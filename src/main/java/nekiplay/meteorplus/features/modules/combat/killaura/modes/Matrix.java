@@ -4,6 +4,7 @@ import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.systems.friends.Friends;
 import meteordevelopment.meteorclient.systems.modules.combat.KillAura;
 import meteordevelopment.meteorclient.utils.entity.TargetUtils;
+import meteordevelopment.meteorclient.utils.player.ChatUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.player.Rotations;
 import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlusMode;
@@ -53,6 +54,7 @@ public class Matrix extends KillAuraPlusMode {
 			isRotated = false;
 
 			EntityHitResult result = raycastEntity(settings.range.get(), rotateVector.getX(), rotateVector.getY(), 0f);
+			ChatUtils.info(result.getType().name());
 			if (settings.onlyCrits.get() && !allowCrit() && needCrit(target)) {
 
 			}
