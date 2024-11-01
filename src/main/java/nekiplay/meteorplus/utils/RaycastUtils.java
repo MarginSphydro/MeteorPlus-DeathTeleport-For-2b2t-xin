@@ -20,7 +20,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 public class RaycastUtils {
 	public static EntityHitResult raycastEntity(final double range, final float yaw, final float pitch, double boxexpand) {
 		Entity camera = mc.getCameraEntity();
-		Vec3d cameraVec = camera.getCameraPosVec(1f);
+		Vec3d cameraVec = mc.player.getEyePos();
 
 		final float yawCos = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
 		final float yawSin = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);

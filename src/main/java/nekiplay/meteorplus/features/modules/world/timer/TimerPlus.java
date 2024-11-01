@@ -12,7 +12,7 @@ import nekiplay.meteorplus.features.modules.world.timer.modes.NCP;
 import nekiplay.meteorplus.features.modules.world.timer.modes.NCPv2;
 import nekiplay.meteorplus.features.modules.world.timer.modes.Vulcan;
 
-import static nekiplay.meteorplus.hud.TimerPlusCharge.find_percent;
+import static nekiplay.meteorplus.features.hud.TimerPlusCharge.find_percent;
 
 public class TimerPlus extends Module {
 	public TimerPlus() {

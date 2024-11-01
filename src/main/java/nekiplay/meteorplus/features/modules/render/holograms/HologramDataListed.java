@@ -2,9 +2,11 @@ package nekiplay.meteorplus.features.modules.render.holograms;
 
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.world.Dimension;
+import nekiplay.meteorplus.features.modules.world.customblocks.PosData;
 import net.minecraft.util.math.BlockPos;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HologramDataListed {
 	public double x;
@@ -47,5 +49,25 @@ public class HologramDataListed {
 		this.world = world;
 		this.dimension = dimension.name();
 		this.max_render_distance = max_render_distance;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		HologramDataListed otherPos = (HologramDataListed) obj;
+		if (x == otherPos.x && y == otherPos.y && z == otherPos.z) {
+			return true;
+		}
+		return super.equals(obj);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(x, y, z);
 	}
 }

@@ -1,4 +1,4 @@
-package nekiplay.meteorplus.hud;
+package nekiplay.meteorplus.features.hud;
 
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.hud.HudElement;

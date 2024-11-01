@@ -11,12 +11,8 @@ public class HologramData {
 	public double y;
 	public double z;
 	public String text;
-	public String world;
-	public String dimension;
 	public Color color;
-	public double max_render_distance = 16;
 	public int item_id = 0;
-	public double scale = 1;
 	public int item_scale = 2;
 
 	public HologramData() {
@@ -29,9 +25,6 @@ public class HologramData {
 		this.color = color;
 
 		this.text = text;
-		this.world = world;
-		this.dimension = dimension;
-		this.max_render_distance = max_render_distance;
 	}
 
 	public HologramData(BlockPos pos, String text, String world, Dimension dimension, Color color, double max_render_distance) {
@@ -41,8 +34,5 @@ public class HologramData {
 		this.color = color;
 
 		this.text = text;
-		this.world = world;
-		this.dimension = dimension.name();
-		this.max_render_distance = max_render_distance;
 	}
 }

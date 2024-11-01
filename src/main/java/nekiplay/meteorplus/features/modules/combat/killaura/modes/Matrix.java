@@ -54,7 +54,9 @@ public class Matrix extends KillAuraPlusMode {
 			isRotated = false;
 
 			EntityHitResult result = raycastEntity(settings.range.get(), rotateVector.getX(), rotateVector.getY(), 0f);
-			ChatUtils.info(result.getType().name());
+			if (result != null) {
+				ChatUtils.info(result.getType().name());
+			}
 			if (settings.onlyCrits.get() && !allowCrit() && needCrit(target)) {
 
 			}

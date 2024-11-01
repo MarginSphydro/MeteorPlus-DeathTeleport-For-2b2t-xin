@@ -7,6 +7,8 @@ import meteordevelopment.meteorclient.events.entity.player.SendMovementPacketsEv
 import meteordevelopment.meteorclient.events.packets.PacketEvent;
 import meteordevelopment.meteorclient.events.world.CollisionShapeEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
+import meteordevelopment.meteorclient.gui.GuiTheme;
+import meteordevelopment.meteorclient.gui.widgets.WWidget;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
@@ -117,7 +119,14 @@ public class FlyPlus extends Module {
 		.build()
 	);
 
-
+	@Override
+	public WWidget getWidget(GuiTheme theme) {
+		WWidget widget = super.getWidget(theme);
+		if (flyMode.get() == FlyModes.Vulcan_Clip) {
+			return theme.label("This mode work only on 1.89 servers");
+		}
+		return widget;
+	}
 
 	private FlyMode currentMode;
 

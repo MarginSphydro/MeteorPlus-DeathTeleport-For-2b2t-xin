@@ -1,5 +1,6 @@
 package nekiplay.meteorplus.features.modules.combat;
 
+import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.friends.Friends;
@@ -149,7 +150,7 @@ public class TriggerBot extends Module {
 	}
 
 	@EventHandler
-	private void onTick(TickEvent.Pre event) {
+	private void onTick(Render3DEvent event) {
 		if (!mc.player.isAlive() || PlayerUtils.getGameMode() == GameMode.SPECTATOR) return;
 		if (mc.targetedEntity == null) return;
 
