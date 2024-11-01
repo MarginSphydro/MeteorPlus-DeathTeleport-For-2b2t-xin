@@ -10,12 +10,14 @@ import meteordevelopment.meteorclient.renderer.text.TextRenderer;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.Utils;
+import meteordevelopment.meteorclient.utils.misc.MeteorStarscript;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.render.NametagUtils;
 import meteordevelopment.meteorclient.utils.render.RenderUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
+import meteordevelopment.starscript.Script;
 import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.item.Item;
@@ -24,11 +26,11 @@ import net.minecraft.util.math.Vec3d;
 import org.joml.Vector3d;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +42,8 @@ public class HologramModule extends Module {
 
 	public List<HologramDataListed> allHolograms = new ArrayList<HologramDataListed>();
 	public List<HologramDataListed> inWorldHolograms = new ArrayList<HologramDataListed>();
+	public HashMap<String, Script> scripts = new HashMap<String, Script>();
+
 
 	@Override
 	public void onActivate() {
@@ -81,9 +85,9 @@ public class HologramModule extends Module {
 					double hX = -widthHalf;
 					double hY = -heightDown;
 
-					text.render(hologram_text, hX, hY, hologramData.color, true);
+					text.render(MeteorStarscript.run(scripts.get(hologram_text)), hX, hY, hologramData.color, true);
 					for (HologramData hologramData1 : hologramData.other_holograms) {
-						text.render(hologramData1.text, hX - hologramData1.x, hY - hologramData1.y, hologramData1.color, true);
+						text.render(MeteorStarscript.run(scripts.get(hologramData1.text)), hX - hologramData1.x, hY - hologramData1.y, hologramData1.color, true);
 						if (hologramData1.item_id != 0) {
 							Item item = Item.byRawId(hologramData1.item_id);
 							RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) ((int) hX - hologramData1.x), (int) ((int) 0 - hologramData1.y), hologramData1.item_scale, true);
@@ -101,6 +105,17 @@ public class HologramModule extends Module {
 		}
 	}
 
+	private void loadScripts(HologramDataListed hologramDataListed) {
+		if (!scripts.containsKey(hologramDataListed.text)) {
+			scripts.put(hologramDataListed.text, MeteorStarscript.compile(hologramDataListed.text));
+		}
+		for (HologramData hologramData1 : hologramDataListed.other_holograms) {
+			if (!scripts.containsKey(hologramData1.text)) {
+				scripts.put(hologramData1.text, MeteorStarscript.compile(hologramData1.text));
+			}
+		}
+	}
+
 	private void load() {
 		File dir = new File(MeteorClient.FOLDER, "holograms");
 		if (dir.exists()) {
@@ -108,6 +123,7 @@ public class HologramModule extends Module {
 			File dir2 = new File(dir, world_name);
 			if (dir2.exists()) {
 				allHolograms.clear();
+				scripts.clear();
 				File[] files = dir2.listFiles();
 				if (files != null) {
 					for (File file : files) {
@@ -119,13 +135,13 @@ public class HologramModule extends Module {
 									String json = reader.lines().collect(Collectors.joining());
 									HologramDataListed hologramData = gson.fromJson(json, HologramDataListed.class);
 									if (hologramData != null) {
+										loadScripts(hologramData);
 										allHolograms.add(hologramData);
 										MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Success loaded hologram: " + file.getName());
 									}
-
-								} catch (JsonSyntaxException e) {
+								}
+								catch (Exception e) {
 									MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in hologram: " + e);
-
 								}
 							} catch (IOException e) {
 								MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in hologram: " + e);
