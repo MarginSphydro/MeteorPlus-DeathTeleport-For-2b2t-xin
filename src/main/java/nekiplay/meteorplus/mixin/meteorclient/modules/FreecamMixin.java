@@ -23,6 +23,7 @@ import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -177,7 +178,7 @@ public class FreecamMixin {
 		}
 	}
 
-	@Unique
+	@Unique @Nullable
 	private BlockPos rayCastClicked() {
 		BlockPos blockPos = null;
 		Vec3d rotationVector = RaycastUtils.getRotationVector((float) freecam.getPitch(mc.getTickDelta()), (float) freecam.getYaw(mc.getTickDelta()));
@@ -212,7 +213,7 @@ public class FreecamMixin {
 				event.cancel();
 			}
 		}
-		if (baritoneMoveKey.get().isPressed()) {
+		if (baritoneMoveKey.get().isPressed() && mc.currentScreen == null) {
 			BlockPos clicked = rayCastClicked();
 			if (clicked == null) return;
 
@@ -233,7 +234,7 @@ public class FreecamMixin {
 			event.cancel();
 		}
 
-		if (baritoneStopKey.get().isPressed()) {
+		if (baritoneStopKey.get().isPressed() && mc.currentScreen == null) {
 			BaritoneAPI.getProvider().getPrimaryBaritone().getPathingBehavior().forceCancel();
 			if (blink != null) {
 				if (blink.isActive()) {
