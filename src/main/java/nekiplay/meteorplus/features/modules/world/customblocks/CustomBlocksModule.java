@@ -12,34 +12,22 @@ import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.orbit.EventHandler;
 import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
-import nekiplay.meteorplus.features.modules.render.holograms.HologramData;
-import nekiplay.meteorplus.features.modules.render.holograms.HologramDataListed;
 import net.minecraft.block.*;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.util.Hand;
-import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.profiling.jfr.event.ChunkRegionEvent;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.stream.Collectors;
-
-import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 public class CustomBlocksModule extends Module {
 	public CustomBlocksModule() {
@@ -56,6 +44,10 @@ public class CustomBlocksModule extends Module {
 
 		createDefault();
 		load();
+
+		for (Chunk chunk : Utils.chunks()) {
+			updateChunkData(chunk);
+		}
 	}
 
 	public final Setting<Boolean> noSetIfAir = settingsGroup.add(new BoolSetting.Builder()
@@ -65,9 +57,7 @@ public class CustomBlocksModule extends Module {
 		.build()
 	);
 
-	@EventHandler
-	private void onChunkData(ChunkDataEvent event) {
-		WorldChunk chunk = event.chunk();
+	private void updateChunkData(Chunk chunk) {
 		String dimension = PlayerUtils.getDimension().name();
 		for (int x = chunk.getPos().getStartX(); x <= chunk.getPos().getEndX(); x++) {
 			for (int z = chunk.getPos().getStartZ(); z <= chunk.getPos().getEndZ(); z++) {
@@ -91,7 +81,12 @@ public class CustomBlocksModule extends Module {
 				}
 			}
 		}
+	}
 
+	@EventHandler
+	private void onChunkData(ChunkDataEvent event) {
+		WorldChunk chunk = event.chunk();
+		updateChunkData(chunk);
 	}
 
 	private boolean isValidBlockForReplace(Block block) {
