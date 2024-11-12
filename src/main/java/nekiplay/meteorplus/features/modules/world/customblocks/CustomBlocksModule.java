@@ -15,12 +15,11 @@ import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
 import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
+import net.minecraft.block.*;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Heightmap;
+import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.WorldChunk;
 
 import java.io.*;
@@ -45,6 +44,10 @@ public class CustomBlocksModule extends Module {
 
 		createDefault();
 		load();
+
+		for (Chunk chunk : Utils.chunks()) {
+			updateChunkData(chunk);
+		}
 	}
 
 	public final Setting<Boolean> noSetIfAir = settingsGroup.add(new BoolSetting.Builder()
@@ -54,9 +57,7 @@ public class CustomBlocksModule extends Module {
 		.build()
 	);
 
-	@EventHandler
-	private void onChunkData(ChunkDataEvent event) {
-		WorldChunk chunk = event.chunk();
+	private void updateChunkData(Chunk chunk) {
 		String dimension = PlayerUtils.getDimension().name();
 		for (int x = chunk.getPos().getStartX(); x <= chunk.getPos().getEndX(); x++) {
 			for (int z = chunk.getPos().getStartZ(); z <= chunk.getPos().getEndZ(); z++) {
@@ -72,17 +73,20 @@ public class CustomBlocksModule extends Module {
 					CustomBlockData customBlockData = allBlocks.get(new PosData(pos));
 					if (customBlockData != null) {
 						if (customBlockData.dimension.equals(dimension)) {
-							Item item = Item.byRawId(customBlockData.block_id);
-							Block block = Block.getBlockFromItem(item);
 							if (isValidBlockForReplace(original)) {
-								mc.world.setBlockState(pos, block.getDefaultState());
+								setBlock(pos, customBlockData);
 							}
 						}
 					}
 				}
 			}
 		}
+	}
 
+	@EventHandler
+	private void onChunkData(ChunkDataEvent event) {
+		WorldChunk chunk = event.chunk();
+		updateChunkData(chunk);
 	}
 
 	private boolean isValidBlockForReplace(Block block) {
@@ -95,17 +99,23 @@ public class CustomBlocksModule extends Module {
 		return false;
 	}
 
+	private void setBlock(BlockPos pos, CustomBlockData data) {
+		Item item = Item.byRawId(data.block_id);
+		Block block = Block.getBlockFromItem(item);
+		BlockState state = block.getDefaultState();
+
+		mc.world.setBlockState(pos, state);
+	}
+
 	@EventHandler
 	private void onBlockUpdate(BlockUpdateEvent event) {
 		String dimension = PlayerUtils.getDimension().name();
 		CustomBlockData customBlockData = allBlocks.get(new PosData(event.pos));
 		if (customBlockData != null) {
 			if (customBlockData.dimension.equals(dimension)) {
-				Item item = Item.byRawId(customBlockData.block_id);
 				Block original = event.newState.getBlock();
-				Block block = Block.getBlockFromItem(item);
 				if (isValidBlockForReplace(original)) {
-					mc.world.setBlockState(event.pos, block.getDefaultState());
+					setBlock(event.pos, customBlockData);
 				}
 			}
 		}
