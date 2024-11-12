@@ -27,7 +27,6 @@ public class BlockESPMixin extends Module {
 	@Unique
 	private long renders = 0;
 
-	@Unique
 	@Override
 	public String getInfoString() {
 		renders = 0;
