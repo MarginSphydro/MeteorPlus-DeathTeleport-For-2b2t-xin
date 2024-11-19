@@ -22,8 +22,6 @@ import nekiplay.meteorplus.features.modules.world.customblocks.CustomBlocksModul
 import nekiplay.meteorplus.features.hud.TimerPlusCharge;
 import nekiplay.meteorplus.features.modules.integrations.MapIntegration;
 import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
-import nekiplay.main.items.ModItems;
-import nekiplay.meteorplus.features.modules.world.zones.ZonesModule;
 import nekiplay.meteorplus.settings.ConfigModifier;
 import net.fabricmc.loader.api.FabricLoader;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
@@ -38,20 +36,18 @@ import nekiplay.meteorplus.features.modules.movement.jesus.JesusPlus;
 import nekiplay.meteorplus.features.modules.movement.nofall.NoFallPlus;
 import nekiplay.meteorplus.features.modules.movement.speed.SpeedPlus;
 import nekiplay.meteorplus.features.modules.movement.spider.SpiderPlus;
+import net.minecraft.item.Items;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-
-import static nekiplay.Main.METEOR_LOGPREFIX;
 import static nekiplay.MixinPlugin.*;
 
 public class MeteorPlusAddon extends MeteorAddon {
 	public static final Logger LOG = LoggerFactory.getLogger(MeteorPlusAddon.class);
-	public static final ItemStack logo_mods_item = ModItems.METEOR_PLUS_LOGO_MODS_ITEM.getDefaultStack();
 
-	public static final Category CATEGORYMODS = new Category("Integrations", logo_mods_item);
+	public static final Category CATEGORYMODS = new Category("Integrations", Items.REDSTONE.getDefaultStack());
 	public static final String HUD_TITLE = "Meteor+";
 	public static final HudGroup HUD_GROUP = new HudGroup(HUD_TITLE);
 
@@ -60,6 +56,8 @@ public class MeteorPlusAddon extends MeteorAddon {
 	public static MeteorPlusAddon getInstance() {
 		return instance;
 	}
+
+	public static final String METEOR_LOGPREFIX = "[Meteor+]";
 
 	@Override
 	public void onInitialize() {
@@ -172,7 +170,6 @@ public class MeteorPlusAddon extends MeteorAddon {
 		modules.add(new SpiderPlus());
 		modules.add(new JesusPlus());
 		modules.add(new BedrockStorageBruteforce());
-		modules.add(new AutoCraftPlus());
 		modules.add(new AutoObsidianFarm());
 		modules.add(new XrayBruteforce());
 		modules.add(new AutoLeave());

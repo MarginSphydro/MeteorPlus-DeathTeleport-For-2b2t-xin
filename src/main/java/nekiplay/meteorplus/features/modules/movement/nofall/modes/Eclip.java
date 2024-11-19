@@ -66,7 +66,7 @@ public class Eclip extends NoFallMode {
 	public void onSendPacket(PacketEvent.Send event) {
 		if (!groundcheck) return;
 		if (!(event.packet instanceof PlayerMoveC2SPacket)
-			|| ((IPlayerMoveC2SPacket) event.packet).getTag() == 1337) return;
+			|| ((IPlayerMoveC2SPacket) event.packet).meteor$getTag() == 1337) return;
 		((PlayerMoveC2SPacketAccessor) event.packet).setOnGround(true);
 	}
 
@@ -83,11 +83,11 @@ public class Eclip extends NoFallMode {
 				}
 				case 1: {
 					groundcheck = true;
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false, mc.player.horizontalCollision));
 					ticks++;
 				}
 				case 2: {
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false, mc.player.horizontalCollision));
 					ticks++;
 				}
 				case 3: {
@@ -96,7 +96,7 @@ public class Eclip extends NoFallMode {
 				}
 				case 4: {
 					player.setPosition(player.getX(), blocks, player.getZ());
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(player.getX(), blocks, player.getZ(), true));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(player.getX(), blocks, player.getZ(), true, mc.player.horizontalCollision));
 					teleports++;
 					ticks++;
 				}

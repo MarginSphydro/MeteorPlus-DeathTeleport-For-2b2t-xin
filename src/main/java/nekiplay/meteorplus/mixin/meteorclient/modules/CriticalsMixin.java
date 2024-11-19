@@ -41,10 +41,10 @@ public class CriticalsMixin extends Module {
 
 	@Inject(method = "onSendPacket", at = @At("HEAD"), cancellable = true)
 	private void onSendPacket(PacketEvent.Send event, CallbackInfo ci) {
-		if (event.packet instanceof IPlayerInteractEntityC2SPacket packet && packet.getType() == PlayerInteractEntityC2SPacket.InteractType.ATTACK) {
+		if (event.packet instanceof IPlayerInteractEntityC2SPacket packet && packet.meteor$getType() == PlayerInteractEntityC2SPacket.InteractType.ATTACK) {
 			if (skipCrit()) { ci.cancel(); return; }
 
-			Entity entity = packet.getEntity();
+			Entity entity = packet.meteor$getEntity();
 			if (entity.getType() == EntityType.SHULKER_BULLET || entity.getType() == EntityType.FIREBALL) {
 				ci.cancel();
 			}

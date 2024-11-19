@@ -33,7 +33,7 @@ public class ElytraFly extends NoFallMode {
 
 			if (mc.player.fallDistance > 2.7) {
 				mc.player.networkHandler.sendPacket(new ClientCommandC2SPacket(mc.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
-				mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true));
+				mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(true, mc.player.horizontalCollision));
 				Vec3d vel = mc.player.getVelocity();
 				mc.player.setVelocity(vel.x, 0, vel.z);
 				mc.player.fallDistance = 0.0f;

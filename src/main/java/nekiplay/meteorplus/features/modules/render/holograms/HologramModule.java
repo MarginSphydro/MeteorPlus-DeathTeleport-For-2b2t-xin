@@ -18,7 +18,6 @@ import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.starscript.Script;
-import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
@@ -128,7 +127,7 @@ public class HologramModule extends Module {
 				if (files != null) {
 					for (File file : files) {
 						if (file.exists()) {
-							MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
+							MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
 							try {
 								BufferedReader reader = Files.newBufferedReader(Path.of(file.toURI()), StandardCharsets.UTF_8);
 								try {
@@ -137,14 +136,14 @@ public class HologramModule extends Module {
 									if (hologramData != null) {
 										loadScripts(hologramData);
 										allHolograms.add(hologramData);
-										MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Success loaded hologram: " + file.getName());
+										MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Success loaded hologram: " + file.getName());
 									}
 								}
 								catch (Exception e) {
-									MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in hologram: " + e);
+									MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in hologram: " + e);
 								}
 							} catch (IOException e) {
-								MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in hologram: " + e);
+								MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in hologram: " + e);
 							}
 						}
 					}

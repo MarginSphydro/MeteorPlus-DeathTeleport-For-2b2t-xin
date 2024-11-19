@@ -66,8 +66,8 @@ public class VulcanClip extends FlyMode {
 			PlayerPositionLookS2CPacket packet = (PlayerPositionLookS2CPacket)event.packet;
 			Vec3d playerPos = mc.player.getPos();
 			waitFlag = false;
-			mc.player.setPosition(packet.getX(), packet.getY(), packet.getZ());
-			mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(playerPos.x, playerPos.y, playerPos.z, false));
+			mc.player.setPosition(packet.change().position().x, packet.change().position().y, packet.change().position().z);
+			mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(playerPos.x, playerPos.y, playerPos.z, false, mc.player.horizontalCollision));
 			event.cancel();
 			mc.player.jump();
 			clip(0.127318f, 0f);
@@ -84,6 +84,6 @@ public class VulcanClip extends FlyMode {
 		double x = -sin(yaw) * dist;
 		double z = cos(yaw) * dist;
 		mc.player.setPosition(mc.player.getPos().x + x, mc.player.getPos().y + y, mc.player.getPos().z + z);
-		mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY(), mc.player.getZ(), false));
+		mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(mc.player.getX(), mc.player.getY(), mc.player.getZ(), false, mc.player.horizontalCollision));
 	}
 }

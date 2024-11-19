@@ -87,7 +87,7 @@ public class Freeze extends Module {
 	private void InteractBlockEvent(InteractBlockEvent event)
 	{
 		if (mc.player != null && mc.getNetworkHandler() != null && FreezeLookPlace.get()) {
-			PlayerMoveC2SPacket.LookAndOnGround r = new PlayerMoveC2SPacket.LookAndOnGround(mc.player.getYaw(), mc.player.getPitch(), mc.player.isOnGround());
+			PlayerMoveC2SPacket.LookAndOnGround r = new PlayerMoveC2SPacket.LookAndOnGround(mc.player.getYaw(), mc.player.getPitch(), mc.player.isOnGround(), mc.player.horizontalCollision);
 			rotate = true;
 			mc.getNetworkHandler().sendPacket(r);
 			rotate = false;

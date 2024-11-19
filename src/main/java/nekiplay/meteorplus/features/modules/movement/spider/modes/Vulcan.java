@@ -149,10 +149,10 @@ public class Vulcan extends SpiderMode {
 					mc.player.setVelocity(pl_velocity.x, 0.41999998688698, pl_velocity.z);
 					tick = 1;
 				} else if (tick == 1) {
-					mc.player.setVelocity(pl_velocity.x, 0.41999998688698 - 0.08679999325 - coff, pl_velocity.z);
+					mc.player.setVelocity(pl_velocity.x, 0.33319999363 - coff, pl_velocity.z);
 					tick = 2;
 				} else if (tick == 2) {
-					mc.player.setVelocity(pl_velocity.x, 0.41999998688698 - 0.17186398826 - coff, pl_velocity.z);
+					mc.player.setVelocity(pl_velocity.x, 0.24813599862 - coff, pl_velocity.z);
 					tick = 0;
 				}
 				switch (typeStarted) {

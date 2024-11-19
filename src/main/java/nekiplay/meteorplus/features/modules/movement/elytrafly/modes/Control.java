@@ -4,6 +4,7 @@ import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
 import meteordevelopment.meteorclient.mixininterface.IVec3d;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.ElytraFlyMode;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.ElytraFlyModes;
+import net.minecraft.entity.EntityPose;
 
 public class Control extends ElytraFlyMode {
 	public Control() {
@@ -16,7 +17,7 @@ public class Control extends ElytraFlyMode {
 	private double velocity;
 	@Override
 	public void onPlayerMove(PlayerMoveEvent event) {
-		if (!mc.player.isFallFlying()) {return;}
+		if (!mc.player.isGliding()) {return;}
 
 		updateControlMovement();
 		pitch = 0;
@@ -50,7 +51,7 @@ public class Control extends ElytraFlyMode {
 			y = -elytraFly.downSpeed_control.get();
 		}
 
-		((IVec3d) event.movement).set(x, y, z);
+		((IVec3d) event.movement).meteor$set(x, y, z);
 		if (elytraFly.resetSpeed.get()) {
 			mc.player.setVelocity(0, 0, 0);
 		}

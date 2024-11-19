@@ -384,7 +384,7 @@ public class ConfigModifier {
 		if (mc.player == null || mc.world == null) return Value.string("");
 
 		BP.set(mc.player.getX(), mc.player.getY(), mc.player.getZ());
-		Identifier id = mc.world.getRegistryManager().get(RegistryKeys.BIOME).getId(mc.world.getBiome(BP).value());
+		Identifier id = mc.world.getRegistryManager().getOptional(RegistryKeys.BIOME).get().getId(mc.world.getBiome(BP).value());
 		if (id == null) return Value.string("Unknown");
 
 		return Value.string(Arrays.stream(id.getPath().split("_")).map(StringUtils::capitalize).collect(Collectors.joining(" ")));

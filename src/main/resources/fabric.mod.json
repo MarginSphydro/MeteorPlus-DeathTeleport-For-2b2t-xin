@@ -17,16 +17,12 @@
   "icon": "assets/meteorplus/icon.png",
   "environment": "*",
   "entrypoints": {
-    "main": [
-      "nekiplay.Main"
-    ],
     "meteor": [
       "nekiplay.meteorplus.MeteorPlusAddon"
     ]
   },
   "mixins": [
     "meteorplus.mixins.json",
-    "meteorplus-journeymap.mixins.json",
     "meteorplus-xaeroworldmap.mixins.json",
     "meteorplus-whereisit.mixins.json"
   ],

@@ -13,7 +13,6 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.utils.Utils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.orbit.EventHandler;
-import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.block.*;
 import net.minecraft.item.Item;
@@ -132,7 +131,7 @@ public class CustomBlocksModule extends Module {
 				if (files != null) {
 					for (File file : files) {
 						if (file.exists()) {
-							MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
+							MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
 							try {
 								BufferedReader reader = Files.newBufferedReader(Path.of(file.toURI()), StandardCharsets.UTF_8);
 								try {
@@ -142,15 +141,15 @@ public class CustomBlocksModule extends Module {
 										for (PosData posData : hologramData.positions) {
 											allBlocks.put(posData, hologramData);
 										}
-										MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Success loaded custom block: " + file.getName());
+										MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Success loaded custom block: " + file.getName());
 									}
 
 								} catch (JsonSyntaxException e) {
-									MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in custom block: " + e);
+									MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in custom block: " + e);
 
 								}
 							} catch (IOException e) {
-								MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in custom block: " + e);
+								MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in custom block: " + e);
 							}
 						}
 					}

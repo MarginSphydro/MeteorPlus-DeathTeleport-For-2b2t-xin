@@ -66,7 +66,7 @@ public class NCP extends JesusMode {
 		if (velZ >= settings.limit_speed.get().floatValue()) {
 			velZ = settings.limit_speed.get().floatValue();
 		}
-		((IVec3d) mc.player.getVelocity()).set(velX, 0, velZ);
+		((IVec3d) mc.player.getVelocity()).meteor$set(velX, 0, velZ);
 		mc.player.setSneaking(true);
 	}
 	@Override
@@ -86,12 +86,12 @@ public class NCP extends JesusMode {
 		float forward = mc.player.forwardSpeed;
 		float yaw = mc.player.getYaw();
 		if (forward == 0) {
-			((IVec3d) mc.player.getVelocity()).set(0,  mc.player.getVelocity().y, 0);
+			((IVec3d) mc.player.getVelocity()).meteor$set(0,  mc.player.getVelocity().y, 0);
 		} else {
 			double x = forward * motion * Math.cos(Math.toRadians(yaw + 90.0f)) * motion * Math.sin(Math.toRadians(yaw + 90.0f));
 			double z = forward * motion * Math.sin(Math.toRadians(yaw + 90.0f)) * motion * Math.cos(Math.toRadians(yaw + 90.0f));
 
-			((IVec3d) mc.player.getVelocity()).set(x,  mc.player.getVelocity().y, z);
+			((IVec3d) mc.player.getVelocity()).meteor$set(x,  mc.player.getVelocity().y, z);
 		}
 	}
 }

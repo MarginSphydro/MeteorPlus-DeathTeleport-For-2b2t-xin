@@ -61,14 +61,14 @@ public class Matrix6_7_0 extends SpeedMode {
 			mc.options.jumpKey.setPressed(false);
 			mc.player.jump();
 			IVec3d v = (IVec3d) mc.player.getVelocity();
-			v.setY(0.41050001145141919810);
+			v.meteor$setY(0.41050001145141919810);
 			if (Math.abs(mc.player.getAbilities().getFlySpeed()) < 0.1) {
 				MovementUtils.strafe(MovementUtils.getSpeed());
 			}
 		}
 		if (!PlayerUtils.isMoving()) {
 			IVec3d v = (IVec3d) mc.player.getVelocity();
-			v.setXZ(0, 0);
+			v.meteor$setXZ(0, 0);
 		}
 	}
 }

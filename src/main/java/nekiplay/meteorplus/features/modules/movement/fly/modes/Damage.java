@@ -44,10 +44,10 @@ public class Damage extends FlyMode {
 			}
 
 			if (ticks_up < workingUpTicks) {
-				((IVec3d) mc.player.getVelocity()).set(velX, speedUp, velZ);
+				((IVec3d) mc.player.getVelocity()).meteor$set(velX, speedUp, velZ);
 			}
 			else {
-				((IVec3d) mc.player.getVelocity()).set(velX, 0, velZ);
+				((IVec3d) mc.player.getVelocity()).meteor$set(velX, 0, velZ);
 			}
 			ticks++;
 			ticks_up++;

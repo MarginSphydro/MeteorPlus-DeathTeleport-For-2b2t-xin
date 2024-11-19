@@ -46,10 +46,10 @@ public class MatrixZoom2 extends JesusMode {
 		}
 		if (mc.world.getBlockState(new BlockPos((int) mc.player.getPos().x, (int) (mc.player.getPos().y + range), (int) mc.player.getPos().z)).getBlock() == Blocks.WATER && !mc.player.horizontalCollision) {
 			if (tick == 0) {
-				((IVec3d) mc.player.getVelocity()).set(velX, 0.030091, velZ);
+				((IVec3d) mc.player.getVelocity()).meteor$set(velX, 0.030091, velZ);
 			}
 			else if (tick == 1) {
-				((IVec3d) mc.player.getVelocity()).set(velX, -0.030091, velZ);
+				((IVec3d) mc.player.getVelocity()).meteor$set(velX, -0.030091, velZ);
 			}
 		}
 	}

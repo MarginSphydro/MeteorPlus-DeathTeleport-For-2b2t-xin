@@ -28,6 +28,6 @@ public class CustomSpeedUtils {
 			velZ = anchor.deltaZ;
 		}
 
-		((IVec3d) event.movement).set(velX, event.movement.y, velZ);
+		((IVec3d) event.movement).meteor$set(velX, event.movement.y, velZ);
 	}
 }

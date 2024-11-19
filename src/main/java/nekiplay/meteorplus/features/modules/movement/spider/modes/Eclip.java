@@ -62,11 +62,11 @@ public class Eclip extends SpiderMode {
 					ticks++;
 				}
 				case 1: {
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false, mc.player.horizontalCollision));
 					ticks++;
 				}
 				case 2: {
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.OnGroundOnly(false, mc.player.horizontalCollision));
 					ticks++;
 				}
 				case 3: {
@@ -75,7 +75,7 @@ public class Eclip extends SpiderMode {
 				}
 				case 4: {
 					player.setPosition(player.getX(), player.getY() + blocks, player.getZ());
-					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(player.getX(), player.getY() + blocks, player.getZ(), false));
+					mc.player.networkHandler.sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(player.getX(), player.getY() + blocks, player.getZ(), false, mc.player.horizontalCollision));
 					ticks++;
 				}
 				case 5: {

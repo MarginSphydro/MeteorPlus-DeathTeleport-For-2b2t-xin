@@ -16,7 +16,7 @@ public class Wasp extends ElytraFlyMode {
 
 	@Override
 	public void onPlayerMove(PlayerMoveEvent event) {
-		if (!mc.player.isFallFlying()) {return;}
+		if (!mc.player.isGliding()) {return;}
 
 		updateWaspMovement();
 		pitch = mc.player.getPitch();
@@ -39,7 +39,7 @@ public class Wasp extends ElytraFlyMode {
 			y = elytraFly.up_wasp.get();
 		}
 
-		((IVec3d) event.movement).set(x, y, z);
+		((IVec3d) event.movement).meteor$set(x, y, z);
 
 		if (elytraFly.resetSpeed.get()) {
 			mc.player.setVelocity(0, 0, 0);

@@ -14,9 +14,7 @@ import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
-import nekiplay.Main;
 import nekiplay.meteorplus.MeteorPlusAddon;
-import nekiplay.meteorplus.features.modules.render.holograms.HologramDataListed;
 import net.minecraft.util.math.Box;
 
 import java.io.BufferedReader;
@@ -70,7 +68,7 @@ public class ZonesModule extends Module {
 
 	@EventHandler
 	private void onStartBlockBreaking(StartBreakingBlockEvent event) {
-		
+
 	}
 
 	private void load() {
@@ -84,7 +82,7 @@ public class ZonesModule extends Module {
 				if (files != null) {
 					for (File file : files) {
 						if (file.exists()) {
-							MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
+							MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Loading hologram: " + file.getName());
 							try {
 								BufferedReader reader = Files.newBufferedReader(Path.of(file.toURI()), StandardCharsets.UTF_8);
 								try {
@@ -92,15 +90,15 @@ public class ZonesModule extends Module {
 									ZoneData hologramData = gson.fromJson(json, ZoneData.class);
 									if (hologramData != null) {
 										allZones.add(hologramData);
-										MeteorPlusAddon.LOG.info(Main.METEOR_LOGPREFIX + " Success loaded zone: " + file.getName());
+										MeteorPlusAddon.LOG.info(MeteorPlusAddon.METEOR_LOGPREFIX + " Success loaded zone: " + file.getName());
 									}
 
 								} catch (JsonSyntaxException e) {
-									MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in zone: " + e);
+									MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in zone: " + e);
 
 								}
 							} catch (IOException e) {
-								MeteorPlusAddon.LOG.error(Main.METEOR_LOGPREFIX + " Error in zone: " + e);
+								MeteorPlusAddon.LOG.error(MeteorPlusAddon.METEOR_LOGPREFIX + " Error in zone: " + e);
 							}
 						}
 					}

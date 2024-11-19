@@ -14,6 +14,7 @@ import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.world.BlockUtils;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.block.*;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.*;
@@ -203,7 +204,7 @@ public class AutoToolMixin extends Module
 		if (enchantPreference == AutoTool.EnchantPreference.SilkTouch) score += Utils.getEnchantmentLevel(itemStack, Enchantments.SILK_TOUCH);
 
 		if (itemStack.getItem() instanceof SwordItem item && (state.getBlock() instanceof BambooBlock || state.getBlock() instanceof BambooShootBlock))
-			score += 9000 + (item.getMaterial().getMiningSpeedMultiplier() * 1000);
+			score += 9000 + (item.getComponents().get(DataComponentTypes.TOOL).getSpeed(state) * 1000);
 
 
 		return score;
@@ -216,7 +217,7 @@ public class AutoToolMixin extends Module
 	}
 	@Unique
 	private static boolean isTool2(Item item) {
-		return item instanceof ToolItem || item instanceof ShearsItem;
+		return item instanceof MiningToolItem  || item instanceof ShearsItem;
 	}
 	@Unique
 	private static boolean isTool2(ItemStack itemStack) {
