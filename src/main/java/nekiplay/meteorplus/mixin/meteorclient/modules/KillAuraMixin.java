@@ -8,9 +8,12 @@ import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.combat.KillAura;
+import meteordevelopment.meteorclient.systems.modules.movement.Flight;
+import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFly;
 import meteordevelopment.meteorclient.utils.entity.DamageUtils;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import nekiplay.meteorplus.features.modules.combat.Teams;
+import nekiplay.meteorplus.features.modules.movement.elytrafly.ElytraFlyPlus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -73,6 +76,7 @@ public class KillAuraMixin extends Module {
 		.visible(() -> !customDelay.get())
 		.build()
 	);
+
 	@Unique
 	private final Setting<Integer> maxHurtTime = sgTimingPlus.add(new IntSetting.Builder()
 		.name("max-enemy-hurt-time")
@@ -88,6 +92,13 @@ public class KillAuraMixin extends Module {
 		.name("only-crits")
 		.description("Attack enemy only if this attack crit after jump.")
 		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> onlyCritsIgnoreFlight = sgTimingPlus.add(new BoolSetting.Builder()
+		.name("ignore-only-crits-on-flight")
+		.defaultValue(true)
 		.build()
 	);
 
@@ -145,12 +156,17 @@ public class KillAuraMixin extends Module {
 
 	@Inject(method = "delayCheck", at = @At("HEAD"), cancellable = true)
 	private void delayCheck(CallbackInfoReturnable<Boolean> cir) {
+		Modules modules = Modules.get();
 		if (onlyCrits.get() && !allowCrit() && needCrit(getTarget())) {
 			if (ignoreOnlyCritsOnLevitation.get() && !Objects.requireNonNull(mc.player).hasStatusEffect(StatusEffects.LEVITATION)) {
 				cir.setReturnValue(false);
 				return;
 			}
-			else if (!ignoreOnlyCritsOnLevitation.get()) {
+			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
+				cir.setReturnValue(false);
+				return;
+			}
+			else if (!ignoreOnlyCritsOnLevitation.get() && !onlyCritsIgnoreFlight.get()) {
 				cir.setReturnValue(false);
 				return;
 			}
