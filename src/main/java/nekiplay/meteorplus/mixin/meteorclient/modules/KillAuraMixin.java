@@ -1,18 +1,19 @@
 package nekiplay.meteorplus.mixin.meteorclient.modules;
 
-import meteordevelopment.meteorclient.events.render.Render3DEvent;
-import meteordevelopment.meteorclient.settings.*;
+import meteordevelopment.meteorclient.settings.BoolSetting;
+import meteordevelopment.meteorclient.settings.IntSetting;
+import meteordevelopment.meteorclient.settings.Setting;
+import meteordevelopment.meteorclient.settings.SettingGroup;
 import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.combat.KillAura;
-import meteordevelopment.meteorclient.utils.Utils;
+import meteordevelopment.meteorclient.systems.modules.movement.Flight;
+import meteordevelopment.meteorclient.systems.modules.movement.elytrafly.ElytraFly;
 import meteordevelopment.meteorclient.utils.entity.DamageUtils;
-import meteordevelopment.meteorclient.utils.render.color.Color;
-import meteordevelopment.meteorclient.utils.render.color.SettingColor;
-import meteordevelopment.orbit.EventHandler;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import nekiplay.meteorplus.features.modules.combat.Teams;
+import nekiplay.meteorplus.features.modules.movement.elytrafly.ElytraFlyPlus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -41,9 +42,6 @@ public class KillAuraMixin extends Module {
 	@Unique
 	private final SettingGroup sgTimingPlus = settings.createGroup(MeteorPlusAddon.HUD_TITLE + " Timing");
 
-	@Unique
-	private final SettingGroup sgRenderPlus = settings.createGroup(MeteorPlusAddon.HUD_TITLE + " Render");
-
 	@Final
 	@Shadow
 	private final SettingGroup sgTargeting = settings.getGroup("Targeting");
@@ -51,15 +49,6 @@ public class KillAuraMixin extends Module {
 	@Final
 	@Shadow
 	private final SettingGroup sgTiming = settings.getGroup("Timing");
-
-	@Final
-	@Shadow
-	private final Setting<Double> range = (Setting<Double>) sgTargeting.get("range");
-
-	@Final
-	@Shadow
-	private final Setting<Double> wallsRange = (Setting<Double>) sgTargeting.get("walls-range");
-
 
 	@Final
 	@Shadow
@@ -87,6 +76,7 @@ public class KillAuraMixin extends Module {
 		.visible(() -> !customDelay.get())
 		.build()
 	);
+
 	@Unique
 	private final Setting<Integer> maxHurtTime = sgTimingPlus.add(new IntSetting.Builder()
 		.name("max-enemy-hurt-time")
@@ -102,6 +92,13 @@ public class KillAuraMixin extends Module {
 		.name("only-crits")
 		.description("Attack enemy only if this attack crit after jump.")
 		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> onlyCritsIgnoreFlight = sgTimingPlus.add(new BoolSetting.Builder()
+		.name("ignore-only-crits-on-flight")
+		.defaultValue(true)
 		.build()
 	);
 
@@ -146,7 +143,7 @@ public class KillAuraMixin extends Module {
 		.defaultValue(2)
 		.min(0)
 		.sliderMax(60)
-		.visible(customDelay::get)
+		.visible(customDelayOneHit::get)
 		.build()
 	);
 
@@ -159,12 +156,17 @@ public class KillAuraMixin extends Module {
 
 	@Inject(method = "delayCheck", at = @At("HEAD"), cancellable = true)
 	private void delayCheck(CallbackInfoReturnable<Boolean> cir) {
+		Modules modules = Modules.get();
 		if (onlyCrits.get() && !allowCrit() && needCrit(getTarget())) {
 			if (ignoreOnlyCritsOnLevitation.get() && !Objects.requireNonNull(mc.player).hasStatusEffect(StatusEffects.LEVITATION)) {
 				cir.setReturnValue(false);
 				return;
 			}
-			else if (!ignoreOnlyCritsOnLevitation.get()) {
+			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
+				cir.setReturnValue(false);
+				return;
+			}
+			else if (!ignoreOnlyCritsOnLevitation.get() && !onlyCritsIgnoreFlight.get()) {
 				cir.setReturnValue(false);
 				return;
 			}
