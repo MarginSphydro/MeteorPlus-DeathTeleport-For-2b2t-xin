@@ -17,9 +17,7 @@ public class HologramDataListed {
 	public String dimension;
 	public Color color;
 	public double max_render_distance = 16;
-	public int item_id = 0;
 	public double scale = 1;
-	public int item_scale = 2;
 	public boolean distanceScaling = false;
 
 	public ArrayList<HologramData> other_holograms = new ArrayList<HologramData>();
