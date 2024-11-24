@@ -162,7 +162,7 @@ public class KillAuraMixin extends Module {
 				cir.setReturnValue(false);
 				return;
 			}
-			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
+			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(FlyPlus.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
 				cir.setReturnValue(false);
 				return;
 			}
