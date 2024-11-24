@@ -12,8 +12,6 @@ import nekiplay.meteorplus.features.modules.world.timer.modes.NCP;
 import nekiplay.meteorplus.features.modules.world.timer.modes.NCPv2;
 import nekiplay.meteorplus.features.modules.world.timer.modes.Vulcan;
 
-import static nekiplay.meteorplus.features.hud.TimerPlusCharge.find_percent;
-
 public class TimerPlus extends Module {
 	public TimerPlus() {
 		super(Categories.World, "timer+", "Bypass timer.");
@@ -209,6 +207,12 @@ public class TimerPlus extends Module {
 		double percentage = find_percent(0, TimerPlus.rechargeDelay, TimerPlus.rechargeTimer);
 
 		return String.format("%.1f", percentage);
+	}
+	public static double find_percent(double start,double end,double val){
+		end = end- start;
+		val = val - start;
+		start = 0;
+		return((1-(val/end))*100);
 	}
 }
 
