@@ -172,6 +172,10 @@ public class WaypointsModuleMixin extends Module {
 		table.row();
 
 		WButton create = table.add(theme.button("Create")).expandX().widget();
-		create.action = () -> mc.setScreen(new EditWaypointScreen(theme, null, () -> initTable(theme, table)));
+		create.action = () -> {
+			if (Utils.canUpdate()) {
+				mc.setScreen(new EditWaypointScreen(theme, null, () -> initTable(theme, table)));
+			}
+		};
 	}
 }
