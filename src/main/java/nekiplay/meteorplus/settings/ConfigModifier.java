@@ -11,6 +11,7 @@ import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.starscript.Starscript;
 import meteordevelopment.starscript.value.Value;
 import meteordevelopment.starscript.value.ValueMap;
+import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
 import nekiplay.meteorplus.mixinclasses.SpoofMode;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.effect.StatusEffect;
@@ -78,6 +79,14 @@ public class ConfigModifier {
 
 	private void changedProtection() {
 		Starscript ss = MeteorStarscript.ss;
+		ss.set("meteorplus", new ValueMap()
+			.set("modules", new ValueMap()
+				.set("timerplus", new ValueMap()
+					.set("charge", () -> Value.number(TimerPlus.getPercentage()))
+				)
+			)
+		);
+
 
 		if (positionProtection.get()) {
 			if (spoofMode.get() == SpoofMode.Fake) {

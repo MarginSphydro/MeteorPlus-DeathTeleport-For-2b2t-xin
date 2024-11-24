@@ -19,7 +19,6 @@ import nekiplay.meteorplus.features.modules.render.holograms.*;
 import nekiplay.meteorplus.features.modules.world.*;
 import nekiplay.meteorplus.features.modules.world.autoobsidianmine.AutoObsidianFarm;
 import nekiplay.meteorplus.features.modules.world.customblocks.CustomBlocksModule;
-import nekiplay.meteorplus.features.hud.TimerPlusCharge;
 import nekiplay.meteorplus.features.modules.integrations.MapIntegration;
 import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
 import nekiplay.meteorplus.settings.ConfigModifier;
@@ -203,7 +202,7 @@ public class MeteorPlusAddon extends MeteorAddon {
 		//region Hud
 		LOG.info(METEOR_LOGPREFIX + " Initializing hud...");
 
-		Hud.get().register(TimerPlusCharge.INFO);
+
 
 		LOG.info(METEOR_LOGPREFIX + " Loaded hud");
 		//endregion

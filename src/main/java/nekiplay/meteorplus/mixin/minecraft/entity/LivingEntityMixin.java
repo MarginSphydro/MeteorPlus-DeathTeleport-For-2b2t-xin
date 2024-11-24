@@ -25,10 +25,13 @@ public class LivingEntityMixin {
 	@Inject(method = "tickMovement", at = @At("HEAD"))
 	private void hookTickMovement(CallbackInfo ci) {
 		Modules modules = Modules.get();
-		NoJumpDelay noJumpDelay = modules.get(NoJumpDelay.class);
-		if (noJumpDelay == null) { return; }
-		if (noJumpDelay.isActive()) {
-			jumpingCooldown = 0;
+		if (modules != null) {
+			NoJumpDelay noJumpDelay = modules.get(NoJumpDelay.class);
+			if (noJumpDelay != null) {
+				if (noJumpDelay.isActive()) {
+					jumpingCooldown = 0;
+				}
+			}
 		}
 	}
 }

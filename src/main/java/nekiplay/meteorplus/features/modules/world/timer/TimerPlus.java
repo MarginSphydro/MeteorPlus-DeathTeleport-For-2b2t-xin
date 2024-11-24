@@ -198,6 +198,12 @@ public class TimerPlus extends Module {
 		currentMode.onSentPacket(event);
 	}
 
+	public static double getPercentage() {
+		double percentage = find_percent(0, TimerPlus.rechargeDelay, TimerPlus.rechargeTimer);
+
+		return percentage;
+	}
+
 	@Override
 	public String getInfoString() {
 		double percentage = find_percent(0, TimerPlus.rechargeDelay, TimerPlus.rechargeTimer);
