@@ -77,7 +77,7 @@ public class ConfigModifier {
 		return INSTANCE;
 	}
 
-	private void changedProtection() {
+	public ConfigModifier() {
 		Starscript ss = MeteorStarscript.ss;
 		ss.set("meteorplus", new ValueMap()
 			.set("modules", new ValueMap()
@@ -86,6 +86,11 @@ public class ConfigModifier {
 				)
 			)
 		);
+	}
+
+	private void changedProtection() {
+		Starscript ss = MeteorStarscript.ss;
+
 
 
 		if (positionProtection.get()) {
