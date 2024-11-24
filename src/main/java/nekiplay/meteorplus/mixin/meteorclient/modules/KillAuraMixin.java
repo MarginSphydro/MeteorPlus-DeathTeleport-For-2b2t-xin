@@ -14,6 +14,7 @@ import meteordevelopment.meteorclient.utils.entity.DamageUtils;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import nekiplay.meteorplus.features.modules.combat.Teams;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.ElytraFlyPlus;
+import nekiplay.meteorplus.features.modules.movement.fly.FlyPlus;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -162,7 +163,7 @@ public class KillAuraMixin extends Module {
 				cir.setReturnValue(false);
 				return;
 			}
-			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
+			else if (onlyCritsIgnoreFlight.get() && (!modules.isActive(Flight.class) && !modules.isActive(FlyPlus.class) && !modules.isActive(ElytraFly.class) && !modules.isActive(ElytraFlyPlus.class))) {
 				cir.setReturnValue(false);
 				return;
 			}

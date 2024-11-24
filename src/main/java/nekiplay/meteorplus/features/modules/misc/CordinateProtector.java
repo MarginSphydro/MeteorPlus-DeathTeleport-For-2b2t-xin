@@ -51,8 +51,8 @@ public class CordinateProtector {
 						blockPos = blockPos.add(ConfigModifier.get().x_spoof.get(), 0, ConfigModifier.get().z_spoof.get());
 						ChunkPos chunkPos = new ChunkPos(blockPos);
 
-						String chunk = String.format(Locale.ROOT, "Chunk: %d %d %d [%d %d in r.%d.%d.mca]", chunkPos.x, ChunkSectionPos.getSectionCoord(blockPos.getY()), chunkPos.z, chunkPos.getRegionRelativeX(), chunkPos.getRegionRelativeZ(), chunkPos.getRegionX(), chunkPos.getRegionZ());
 						if (ConfigModifier.get().spoofMode.get() == SpoofMode.Fake) {
+							String chunk = String.format(Locale.ROOT, "Chunk: %d %d %d [%d %d in r.%d.%d.mca]", chunkPos.x, ChunkSectionPos.getSectionCoord(blockPos.getY()), chunkPos.z, chunkPos.getRegionRelativeX(), chunkPos.getRegionRelativeZ(), chunkPos.getRegionX(), chunkPos.getRegionZ());
 							lines.set(index, chunk);
 						}
 						else if (ConfigModifier.get().spoofMode.get() == SpoofMode.Sensor) {
