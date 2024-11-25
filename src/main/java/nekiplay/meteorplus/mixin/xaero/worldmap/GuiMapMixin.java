@@ -48,7 +48,7 @@ public abstract class GuiMapMixin {
 	private double cameraX = 0.0;
 	@Shadow(remap = false)
 	private double cameraZ = 0.0;
-	@Inject(method = "<init>", at = @At("JUMP"))
+	@Inject(method = "<init>", at = @At("TAIL"))
 	private void onInit(CallbackInfo info) {
 		cameraX = ((float) mc.player.getX());
 		cameraZ = ((float) mc.player.getZ());
