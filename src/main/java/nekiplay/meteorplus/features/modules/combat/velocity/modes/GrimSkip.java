@@ -32,7 +32,9 @@ public class GrimSkip extends VelocityMode {
 	@Override
 	public void onReceivePacket(PacketEvent.Receive event) {
 		Packet<?> packet = event.packet;
-
+		if (packet instanceof EntityDamageS2CPacket && ((EntityDamageS2CPacket) packet).entityId() == mc.player.getId()) {
+			canCancel = true;
+		}
 		if (((packet instanceof EntityVelocityUpdateS2CPacket && ((EntityVelocityUpdateS2CPacket) packet).getId() == mc.player.getId()) || packet instanceof ExplosionS2CPacket) && canCancel) {
 			skip = 6;
 			event.cancel();
