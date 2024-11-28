@@ -36,7 +36,7 @@ public class GrimSkip extends VelocityMode {
 		if (packet instanceof EntityDamageS2CPacket && ((EntityDamageS2CPacket) packet).entityId() == mc.player.getId()) {
 			canCancel = true;
 		}
-		if (((packet instanceof EntityVelocityUpdateS2CPacket && ((EntityVelocityUpdateS2CPacket) packet).getEntityId() == mc.player.getId()) || packet instanceof ExplosionS2CPacket) && canCancel) {
+		if (((packet instanceof EntityVelocityUpdateS2CPacket && ((EntityVelocityUpdateS2CPacket) packet).getId() == mc.player.getId()) || packet instanceof ExplosionS2CPacket) && canCancel) {
 			skip = 6;
 			event.cancel();
 		}
