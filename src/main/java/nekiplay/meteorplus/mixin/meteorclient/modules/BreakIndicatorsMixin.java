@@ -1,5 +1,6 @@
 package nekiplay.meteorplus.mixin.meteorclient.modules;
 
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import meteordevelopment.meteorclient.events.render.Render2DEvent;
 import meteordevelopment.meteorclient.mixin.ClientPlayerInteractionManagerAccessor;
 import meteordevelopment.meteorclient.mixin.WorldRendererAccessor;
@@ -18,7 +19,7 @@ import meteordevelopment.meteorclient.utils.render.color.SettingColor;
 import meteordevelopment.orbit.EventHandler;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.block.BlockState;
-import net.minecraft.entity.player.BlockBreakingInfo;
+import net.minecraft.client.render.BlockBreakingInfo;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.shape.VoxelShape;
@@ -26,7 +27,6 @@ import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import java.util.List;
-import java.util.Map;
 
 @Mixin(BreakIndicators.class)
 public class BreakIndicatorsMixin extends Module  {
@@ -61,15 +61,15 @@ public class BreakIndicatorsMixin extends Module  {
 	);
 
 
-	public BreakIndicatorsMixin(Category category, String name, String description, String... aliases) {
-		super(category, name, description, aliases);
+	public BreakIndicatorsMixin(Category category, String name, String description) {
+		super(category, name, description);
 	}
 
 	@Unique
 	@EventHandler
 	private void on2DRender(Render2DEvent event) {
 
-		Map<Integer, BlockBreakingInfo> blocks = ((WorldRendererAccessor) mc.worldRenderer).getBlockBreakingInfos();
+		Int2ObjectMap<BlockBreakingInfo> blocks = ((WorldRendererAccessor) mc.worldRenderer).getBlockBreakingInfos();
 
 		float ownBreakingStage = ((ClientPlayerInteractionManagerAccessor) mc.interactionManager).getBreakingProgress();
 		BlockPos ownBreakingPos = ((ClientPlayerInteractionManagerAccessor) mc.interactionManager).getCurrentBreakingBlockPos();
