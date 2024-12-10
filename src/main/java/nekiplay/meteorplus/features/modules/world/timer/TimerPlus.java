@@ -197,9 +197,7 @@ public class TimerPlus extends Module {
 	}
 
 	public static double getPercentage() {
-		double percentage = find_percent(0, TimerPlus.rechargeDelay, TimerPlus.rechargeTimer);
-
-		return percentage;
+		return find_percent(0, TimerPlus.rechargeDelay, TimerPlus.rechargeTimer);
 	}
 
 	@Override
