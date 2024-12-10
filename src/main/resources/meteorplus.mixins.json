@@ -22,6 +22,7 @@
     "meteorclient.modules.NoRenderMixin",
     "meteorclient.modules.TracersMixin",
     "meteorclient.modules.WaypointsModuleMixin",
+		"meteorclient.modules.BreakIndicatorsMixin",
     "minecraft.ClientConnectionAccessor",
     "minecraft.ClientPlayerInteractionManagerMixin",
     "minecraft.CraftingScreenHandlerAccessor",

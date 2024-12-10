@@ -84,7 +84,7 @@ public class KillAuraMixin extends Module {
 		.defaultValue(0)
 		.min(0)
 		.sliderMax(20)
-		.visible(() -> smartDelayv2.get())
+		.visible(smartDelayv2::get)
 		.build()
 	);
 
@@ -100,6 +100,7 @@ public class KillAuraMixin extends Module {
 	private final Setting<Boolean> onlyCritsIgnoreFlight = sgTimingPlus.add(new BoolSetting.Builder()
 		.name("ignore-only-crits-on-flight")
 		.defaultValue(true)
+		.visible(onlyCrits::get)
 		.build()
 	);
 
@@ -107,7 +108,7 @@ public class KillAuraMixin extends Module {
 	private final Setting<Boolean> ignoreOnlyCritsOnLevitation = sgTimingPlus.add(new BoolSetting.Builder()
 		.name("ignore-only-crits-on-levetation")
 		.defaultValue(true)
-		.visible(() -> onlyCrits.get())
+		.visible(onlyCrits::get)
 		.build()
 	);
 
