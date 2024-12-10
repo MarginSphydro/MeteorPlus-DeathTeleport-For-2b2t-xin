@@ -25,11 +25,8 @@ import net.minecraft.util.shape.VoxelShape;
 import org.joml.Vector3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
-
 import java.util.List;
 import java.util.Map;
-
-import static nekiplay.meteorplus.features.modules.world.timer.TimerPlus.find_percent;
 
 @Mixin(BreakIndicators.class)
 public class BreakIndicatorsMixin extends Module  {
@@ -40,7 +37,7 @@ public class BreakIndicatorsMixin extends Module  {
 	@Unique
 	public final Setting<Boolean> percentageRender = sgPercentageRenderPlus.add(new BoolSetting.Builder()
 		.name("enable-percentage-render")
-		.description("Whether or not to render blocks being packet mined.")
+		.description("Enable percentage text render.")
 		.defaultValue(true)
 		.build()
 	);
@@ -57,7 +54,7 @@ public class BreakIndicatorsMixin extends Module  {
 	@Unique
 	private final Setting<SettingColor> percentageColor = sgPercentageRenderPlus.add(new ColorSetting.Builder()
 		.name("percentage-color")
-		.description("The color for the breaking block.")
+		.description("The color for the percentage text.")
 		.defaultValue(new SettingColor(25, 252, 25, 150))
 		.visible(percentageRender::get)
 		.build()
@@ -72,10 +69,6 @@ public class BreakIndicatorsMixin extends Module  {
 	@EventHandler
 	private void on2DRender(Render2DEvent event) {
 
-		if (packetMine.get() && !Modules.get().get(PacketMine.class).blocks.isEmpty()) {
-			renderPacket(event, Modules.get().get(PacketMine.class).blocks);
-		}
-
 		Map<Integer, BlockBreakingInfo> blocks = ((WorldRendererAccessor) mc.worldRenderer).getBlockBreakingInfos();
 
 		float ownBreakingStage = ((ClientPlayerInteractionManagerAccessor) mc.interactionManager).getBreakingProgress();
@@ -89,8 +82,11 @@ public class BreakIndicatorsMixin extends Module  {
 
 			BlockState state = mc.world.getBlockState(ownBreakingPos);
 			VoxelShape shape = state.getOutlineShape(mc.world, ownBreakingPos);
+			if (shape == null || shape.isEmpty()) return;
 
-			renderBlock(event, ownBreakingPos, shrinkFactor);
+			Box orig = shape.getBoundingBox();
+
+			renderBlock(event, ownBreakingPos, shrinkFactor, orig);
 
 		}
 
@@ -108,13 +104,17 @@ public class BreakIndicatorsMixin extends Module  {
 			double shrinkFactor = (9 - (stage + 1)) / 9d;
 			double progress = 1d - shrinkFactor;
 
-			renderBlock(event, pos, shrinkFactor);
+			renderBlock(event, pos, shrinkFactor, orig);
 		});
+
+		if (packetMine.get() && !Modules.get().get(PacketMine.class).blocks.isEmpty()) {
+			renderPacket(event, Modules.get().get(PacketMine.class).blocks);
+		}
 	}
 
 	@Unique
-	private void renderBlock(Render2DEvent event, BlockPos pos, double shrinkFactor) {
-		Vector3d vector3d = new Vector3d(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+	private void renderBlock(Render2DEvent event, BlockPos pos, double shrinkFactor, Box orig) {
+		Vector3d vector3d = new Vector3d(pos.getX() + orig.getCenter().x, pos.getY() + orig.getCenter().y, pos.getZ() + orig.getCenter().z);
 		if (percentageRender.get()) {
 			if (NametagUtils.to2D(vector3d, 1, true)) {
 				TextRenderer text = TextRenderer.get();
@@ -152,7 +152,7 @@ public class BreakIndicatorsMixin extends Module  {
 				double shrinkFactor = 1d - progressNormalised;
 				BlockPos pos = block.blockPos;
 
-				renderBlock(event, pos, shrinkFactor);
+				renderBlock(event, pos, shrinkFactor, orig);
 			}
 		}
 	}
