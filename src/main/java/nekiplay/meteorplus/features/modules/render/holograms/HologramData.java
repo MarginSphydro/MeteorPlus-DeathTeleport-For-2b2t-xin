@@ -12,6 +12,8 @@ public class HologramData {
 	public double z;
 	public String text;
 	public Color color;
+	public int item_id = 0;
+	public int item_scale = 2;
 
 	public HologramData() {
 

@@ -87,9 +87,17 @@ public class HologramModule extends Module {
 					text.render(MeteorStarscript.run(scripts.get(hologram_text)), hX, hY, hologramData.color, true);
 					for (HologramData hologramData1 : hologramData.other_holograms) {
 						text.render(MeteorStarscript.run(scripts.get(hologramData1.text)), hX - hologramData1.x, hY - hologramData1.y, hologramData1.color, true);
+						if (hologramData1.item_id != 0) {
+							Item item = Item.byRawId(hologramData1.item_id);
+							RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) ((int) hX - hologramData1.x), (int) ((int) 0 - hologramData1.y), hologramData1.item_scale, true);
+						}
 					}
 
 					text.end();
+					if (hologramData.item_id != 0) {
+						Item item = Item.byRawId(hologramData.item_id);
+						RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) hX, (int) 0, hologramData.item_scale, true);
+					}
 					NametagUtils.end(event.drawContext);
 				}
 			}
