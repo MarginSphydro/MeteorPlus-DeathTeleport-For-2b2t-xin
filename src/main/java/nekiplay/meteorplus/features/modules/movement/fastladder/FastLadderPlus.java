@@ -12,7 +12,7 @@ import nekiplay.meteorplus.features.modules.movement.fastladder.modes.Spartan;
 
 public class FastLadderPlus extends Module {
 	public FastLadderPlus() {
-		super(Categories.Movement, "fast-ladder+", "Bypass fast-ladder");
+		super(Categories.Movement, "fast-climb+", "Bypass fast-climb");
 		onSpiderModeChanged(spiderMode.get());
 	}
 	private final SettingGroup sgGeneral = settings.getDefaultGroup();

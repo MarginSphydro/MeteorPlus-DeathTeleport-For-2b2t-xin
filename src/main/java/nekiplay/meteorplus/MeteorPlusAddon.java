@@ -178,6 +178,7 @@ public class MeteorPlusAddon extends MeteorAddon {
 		modules.add(new Freeze());
 		modules.add(new AntiBotPlus());
 		modules.add(new ItemFrameEsp());
+		modules.add(new KillEffect());
 		//modules.add(new KillAuraPlus());
 		modules.add(new ElytraFlyPlus());
 		modules.add(new VelocityPlus());

@@ -12,7 +12,6 @@ import java.util.Set;
 public class MixinPlugin implements IMixinConfigPlugin {
 	public static final Logger LOG = LoggerFactory.getLogger(MixinPlugin.class);
 	public static final String METEOR_LOGPREFIX_MIXIN = "[Meteor+ Mixins]";
-	public static final String BOZE_LOGPREFIX_MIXIN = "[Boze+ Mixins]";
 
 	private static final String mixinPackageMeteorPlus = "nekiplay.meteorplus.mixin";
 	private static final String mixinPackageBozePlus = "nekiplay.bozeplus.mixin";
