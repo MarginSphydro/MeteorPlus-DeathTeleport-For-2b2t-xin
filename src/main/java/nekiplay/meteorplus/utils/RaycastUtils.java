@@ -20,7 +20,7 @@ import static meteordevelopment.meteorclient.MeteorClient.mc;
 public class RaycastUtils {
 	public static EntityHitResult raycastEntity(final double range, final float yaw, final float pitch, double boxexpand) {
 		Entity camera = mc.getCameraEntity();
-		Vec3d cameraVec = mc.player.getEyePos();
+		Vec3d pos = mc.player.getEyePos();
 
 		final float yawCos = MathHelper.cos(-yaw * 0.017453292F - (float) Math.PI);
 		final float yawSin = MathHelper.sin(-yaw * 0.017453292F - (float) Math.PI);
@@ -29,10 +29,10 @@ public class RaycastUtils {
 
 		final Vec3d rotation = new Vec3d(yawSin * pitchCos, pitchSin, yawCos * pitchCos);
 
-		Vec3d vec3d3 = cameraVec.add(rotation.x * range, rotation.y * range, rotation.z * range);
+		Vec3d vec3d3 = pos.add(rotation.x * range, rotation.y * range, rotation.z * range);
 		Box box = camera.getBoundingBox().stretch(rotation.multiply(range)).expand(boxexpand, boxexpand, boxexpand);
 
-		return ProjectileUtil.raycast(camera, cameraVec, vec3d3, box, new Predicate<Entity>() {
+		return ProjectileUtil.raycast(camera, pos, vec3d3, box, new Predicate<Entity>() {
 			@Override
 			public boolean test(Entity entity) {
 				return !entity.isSpectator() && entity.isCollidable();
@@ -49,7 +49,7 @@ public class RaycastUtils {
 		return new Vec3d(i * j, -k, h * j);
 	}
 
-	public static HitResult raycast(Vec3d camera, Vec3d rotation, double maxDistance, float tickDelta, boolean includeFluids) {
+	public static HitResult raycast(Vec3d camera, Vec3d rotation, double maxDistance, boolean includeFluids) {
 		Vec3d vec3d = camera;
 		Vec3d vec3d2 = rotation;
 		Vec3d vec3d3 = vec3d.add(vec3d2.x * maxDistance, vec3d2.y * maxDistance, vec3d2.z * maxDistance);

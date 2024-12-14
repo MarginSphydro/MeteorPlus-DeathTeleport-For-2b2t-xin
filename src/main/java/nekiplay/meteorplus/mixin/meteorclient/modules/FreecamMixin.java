@@ -97,78 +97,24 @@ public class FreecamMixin {
 			block == Blocks.DEAD_BUSH ||
 			block == Blocks.SNOW ||
 			block == Blocks.MOSS_CARPET ||
-			// Decorations
-			block == Blocks.TORCH ||
-			block == Blocks.WALL_TORCH ||
+			// Torchs
+			block instanceof TorchBlock ||
+			block instanceof WallTorchBlock ||
 			// Signs
-			block == Blocks.SPRUCE_SIGN ||
-			block == Blocks.ACACIA_SIGN ||
-			block == Blocks.BIRCH_SIGN ||
-			block == Blocks.CHERRY_SIGN ||
-			block == Blocks.BAMBOO_SIGN ||
-			block == Blocks.OAK_SIGN ||
-			block == Blocks.CRIMSON_SIGN ||
-			block == Blocks.DARK_OAK_SIGN ||
-			block == Blocks.JUNGLE_SIGN ||
-			block == Blocks.MANGROVE_SIGN ||
-			block == Blocks.WARPED_SIGN ||
-			// Wall signs
-			block == Blocks.SPRUCE_WALL_SIGN ||
-			block == Blocks.ACACIA_WALL_SIGN ||
-			block == Blocks.BIRCH_WALL_SIGN ||
-			block == Blocks.CHERRY_WALL_SIGN ||
-			block == Blocks.BAMBOO_WALL_SIGN ||
-			block == Blocks.OAK_WALL_SIGN ||
-			block == Blocks.CRIMSON_WALL_SIGN ||
-			block == Blocks.DARK_OAK_WALL_SIGN ||
-			block == Blocks.JUNGLE_WALL_SIGN ||
-			block == Blocks.MANGROVE_WALL_SIGN ||
-			block == Blocks.WARPED_WALL_SIGN ||
+			block instanceof WallSignBlock ||
+			block instanceof SignBlock ||
 			// Mushroms
-			block == Blocks.BROWN_MUSHROOM ||
-			block == Blocks.RED_MUSHROOM ||
-			block == Blocks.CRIMSON_FUNGUS ||
-			block == Blocks.WARPED_FUNGUS ||
+			block instanceof MushroomPlantBlock ||
 			// Small flowers
-			block == Blocks.DANDELION ||
-			block == Blocks.POPPY ||
-			block == Blocks.BLUE_ORCHID ||
-			block == Blocks.ALLIUM ||
-			block == Blocks.AZURE_BLUET ||
-			block == Blocks.RED_TULIP ||
-			block == Blocks.ORANGE_TULIP ||
-			block == Blocks.WHITE_TULIP ||
-			block == Blocks.PINK_TULIP ||
-			block == Blocks.OXEYE_DAISY ||
-			block == Blocks.CORNFLOWER ||
-			block == Blocks.LILY_OF_THE_VALLEY ||
-			block == Blocks.TORCHFLOWER ||
-			block == Blocks.PINK_PETALS ||
-			block == Blocks.SUGAR_CANE ||
+			block instanceof FlowerBlock ||
 			// Crops
-			block == Blocks.NETHER_WART ||
-			block == Blocks.PITCHER_CROP ||
-			block == Blocks.TORCHFLOWER_CROP ||
-			block == Blocks.BEETROOTS ||
-			block == Blocks.WHEAT ||
-			block == Blocks.CARROTS ||
-			block == Blocks.POTATOES ||
-			block == Blocks.MELON_STEM ||
-			block == Blocks.PUMPKIN_STEM ||
+			block instanceof CropBlock ||
 			// Saplings
-			block == Blocks.SPRUCE_SAPLING ||
-			block == Blocks.ACACIA_SAPLING ||
-			block == Blocks.BIRCH_SAPLING ||
-			block == Blocks.BAMBOO_SAPLING ||
-			block == Blocks.CHERRY_SAPLING ||
-			block == Blocks.DARK_OAK_SAPLING ||
-			block == Blocks.JUNGLE_SAPLING ||
-			block == Blocks.OAK_SAPLING ||
+			block instanceof SaplingBlock ||
 			// Rails
-			block == Blocks.RAIL ||
-			block == Blocks.ACTIVATOR_RAIL ||
-			block == Blocks.POWERED_RAIL ||
-			block == Blocks.DETECTOR_RAIL
+			block instanceof RailBlock ||
+			// Carpets
+			block instanceof CarpetBlock
 
 		) {
 			return pos;
@@ -183,7 +129,7 @@ public class FreecamMixin {
 		BlockPos blockPos = null;
 		Vec3d rotationVector = RaycastUtils.getRotationVector((float) freecam.getPitch(mc.getRenderTickCounter().getTickDelta(true)), (float) freecam.getYaw(mc.getRenderTickCounter().getTickDelta(true)));
 		Vec3d pos = new Vec3d(freecam.pos.x, freecam.pos.y, freecam.pos.z);
-		HitResult result = RaycastUtils.raycast(pos, rotationVector, 64 * 4, mc.getRenderTickCounter().getTickDelta(true), true);
+		HitResult result = RaycastUtils.raycast(pos, rotationVector, 64 * 4, true);
 		if (result.getType() == HitResult.Type.BLOCK) {
 			BlockHitResult blockHitResult = (BlockHitResult) result;
 			blockPos = blockHitResult.getBlockPos();

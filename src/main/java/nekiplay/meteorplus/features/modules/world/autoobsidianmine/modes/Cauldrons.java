@@ -73,7 +73,7 @@ public class Cauldrons extends AutoObsidianFarmMode {
 			}
 		}
 	}
-	
+
 	@Override
 	public String getInfoString() {
 		return Integer.toString(placed);
@@ -173,15 +173,6 @@ public class Cauldrons extends AutoObsidianFarmMode {
 								mc.player.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(bucket.slot()));
 								rotate(block, () -> {
 									Vec3d hitPos = Vec3d.ofCenter(block);
-									Direction side = Direction.DOWN;
-									//BlockPos neighbour;
-									//if (side == null) {
-									//	side = Direction.UP;
-									//	neighbour = block;
-									//} else {
-									//	neighbour = block.offset(side);
-									//	hitPos = hitPos.add((double) side.getOffsetX() * 0.5, (double) side.getOffsetY() * 0.5, (double) side.getOffsetZ() * 0.5);
-									//}
 									BlockHitResult bhr = new BlockHitResult(hitPos, Direction.UP, block, false);
 									boolean isSneaking = false;
 									if (settings.bypassSneak.get()) {

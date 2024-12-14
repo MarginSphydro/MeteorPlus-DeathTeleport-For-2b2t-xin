@@ -10,6 +10,7 @@ import meteordevelopment.meteorclient.utils.player.Rotations;
 import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlusMode;
 import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlusModes;
 import nekiplay.meteorplus.utils.GameSensitivityUtils;
+import nekiplay.meteorplus.utils.RaycastUtils;
 import nekiplay.meteorplus.utils.math.StopWatch;
 import net.minecraft.client.util.math.Vector2f;
 import net.minecraft.entity.Entity;
@@ -26,6 +27,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 import org.joml.Vector3d;
 
 import java.util.ArrayList;
@@ -33,7 +35,7 @@ import java.util.Objects;
 
 import static nekiplay.meteorplus.features.modules.combat.criticals.CriticalsPlus.allowCrit;
 import static nekiplay.meteorplus.features.modules.combat.criticals.CriticalsPlus.needCrit;
-import static nekiplay.meteorplus.utils.RaycastUtils.raycastEntity;
+import static nekiplay.meteorplus.utils.RaycastUtils.*;
 import static net.minecraft.util.math.MathHelper.*;
 
 public class Matrix extends KillAuraPlusMode {
@@ -52,15 +54,12 @@ public class Matrix extends KillAuraPlusMode {
 
 		if (target != null && target.isAlive()) {
 			isRotated = false;
-
-			EntityHitResult result = raycastEntity(settings.range.get(), rotateVector.getX(), rotateVector.getY(), 0f);
+			Vec3d pos = mc.player.getEyePos();
+			HitResult result = RaycastUtils.raycast(pos, getRotationVector(rotateVector.getX(), rotateVector.getY()), 64 * 4, false);
 			if (result != null) {
 				ChatUtils.info(result.getType().name());
 			}
-			if (settings.onlyCrits.get() && !allowCrit() && needCrit(target)) {
-
-			}
-			else if (delayCheck() && result != null && result.getType() == HitResult.Type.ENTITY) {
+			if (delayCheck() && result != null && result.getType() == HitResult.Type.ENTITY) {
 				attack(target);
 				ticks = 2;
 			}
