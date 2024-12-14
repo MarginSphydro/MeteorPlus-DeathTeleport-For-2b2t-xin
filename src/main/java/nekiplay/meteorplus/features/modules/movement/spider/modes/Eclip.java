@@ -33,7 +33,7 @@ public class Eclip extends SpiderMode {
 	@Override
 	public void onTickEventPre(TickEvent.Pre event) {
 		if (work() && mc.player.horizontalCollision) {
-			blocks = Modules.get().get(SpiderPlus.class).Blocks.get();
+			blocks = settings.Blocks.get();
 			clip();
 		} else {
 			ticks = 0;

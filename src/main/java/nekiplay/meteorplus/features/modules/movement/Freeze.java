@@ -2,6 +2,7 @@ package nekiplay.meteorplus.features.modules.movement;
 
 import meteordevelopment.meteorclient.events.entity.EntityRemovedEvent;
 import meteordevelopment.meteorclient.events.entity.player.InteractBlockEvent;
+import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
 import meteordevelopment.meteorclient.events.game.GameLeftEvent;
 import meteordevelopment.meteorclient.events.packets.PacketEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
@@ -114,6 +115,10 @@ public class Freeze extends Module {
 			mc.player.setVelocity(0, 0, 0);
 			mc.player.setPos(position.x, position.y, position.z);
 		}
+	}
+	@EventHandler
+	private void onPlayerMove(PlayerMoveEvent event) {
+		event.movement = new Vec3d(0, 0, 0);
 	}
 	@EventHandler
 	private void remove(EntityRemovedEvent event)
