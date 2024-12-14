@@ -178,6 +178,7 @@ public class MeteorPlusAddon extends MeteorAddon {
 		modules.add(new AutoLeave());
 		modules.add(new AutoAccept());
 		modules.add(new GhostBlockFixer());
+		modules.add(new KillEffect());
 		modules.add(new SafeMine());
 		modules.add(new Freeze());
 		modules.add(new AntiBotPlus());

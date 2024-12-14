@@ -107,11 +107,7 @@ public class Spartan extends FastLadderMode {
 		ClientPlayerEntity player = mc.player;
 		assert player != null;
 		Vec3d pl_velocity = player.getVelocity();
-		Vec3d pos = player.getPos();
-		ClientPlayNetworkHandler h = mc.getNetworkHandler();
-		BlockState state = mc.world.getBlockState(player.getBlockPos());
-		BlockState state2 = mc.world.getBlockState(player.getBlockPos().add(0, 1, 0));
-		if (mc.player.isClimbing() && (state.getBlock() == Blocks.LADDER || state.getBlock() == Blocks.VINE) || state2.getBlock() == Blocks.LADDER || state2.getBlock() == Blocks.VINE) {
+		if (mc.player.isClimbing()) {
 			modify = player.horizontalCollision && player.isHoldingOntoLadder();
 			if (mc.player.isOnGround()) {
 				block = false;
