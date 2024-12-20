@@ -18,6 +18,7 @@
     "meteorclient.modules.TracersMixin",
     "meteorclient.modules.WaypointsModuleMixin",
 		"meteorclient.modules.BreakIndicatorsMixin",
+		"minecraft.entity.LivingEntityAccessor",
     "minecraft.ClientConnectionAccessor",
     "minecraft.CraftingScreenHandlerAccessor",
     "minecraft.ShapelessRecipeAccessor",

@@ -43,6 +43,12 @@ public class KillAuraPlus extends Module {
 		.build()
 	);
 
+	public final Setting<Boolean> movementCorrection = sgGeneral.add(new BoolSetting.Builder()
+		.name("movement-correction")
+		.defaultValue(false)
+		.build()
+	);
+
 	public final Setting<Boolean> autoSwitch = sgGeneral.add(new BoolSetting.Builder()
 		.name("auto-switch")
 		.description("Switches to your selected weapon when attacking the target.")

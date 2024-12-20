@@ -55,8 +55,7 @@ public class KillEffect extends Module {
 									}
 								}
 							}
-							default -> {
-							}
+							default -> {  }
 						}
 						entityList.add(entity);
 					}

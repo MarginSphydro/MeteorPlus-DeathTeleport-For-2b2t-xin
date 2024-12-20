@@ -2,13 +2,16 @@ package nekiplay.meteorplus.features.modules.combat.killaura.modes;
 
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.systems.friends.Friends;
+import meteordevelopment.meteorclient.systems.modules.Modules;
 import meteordevelopment.meteorclient.systems.modules.combat.KillAura;
 import meteordevelopment.meteorclient.utils.entity.TargetUtils;
 import meteordevelopment.meteorclient.utils.player.ChatUtils;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.player.Rotations;
+import nekiplay.meteorplus.features.modules.combat.AntiBotPlus;
 import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlusMode;
 import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlusModes;
+import nekiplay.meteorplus.mixin.minecraft.entity.LivingEntityAccessor;
 import nekiplay.meteorplus.utils.GameSensitivityUtils;
 import nekiplay.meteorplus.utils.RaycastUtils;
 import nekiplay.meteorplus.utils.math.StopWatch;
@@ -54,18 +57,11 @@ public class Matrix extends KillAuraPlusMode {
 
 		if (target != null && target.isAlive()) {
 			isRotated = false;
-			Vec3d pos = mc.player.getEyePos();
-			HitResult result = RaycastUtils.raycast(pos, getRotationVector(rotateVector.getX(), rotateVector.getY()), 64 * 4, false);
-			if (result != null) {
-				ChatUtils.info(result.getType().name());
-			}
+			HitResult result = raycastEntity(settings.range.get(), rotateVector.getX(), rotateVector.getY(), 0f);
 			if (delayCheck() && result != null && result.getType() == HitResult.Type.ENTITY) {
 				attack(target);
 				ticks = 2;
 			}
-
-
-
             if (settings.rotationType.get() == Type.Fast) {
 				if (ticks > 0) {
 					updateRotation(true, 180, 90);
@@ -76,7 +72,7 @@ public class Matrix extends KillAuraPlusMode {
 				}
 			} else {
 				if (!isRotated) {
-					updateRotation(false, 80, 35);
+					updateRotation(false, 40, 35);
 					Rotations.rotate(rotateVector.getX(), rotateVector.getY());
 				}
 			}
@@ -99,6 +95,8 @@ public class Matrix extends KillAuraPlusMode {
  	private boolean entityCheck(Entity entity) {
 		if (entity.equals(mc.player) || entity.equals(mc.cameraEntity)) return false;
 		if ((entity instanceof LivingEntity livingEntity && livingEntity.isDead()) || !entity.isAlive()) return false;
+
+		if (Modules.get().get(AntiBotPlus.class).isBot(entity)) return false;
 
 		Box hitbox = entity.getBoundingBox();
 		if (!PlayerUtils.isWithin(
@@ -186,9 +184,9 @@ public class Matrix extends KillAuraPlusMode {
 				rotateVector = new Vector2f(yaw, pitch);
 				lastYaw = clampedYaw;
 				lastPitch = clampedPitch;
-				//if (options.getValueByName("Коррекция движения").get()) {
-					//mc.player.rotationYawOffset = yaw;
-				//}
+				if (settings.movementCorrection.get()) {
+					((LivingEntityAccessor)mc.player).setServerHeadYaw(yaw);;
+				}
 			}
 			case Fast -> {
 				float yaw = rotateVector.getX() + roundedYaw;
@@ -200,9 +198,9 @@ public class Matrix extends KillAuraPlusMode {
 
 				rotateVector = new Vector2f(yaw, pitch);
 
-				//if (options.getValueByName("Коррекция движения").get()) {
-				//	mc.player.rotationYawOffset = yaw;
-				//}
+				if (settings.movementCorrection.get()) {
+					((LivingEntityAccessor)mc.player).setServerHeadYaw(yaw);;
+				}
 			}
 		}
 	}
