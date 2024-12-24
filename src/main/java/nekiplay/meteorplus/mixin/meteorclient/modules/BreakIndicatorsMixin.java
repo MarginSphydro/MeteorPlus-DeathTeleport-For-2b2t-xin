@@ -80,6 +80,7 @@ public class BreakIndicatorsMixin extends Module  {
 			double shrinkFactor = 1d - ownBreakingStage;
 
 
+			assert mc.world != null;
 			BlockState state = mc.world.getBlockState(ownBreakingPos);
 			VoxelShape shape = state.getOutlineShape(mc.world, ownBreakingPos);
 			if (shape == null || shape.isEmpty()) return;
@@ -95,6 +96,7 @@ public class BreakIndicatorsMixin extends Module  {
 			int stage = info.getStage();
 			if (pos.equals(ownBreakingPos)) return;
 
+			assert mc.world != null;
 			BlockState state = mc.world.getBlockState(pos);
 			VoxelShape shape = state.getOutlineShape(mc.world, pos);
 			if (shape == null || shape.isEmpty()) return;

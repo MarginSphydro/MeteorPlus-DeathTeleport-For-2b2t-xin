@@ -15,7 +15,7 @@
   },
   "license": "GPL-3.0",
   "icon": "assets/meteorplus/icon.png",
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
     "main": [
       "nekiplay.Main"
@@ -38,8 +38,7 @@
 			"links": {
 				"modmenu.website": "https://meteorclientplus.github.io",
 				"modmenu.discord": "https://discord.gg/Y3ardRfJXr",
-				"Guilded": "https://www.guilded.gg/i/27dAlJKk",
-				"Telegram": "https://t.me/+oST4M1L4pGdiYzgy"
+				"Guilded": "https://www.guilded.gg/i/27dAlJKk"
 			},
 			"badges": [ "clientsideOnly" ]
 		}

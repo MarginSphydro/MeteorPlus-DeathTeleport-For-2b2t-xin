@@ -73,6 +73,7 @@ dependencies {
 
 	// Chest Tracker
 	modImplementation("red.jackf:whereisit:${project.where_is_it_version}")
+	modImplementation("maven.modrinth:chest-tracker:${project.chest_tracker}")
 }
 
 loom {
