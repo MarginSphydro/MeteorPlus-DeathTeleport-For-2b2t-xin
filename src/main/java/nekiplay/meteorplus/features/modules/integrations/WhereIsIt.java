@@ -24,14 +24,8 @@ public class WhereIsIt extends Module {
 		.build()
 	);
 
-	public final Setting<SettingColor> visible_text_color = defaultGroup.add(new ColorSetting.Builder()
-		.name("Visible-text-color")
-		.visible(() -> !suport_color_symbols.get())
-		.build()
-	);
-
-	public final Setting<SettingColor> notvisible_text_color = defaultGroup.add(new ColorSetting.Builder()
-		.name("not-visible-text-color")
+	public final Setting<SettingColor> text_color = defaultGroup.add(new ColorSetting.Builder()
+		.name("text-color")
 		.visible(() -> !suport_color_symbols.get())
 		.build()
 	);
@@ -43,15 +37,6 @@ public class WhereIsIt extends Module {
 		.max(15)
 		.min(-15)
 		.sliderRange(-15, 15)
-		.build()
-	);
-
-	public final Setting<Double> text_scale = defaultGroup.add(new DoubleSetting.Builder()
-		.name("text-scale")
-		.defaultValue(1)
-		.max(15)
-		.min(0)
-		.sliderRange(0, 15)
 		.build()
 	);
 }
