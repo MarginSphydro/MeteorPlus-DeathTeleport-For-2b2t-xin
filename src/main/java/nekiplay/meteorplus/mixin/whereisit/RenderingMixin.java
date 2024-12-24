@@ -1,29 +1,15 @@
 package nekiplay.meteorplus.mixin.whereisit;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import nekiplay.meteorplus.features.modules.integrations.WhereIsIt;
-import nekiplay.meteorplus.mixinclasses.ScheduledLabel;
 import nekiplay.meteorplus.utils.ColorRemover;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.render.Camera;
-import net.minecraft.client.render.LightmapTextureManager;
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumerProvider;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.math.Vec3d;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import red.jackf.whereisit.client.render.Rendering;
-import red.jackf.whereisit.config.WhereIsItConfig;
 
 @Mixin(Rendering.class)
 public class RenderingMixin {
@@ -36,7 +22,6 @@ public class RenderingMixin {
 		}
 
 		if (whereIsIt != null && whereIsIt.isActive()) {
-
 			Text text1 = args.get(0);
 			String text2 = text1.getString();
 			if (whereIsIt.suport_color_symbols.get()) {

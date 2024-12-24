@@ -17,14 +17,14 @@ public class MapIntegration extends Module {
 	private final SettingGroup baritoneIntegration = settings.createGroup("Baritone");
 
 	public final Setting<Boolean> baritoneGoto = baritoneIntegration.add(new BoolSetting.Builder()
-		.name("Baritone support")
+		.name("baritone-support")
 		.description("Moving in baritone at the selected location.")
 		.defaultValue(true)
 		.build()
 	);
 
 	public final Setting<Boolean> baritoneElytra = baritoneIntegration.add(new BoolSetting.Builder()
-		.name("Baritone elytra")
+		.name("baritone-elytra")
 		.description("Elytra to location.")
 		.defaultValue(true)
 		.visible(() -> {
@@ -46,7 +46,7 @@ public class MapIntegration extends Module {
 	private final SettingGroup fullMap = settings.createGroup("Full map");
 
 	public final Setting<Boolean> showBlock = fullMap.add(new BoolSetting.Builder()
-		.name("Show block")
+		.name("show-block")
 		.description("Shows the name of the block in the clicked position.")
 		.visible(() -> MixinPlugin.isXaeroWorldMapresent)
 		.defaultValue(true)
