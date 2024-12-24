@@ -3,7 +3,6 @@ package nekiplay.meteorplus.mixin.whereisit;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import nekiplay.meteorplus.features.modules.integrations.WhereIsIt;
 import nekiplay.meteorplus.utils.ColorRemover;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -11,6 +10,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArgs;
 import org.spongepowered.asm.mixin.injection.invoke.arg.Args;
 import red.jackf.whereisit.client.render.Rendering;
+
+import static meteordevelopment.meteorclient.MeteorClient.mc;
 
 @Mixin(Rendering.class)
 public class RenderingMixin {
@@ -29,7 +30,7 @@ public class RenderingMixin {
 				String text3 = ColorRemover.GetVerbatim(text2);
 				args.set(0, Text.of(text3));
 
-				int width = MinecraftClient.getInstance().textRenderer.getWidth(text3);
+				int width = mc.textRenderer.getWidth(text3);
 				float x = (float)(-width) / 2.0F;
 
 				args.set(1, x);
