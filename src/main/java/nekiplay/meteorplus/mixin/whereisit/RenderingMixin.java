@@ -47,6 +47,18 @@ public class RenderingMixin {
 		}
 	}
 
+	@ModifyArgs(method = "renderLabel", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/VertexConsumer;vertex(Lorg/joml/Matrix4f;FFF)Lnet/minecraft/client/render/VertexConsumer;"))
+	private static void backgroundModifer(Args args) {
+		if (whereIsIt == null) {
+			whereIsIt = Modules.get().get(WhereIsIt.class);
+		}
+
+		if (whereIsIt != null && whereIsIt.isActive() && !whereIsIt.background.get()) {
+			args.set(1, 0f);
+			args.set(2, 0f);
+		}
+	}
+
 	@Unique
 	private static int getColor(String text) {
 		if (text.length() >= 2) {

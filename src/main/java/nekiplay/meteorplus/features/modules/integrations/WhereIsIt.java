@@ -12,6 +12,12 @@ public class WhereIsIt extends Module {
 
 	public SettingGroup defaultGroup = settings.getDefaultGroup();
 
+	public final Setting<Boolean> background = defaultGroup.add(new BoolSetting.Builder()
+		.name("draw-background")
+		.defaultValue(true)
+		.build()
+	);
+
 	public final Setting<Boolean> suport_color_symbols = defaultGroup.add(new BoolSetting.Builder()
 		.name("use-color-symbols")
 		.defaultValue(true)
