@@ -45,7 +45,7 @@
 ## Commands
 | Command   | Description       | Bypasses                                |
 |-----------|-------------------|-----------------------------------------|
-| **eclip** | **Vertical clip** | **Matrix, Wraith, Spartan, Negativity** |
+| **eclip** | **Elytra vertical clip** | **Matrix, Wraith, Spartan, Negativity** |
 
 
 ## Meteor Client improvements
@@ -61,14 +61,17 @@
 | **Auto Tool** | **No work in creative mode**                |
 | **KeyBinds**  | **Allow binding function to LMB, RMB, ESC** |
 
+## Integrations
+| Module            | Description                                       |
+|-------------------|---------------------------------------------------|
+| **Chest Tracker** | **Colors support, background disabler, y offset** |
+
 # Installation Guide
 1. Install [minecraft](https://www.minecraft.net)
 2. Install [fabric](https://fabricmc.net) and [fabric api](https://www.curseforge.com/minecraft/mc-mods/fabric-api) for your version of minecraft
 3. Download [meteor client](https://meteorclient.com) for your version of minecraft
 4. Download [meteor plus](https://github.com/MeteorClientPlus/MeteorPlus/releases) for your version of minecraft
 5. Place the meteor client and meteor plus in your mods folder
-
-    A: Make Commit we welcome anyone who makes a useful contribution to our free open source product
 
 ## For Contributors
 We use local builds of Meteor Client and Baritone from Meteor Client since Meteor Client a hosting can sometimes not be paid on time 
