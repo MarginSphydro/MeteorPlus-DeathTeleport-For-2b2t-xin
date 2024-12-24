@@ -3,6 +3,7 @@ package nekiplay.meteorplus.mixin.whereisit;
 import meteordevelopment.meteorclient.systems.modules.Modules;
 import nekiplay.meteorplus.features.modules.integrations.WhereIsIt;
 import nekiplay.meteorplus.utils.ColorRemover;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -27,6 +28,11 @@ public class RenderingMixin {
 			if (whereIsIt.suport_color_symbols.get()) {
 				String text3 = ColorRemover.GetVerbatim(text2);
 				args.set(0, Text.of(text3));
+
+				int width = MinecraftClient.getInstance().textRenderer.getWidth(text3);
+				float x = (float)(-width) / 2.0F;
+
+				args.set(1, x);
 				args.set(3, getColor(text2));
 			}
 			else {
