@@ -51,7 +51,7 @@ public class WaypointRendererMixin {
 					}
 				}).setNameFormatArgs(new Object[]{"E"}));
 
-				if (mapIntegration != null && mapIntegration.baritoneGoto.get()) {
+				if (mapIntegration.baritoneGoto.get()) {
 					rightClickOptions.add((new RightClickOption("gui.world_map.baritone_goal_here", rightClickOptions.size(), target) {
 						public void onAction(Screen screen) {
 							GoalBlock goal = new GoalBlock(new BlockPos(element.getX(), element.getY(), element.getZ()));
