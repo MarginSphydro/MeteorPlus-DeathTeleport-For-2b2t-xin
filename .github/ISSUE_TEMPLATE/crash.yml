@@ -30,6 +30,12 @@ body:
       label: Minecraft Version
     validations:
       required: true
+  - type: input
+    id: logs
+    attributes:
+      label: Logs (https://mclo.gs)
+    validations:
+      required: true
   - type: dropdown
     id: operating-systems
     attributes:
