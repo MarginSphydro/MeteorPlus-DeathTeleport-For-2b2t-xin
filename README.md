@@ -42,18 +42,26 @@
 | **Anti Bot**  | **Ignores bots for KillAura, ESP, Tracers**            |          |
 | **Teams**     | **Does not beat teammates on BedWars and other modes** |          |
 
+## Integrations
+| Module              | Description                                       |
+|---------------------|---------------------------------------------------|
+| **Chest Tracker**   | **Colors support, background disabler, y offset** |
+| **Xaero's MiniMap** | **Support baritone control on context**           |
+
 ## Commands
-| Command   | Description       | Bypasses                                |
-|-----------|-------------------|-----------------------------------------|
-| **eclip** | **Vertical clip** | **Matrix, Wraith, Spartan, Negativity** |
+| Command   | Description            | Bypasses                                |
+|-----------|------------------------|-----------------------------------------|
+| **eclip** | **Vertical clip**      | **Matrix, Wraith, Spartan, Negativity** |
+| **gpt**   | **Use ChatGPT module** |                                         |
 
 
 ## Meteor Client improvements
-| Module                    | Enhancements                                                        |
-|---------------------------|---------------------------------------------------------------------|
-| **Freecam**               | **Added good baritone control via Freecam**                         |       
-| **Waypoints**             | **Added display of distances in label names, sorting, name search** |
-| **Hidden module**         | **Hiding original modules and third-party modules from the GUI**    |
+| Module               | Enhancements                                                        |
+|----------------------|---------------------------------------------------------------------|
+| **Freecam**          | **Added good baritone control via Freecam**                         |       
+| **Waypoints**        | **Added display of distances in label names, sorting, name search** |
+| **BetterTooltips**   | **Translations for BetterTooltips**                                 |
+| **Break Indicators** | **Added percentage render**                                         |
 
 ## Meteor Client fixes
 | Module        | Fix                                         |
