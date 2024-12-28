@@ -2,7 +2,6 @@ package nekiplay.main.events.hud;
 
 import nekiplay.main.events.Cancellable;
 import net.minecraft.client.gui.DrawContext;
-import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.entity.player.PlayerEntity;
 
 public class RenderFoodBarEvent extends Cancellable {

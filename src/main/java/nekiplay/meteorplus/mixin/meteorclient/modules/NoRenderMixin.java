@@ -25,33 +25,33 @@ public class NoRenderMixin extends Module {
 
 	@Unique
 	private final Setting<Boolean> noPosition = noRenderMeteorPlusSetting.add(new BoolSetting.Builder()
-		.name("remove-position")
+		.name("position")
 		.defaultValue(false)
 		.build()
 	);
 	@Unique
 	private final Setting<Boolean> noPositionBlock = noRenderMeteorPlusSetting.add(new BoolSetting.Builder()
-		.name("remove-position-block")
+		.name("position-block")
 		.defaultValue(false)
 		.build()
 	);
 	@Unique
 	private final Setting<Boolean> noPositionChunk = noRenderMeteorPlusSetting.add(new BoolSetting.Builder()
-		.name("remove-position-chunk")
+		.name("position-chunk")
 		.defaultValue(false)
 		.build()
 	);
 
 	@Unique
 	private final Setting<Boolean> noTargetBlockPosition = noRenderMeteorPlusSetting.add(new BoolSetting.Builder()
-		.name("remove-target-block-position")
+		.name("target-block-position")
 		.defaultValue(false)
 		.build()
 	);
 
 	@Unique
 	private final Setting<Boolean> noTargetFluidPosition = noRenderMeteorPlusSetting.add(new BoolSetting.Builder()
-		.name("remove-target-fluid-position")
+		.name("target-fluid-position")
 		.defaultValue(false)
 		.build()
 	);
