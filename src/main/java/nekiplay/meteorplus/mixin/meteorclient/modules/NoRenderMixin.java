@@ -5,7 +5,7 @@ import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.meteorclient.systems.modules.render.NoRender;
 import meteordevelopment.orbit.EventHandler;
-import nekiplay.main.events.hud.DebugDrawTextEvent;
+import nekiplay.main.events.hud.*;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import java.util.List;
@@ -17,9 +17,10 @@ public class NoRenderMixin extends Module {
 	}
 
 	@Unique
-	private final NoRender noRender = (NoRender)(Object) this;
-	@Unique
-	private final SettingGroup noRenderMeteorPlusSetting = noRender.settings.createGroup("F3");
+	private final SettingGroup noRenderMeteorPlusSetting = settings.createGroup("F3");
+
+
+	private final SettingGroup sgHUD = settings.getGroup("HUD");
 
 
 	@Unique
@@ -55,6 +56,96 @@ public class NoRenderMixin extends Module {
 		.build()
 	);
 
+
+	@Unique
+	private final Setting<Boolean> experienceBar = sgHUD.add(new BoolSetting.Builder()
+		.name("experience-bar")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> experienceLevel = sgHUD.add(new BoolSetting.Builder()
+		.name("experience-level")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> healthBar = sgHUD.add(new BoolSetting.Builder()
+		.name("health-bar")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> mountHealthBar = sgHUD.add(new BoolSetting.Builder()
+		.name("mount-health-bar")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> foodBar = sgHUD.add(new BoolSetting.Builder()
+		.name("food-bar")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	private final Setting<Boolean> armorBar = sgHUD.add(new BoolSetting.Builder()
+		.name("armor-bar")
+		.defaultValue(false)
+		.build()
+	);
+
+	@Unique
+	@EventHandler
+	private void onMountHealthBarRender(RenderMountHealthBarEvent event) {
+		if (mountHealthBar.get()) {
+			event.setCancelled(true);
+		}
+	}
+
+	@Unique
+	@EventHandler
+	private void onArmorBarRender(RenderArmorBarEvent event) {
+		if (armorBar.get()) {
+			event.setCancelled(true);
+		}
+	}
+
+	@Unique
+	@EventHandler
+	private void onFoodBarRender(RenderFoodBarEvent event) {
+		if (foodBar.get()) {
+			event.setCancelled(true);
+		}
+	}
+
+	@Unique
+	@EventHandler
+	private void onHealthBarRender(RenderHealthBarEvent event) {
+		if (healthBar.get()) {
+			event.setCancelled(true);
+		}
+	}
+
+	@Unique
+	@EventHandler
+	private void onExperienceBarRender(RenderExperienceBarEvent event) {
+		if (experienceBar.get()) {
+			event.setCancelled(true);
+		}
+	}
+
+	@Unique
+	@EventHandler
+	private void onExperienceLevelRender(RenderExperienceLevelEvent event) {
+		if (experienceLevel.get()) {
+			event.setCancelled(true);
+		}
+	}
 
 	@Unique
 	@EventHandler

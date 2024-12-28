@@ -23,7 +23,8 @@
     "minecraft.CraftingScreenHandlerAccessor",
     "minecraft.ShapelessRecipeAccessor",
     "minecraft.entity.ShulkerEntityAccessor",
-    "minecraft.hud.DebugHudMixin"
+    "minecraft.hud.DebugHudMixin",
+		"minecraft.hud.InGameHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
