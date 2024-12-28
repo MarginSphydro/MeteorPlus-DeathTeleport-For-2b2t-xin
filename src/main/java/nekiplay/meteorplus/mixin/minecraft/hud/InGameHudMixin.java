@@ -52,7 +52,7 @@ public class InGameHudMixin {
 
 	@Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true)
 	private static void onRenderArmor(DrawContext context, PlayerEntity player, int i, int j, int k, int x, CallbackInfo ci) {
-		RenderArmorBarEvent renderArmorBarEvent = RenderArmorBarEvent.get(context, player, top, right);
+		RenderArmorBarEvent renderArmorBarEvent = RenderArmorBarEvent.get(context, player, i, j, k, x);
 		MeteorClient.EVENT_BUS.post(renderArmorBarEvent);
 		if (renderArmorBarEvent.isCancelled()) {
 			ci.cancel();
