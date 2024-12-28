@@ -54,7 +54,6 @@ public class BetterTooltipsMixin extends Module {
 	private void appendTooltipStart(Args args) {
 		Text text = args.get(0);
 		String str = ColorRemover.GetVerbatim(text.getString());
-		MeteorClient.LOG.info(str);
 		if (str.startsWith("Honey level:")) {
 			Pattern pattern = Pattern.compile("Honey level: (.*)");
 			Matcher matcher = pattern.matcher(str);
@@ -77,7 +76,7 @@ public class BetterTooltipsMixin extends Module {
 	private void appendTooltipEnd(Args args) {
 		Text text = args.get(0);
 		String str = ColorRemover.GetVerbatim(text.getString());
-		MeteorClient.LOG.info(str);
+
 		if (str.endsWith("kb")) {
 			Pattern pattern = Pattern.compile("(.*) kb");
 			Matcher matcher = pattern.matcher(str);
@@ -100,7 +99,6 @@ public class BetterTooltipsMixin extends Module {
 	private void appendPreviewTooltipTextEnd(Args args) {
 		Text text = args.get(0);
 		String str = ColorRemover.GetVerbatim(text.getString());
-		MeteorClient.LOG.info(str);
 		if (str.endsWith("to preview")) {
 			args.set(0, Text.literal(I18n.translate("modules.meteor-client.better-tooltips.hold-to-preview", keybind)));
 		}
