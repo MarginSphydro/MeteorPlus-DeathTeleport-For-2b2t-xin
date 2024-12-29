@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 
 import static meteordevelopment.meteorclient.systems.modules.render.BetterTooltips.ECHEST_COLOR;
 
-@Mixin(value = BetterTooltips.class)
+@Mixin(value = BetterTooltips.class, remap = false)
 public class BetterTooltipsMixin extends Module {
 	@Shadow
 	@Final
@@ -42,11 +42,14 @@ public class BetterTooltipsMixin extends Module {
 		super(category, name, description, aliases);
 	}
 
+	@Shadow
 	private final SettingGroup sgGeneral = settings.getDefaultGroup();
+	@Shadow
 	private final SettingGroup sgPreviews = settings.getGroup("Previews");
-
+	@Shadow
 	public final Setting<Boolean> echest = (Setting<Boolean>)sgPreviews.get("echests");
 
+	@Shadow
 	private final Setting<BetterTooltips.DisplayWhen> displayWhen = (Setting<BetterTooltips.DisplayWhen>)sgGeneral.get("display-when");
 
 
