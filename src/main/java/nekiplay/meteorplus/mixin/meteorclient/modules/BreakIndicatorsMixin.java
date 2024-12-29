@@ -68,7 +68,6 @@ public class BreakIndicatorsMixin extends Module  {
 	@Unique
 	@EventHandler
 	private void on2DRender(Render2DEvent event) {
-
 		Map<Integer, BlockBreakingInfo> blocks = ((WorldRendererAccessor) mc.worldRenderer).getBlockBreakingInfos();
 
 		float ownBreakingStage = ((ClientPlayerInteractionManagerAccessor) mc.interactionManager).getBreakingProgress();
@@ -76,17 +75,12 @@ public class BreakIndicatorsMixin extends Module  {
 
 
 		if (ownBreakingPos != null && ownBreakingStage > 0) {
-
 			double shrinkFactor = 1d - ownBreakingStage;
-
-
 			assert mc.world != null;
 			BlockState state = mc.world.getBlockState(ownBreakingPos);
 			VoxelShape shape = state.getOutlineShape(mc.world, ownBreakingPos);
 			if (shape == null || shape.isEmpty()) return;
-
 			Box orig = shape.getBoundingBox();
-
 			renderBlock(event, ownBreakingPos, shrinkFactor, orig);
 
 		}
@@ -95,17 +89,13 @@ public class BreakIndicatorsMixin extends Module  {
 			BlockPos pos = info.getPos();
 			int stage = info.getStage();
 			if (pos.equals(ownBreakingPos)) return;
-
 			assert mc.world != null;
 			BlockState state = mc.world.getBlockState(pos);
 			VoxelShape shape = state.getOutlineShape(mc.world, pos);
 			if (shape == null || shape.isEmpty()) return;
-
 			Box orig = shape.getBoundingBox();
-
 			double shrinkFactor = (9 - (stage + 1)) / 9d;
 			double progress = 1d - shrinkFactor;
-
 			renderBlock(event, pos, shrinkFactor, orig);
 		});
 
