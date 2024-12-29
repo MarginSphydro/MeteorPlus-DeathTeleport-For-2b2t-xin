@@ -93,6 +93,9 @@ public class BetterTooltipsMixin extends Module {
 				args.set(0, Text.literal(I18n.translate("modules.meteor-client.better-tooltips.bytes", val)));
 			}
 		}
+		else if (str.equals("Error getting bytes.")) {
+			args.set(0, Text.literal(I18n.translate("modules.meteor-client.better-tooltips.error-getting-bytes")));
+		}
 	}
 
 	@ModifyArgs(method = "appendPreviewTooltipText", at = @At(value = "INVOKE", target = "Lmeteordevelopment/meteorclient/events/game/ItemStackTooltipEvent;appendEnd(Lnet/minecraft/text/Text;)V"))
