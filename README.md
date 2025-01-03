@@ -6,7 +6,7 @@
 		An addon for <a href="https://github.com/MeteorDevelopment/meteor-client">Meteor client</a> that adds many blatant features.
 	<br>
 	<a href="https://anticope.pages.dev/addons/?addon=MeteorClientPlus%2FMeteorPlus"><img src="https://img.shields.io/badge/verified%20addon-yes-brightgreen" alt="Verified Addon"></a>
-	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.18.2 -- 1.21.1-brightgreen" alt="Minecraft version"/></a>
+	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.20.4 -- 1.21.4-brightgreen" alt="Minecraft version"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/releases"><img src="https://img.shields.io/github/downloads/MeteorClientPlus/MeteorPlus/total" alt="Downloads"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/stargazers"><img src="https://badgen.net/github/stars/MeteorClientPlus/MeteorPlus" alt="GitHub stars"/></a>
 	<br>
@@ -53,7 +53,6 @@
 |---------------------------|---------------------------------------------------------------------|
 | **Freecam**               | **Added good baritone control via Freecam**                         |       
 | **Waypoints**             | **Added display of distances in label names, sorting, name search** |
-| **Hidden module**         | **Hiding original modules and third-party modules from the GUI**    |
 
 ## Meteor Client fixes
 | Module        | Fix                                         |
@@ -62,9 +61,10 @@
 | **KeyBinds**  | **Allow binding function to LMB, RMB, ESC** |
 
 ## Integrations
-| Module            | Description                                       |
-|-------------------|---------------------------------------------------|
-| **Chest Tracker** | **Colors support, background disabler, y offset** |
+| Module              | Description                                       |
+|---------------------|---------------------------------------------------|
+| **Chest Tracker**   | **Colors support, background disabler, y offset** |
+| **Xaero's Minimap** | **Baritone control**                              |
 
 # Installation Guide
 1. Install [minecraft](https://www.minecraft.net)
