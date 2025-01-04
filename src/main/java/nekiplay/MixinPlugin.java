@@ -32,6 +32,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 	public static boolean isXaeroPlusMapresent = false;
 	public static boolean isLitematicaMapresent = false;
 	public static boolean isWhereIsIt = false;
+	public static boolean isChestTracker = false;
 
 	@Override
 	public void onLoad(String mixinPackage) {
@@ -52,6 +53,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 		isXaeroPlusMapresent = loader.isModLoaded("xaeroplus");
 		isLitematicaMapresent = loader.isModLoaded("litematica");
 		isWhereIsIt = loader.isModLoaded("whereisit");
+		isChestTracker = loader.isModLoaded("chesttracker");
 	}
 
 	@Override
@@ -78,6 +80,9 @@ public class MixinPlugin implements IMixinConfigPlugin {
 		}
 		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".whereisit")) {
             return isWhereIsIt && isMeteorClient;
+		}
+		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".chesttracker")) {
+			return isChestTracker && isMeteorClient;
 		}
 		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".minecraft")) {
 			return isMeteorClient;

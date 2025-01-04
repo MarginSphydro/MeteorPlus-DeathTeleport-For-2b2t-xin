@@ -7,7 +7,6 @@ import meteordevelopment.meteorclient.systems.modules.misc.BetterChat;
 import nekiplay.MixinPlugin;
 import nekiplay.meteorplus.features.commands.*;
 import nekiplay.meteorplus.features.modules.combat.*;
-import nekiplay.meteorplus.features.modules.combat.killaura.KillAuraPlus;
 import nekiplay.meteorplus.features.modules.combat.velocity.VelocityPlus;
 import nekiplay.meteorplus.features.modules.integrations.WhereIsIt;
 import nekiplay.meteorplus.features.modules.misc.*;
@@ -24,7 +23,6 @@ import nekiplay.meteorplus.features.hud.TimerPlusCharge;
 import nekiplay.meteorplus.features.modules.integrations.MapIntegration;
 import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
 import nekiplay.main.items.ModItems;
-import nekiplay.meteorplus.features.modules.world.zones.ZonesModule;
 import nekiplay.meteorplus.settings.ConfigModifier;
 import net.fabricmc.loader.api.FabricLoader;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
@@ -54,7 +52,7 @@ public class MeteorPlusAddon extends MeteorAddon {
 
 	public static final Category CATEGORYMODS = new Category("Integrations", logo_mods_item);
 	public static final String HUD_TITLE = "Meteor+";
-	public static final HudGroup HUD_GROUP = new HudGroup(HUD_TITLE);
+	public static final HudGroup 	HUD_GROUP = new HudGroup(HUD_TITLE);
 
 	private static MeteorPlusAddon instance;
 

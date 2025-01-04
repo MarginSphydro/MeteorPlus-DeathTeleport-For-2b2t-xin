@@ -14,26 +14,18 @@ public class WaypointsModuleModes {
 		Name,
 	}
 
-	public static class DistanceComparator implements Comparator<String> {
+	public static class DistanceComparator implements Comparator<Waypoint> {
 		Map<String, Waypoint> base;
-
-		public DistanceComparator(Map<String, Waypoint> base) {
-			this.base = base;
-		}
-		public int compare(String a, String b) {
+		@Override
+		public int compare(Waypoint waypoint, Waypoint t1) {
 			long distance1 = 0;
 			long distance2 = 0;
 			if (mc.player != null) {
-				Waypoint awp = base.get(a);
-				Waypoint bwp = base.get(b);
-				if (awp != null && bwp != null) {
-					if (awp.getPos() != null && bwp.getPos() != null) {
-
-						distance1 = Math.round(mc.player.getPos().distanceTo(awp.getPos().toCenterPos()));
-						distance2 = Math.round(mc.player.getPos().distanceTo(bwp.getPos().toCenterPos()));
-					}
-				}
+				distance1 = Math.round(mc.player.getPos().distanceTo(waypoint.getPos().toCenterPos()));
+				distance2 = Math.round(mc.player.getPos().distanceTo(t1.getPos().toCenterPos()));
 			}
+
+
 			if (distance1 >= distance2) {
 				return 1;
 			} else {
@@ -42,28 +34,13 @@ public class WaypointsModuleModes {
 		}
 	}
 
-	public static class NameComparator implements Comparator<String> {
-		Map<String, Waypoint> base;
-
-		public NameComparator(Map<String, Waypoint> base) {
-			this.base = base;
-		}
-		public int compare(String a, String b) {
-			if (base.containsKey(a) && base.containsKey(b)) {
-
-				Waypoint awp = base.get(a);
-				Waypoint bwp = base.get(b);
-				if (awp != null && bwp != null) {
-					if (awp.name.get().length() >= bwp.name.get().length()) {
-						return 1;
-					} else {
-						return -1;
-					}
-				}
-				return 0;
-			}
-			else {
-				return 0;
+	public static class NameComparator implements Comparator<Waypoint> {
+		@Override
+		public int compare(Waypoint waypoint, Waypoint t1) {
+			if (waypoint.name.get().length() >= t1.name.get().length()) {
+				return 1;
+			} else {
+				return -1;
 			}
 		}
 	}

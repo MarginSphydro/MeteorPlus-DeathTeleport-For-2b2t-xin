@@ -131,12 +131,44 @@ public class WaypointsModuleMixin extends Module {
 	private void initTable(GuiTheme theme, WTable table) {
 		table.clear();
 
-		for (Waypoint waypoint : Waypoints.get()) {
+		List<Waypoint> waypointss = ((WaypointsAccessor)Waypoints.get()).getWaypoints();
+
+		AtomicReference<List<Waypoint>> waypoints = new AtomicReference<>();
+		waypoints.set(waypointss);
+
+		if (sortMode.get() == WaypointsModuleModes.SortMode.Distance) {
+			Collections.sort(waypoints.get(), new WaypointsModuleModes.DistanceComparator());
+		}
+		else if (sortMode.get() == WaypointsModuleModes.SortMode.Name) {
+			Collections.sort(waypoints.get(), new WaypointsModuleModes.NameComparator());
+		}
+
+		List<Waypoint> filtered = new ArrayList<>();
+
+		if (!search.get().isEmpty()) {
+			for (Waypoint waypoint : waypoints.get()) {
+				if (waypoint.name.get().toLowerCase().contains(search.get().toLowerCase())) {
+					filtered.add(waypoint);
+				}
+			}
+			waypoints.set(filtered);
+		}
+		for (Waypoint waypoint : waypoints.get()) {
 			boolean validDim = Waypoints.checkDimension(waypoint);
 
 			table.add(new WIcon(waypoint));
 
-			WLabel name = table.add(theme.label(waypoint.name.get())).expandCellX().widget();
+			String name_str = waypoint.name.get();
+			if (showDistance.get()) {
+				double distance = mc.player.getPos().distanceTo(waypoint.getPos().toCenterPos());
+				if (!showCompactDistance.get()) {
+					name_str += " (" + distance + "m)";
+				}
+				else {
+					name_str += " (" + NumeralUtils.FormatNumber((long)distance) + ")";
+				}
+			}
+			WLabel name = table.add(theme.label(name_str)).expandCellX().widget();
 			if (!validDim) name.color = GRAY;
 
 			WCheckbox visible = table.add(theme.checkbox(waypoint.visible.get())).widget();

@@ -61,7 +61,7 @@
 | **KeyBinds**  | **Allow binding function to LMB, RMB, ESC** |
 
 ## Integrations
-| Module              | Description                                       |
+| Mod                 | Description                                       |
 |---------------------|---------------------------------------------------|
 | **Chest Tracker**   | **Colors support, background disabler, y offset** |
 | **Xaero's Minimap** | **Baritone control**                              |

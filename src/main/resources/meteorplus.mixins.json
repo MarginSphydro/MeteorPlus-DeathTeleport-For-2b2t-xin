@@ -19,6 +19,7 @@
     "meteorclient.modules.WaypointsModuleMixin",
 		"meteorclient.modules.BreakIndicatorsMixin",
 		"meteorclient.modules.BetterTooltipsMixin",
+		"meteorclient.modules.WaypointsAccessor",
 		"minecraft.entity.LivingEntityAccessor",
     "minecraft.ClientConnectionAccessor",
     "minecraft.CraftingScreenHandlerAccessor",
