@@ -1,10 +1,6 @@
 package nekiplay.meteorplus.mixin.meteorclient.modules;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.IBaritone;
-import com.sun.source.tree.Tree;
 import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import baritone.api.pathing.goals.GoalGetToBlock;
 import meteordevelopment.meteorclient.gui.GuiTheme;
 import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
 import meteordevelopment.meteorclient.gui.widgets.WLabel;
@@ -23,7 +19,6 @@ import nekiplay.meteorplus.utils.NumeralUtils;
 import nekiplay.meteorplus.mixinclasses.EditWaypointScreen;
 import nekiplay.meteorplus.mixinclasses.WIcon;
 import nekiplay.meteorplus.mixinclasses.WaypointsModuleModes;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,7 +29,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static meteordevelopment.meteorclient.MeteorClient.mc;
 import static meteordevelopment.meteorclient.utils.render.color.Color.GRAY;
 import static nekiplay.meteorplus.MeteorPlusAddon.HUD_TITLE;
 
@@ -137,10 +131,10 @@ public class WaypointsModuleMixin extends Module {
 		waypoints.set(waypointss);
 
 		if (sortMode.get() == WaypointsModuleModes.SortMode.Distance) {
-			Collections.sort(waypoints.get(), new WaypointsModuleModes.DistanceComparator());
+			waypoints.get().sort(new WaypointsModuleModes.DistanceComparator());
 		}
 		else if (sortMode.get() == WaypointsModuleModes.SortMode.Name) {
-			Collections.sort(waypoints.get(), new WaypointsModuleModes.NameComparator());
+			waypoints.get().sort(new WaypointsModuleModes.NameComparator());
 		}
 
 		List<Waypoint> filtered = new ArrayList<>();
