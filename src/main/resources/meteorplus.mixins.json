@@ -19,6 +19,7 @@
     "meteorclient.modules.WaypointsModuleMixin",
 		"meteorclient.modules.BreakIndicatorsMixin",
 		"meteorclient.modules.BetterTooltipsMixin",
+		"meteorclient.modules.WaypointsAccessor",
     "minecraft.ClientConnectionAccessor",
     "minecraft.ShapelessRecipeAccessor",
     "minecraft.entity.ShulkerEntityAccessor",

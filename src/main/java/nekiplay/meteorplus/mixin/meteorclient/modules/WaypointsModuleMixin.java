@@ -1,10 +1,6 @@
 package nekiplay.meteorplus.mixin.meteorclient.modules;
 
-import baritone.api.BaritoneAPI;
-import baritone.api.IBaritone;
-import com.sun.source.tree.Tree;
 import meteordevelopment.meteorclient.gui.widgets.WWidget;
-import baritone.api.pathing.goals.GoalGetToBlock;
 import meteordevelopment.meteorclient.gui.GuiTheme;
 import meteordevelopment.meteorclient.gui.renderer.GuiRenderer;
 import meteordevelopment.meteorclient.gui.widgets.WLabel;
@@ -23,7 +19,6 @@ import nekiplay.meteorplus.utils.NumeralUtils;
 import nekiplay.meteorplus.mixinclasses.EditWaypointScreen;
 import nekiplay.meteorplus.mixinclasses.WIcon;
 import nekiplay.meteorplus.mixinclasses.WaypointsModuleModes;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import meteordevelopment.meteorclient.gui.widgets.pressable.WCheckbox;
 import org.spongepowered.asm.mixin.Unique;
@@ -34,7 +29,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static meteordevelopment.meteorclient.MeteorClient.mc;
 import static meteordevelopment.meteorclient.utils.render.color.Color.GRAY;
 import static nekiplay.meteorplus.MeteorPlusAddon.HUD_TITLE;
 
@@ -131,12 +125,44 @@ public class WaypointsModuleMixin extends Module {
 	private void initTable(GuiTheme theme, WTable table) {
 		table.clear();
 
-		for (Waypoint waypoint : Waypoints.get()) {
+		List<Waypoint> waypointss = ((WaypointsAccessor)Waypoints.get()).getWaypoints();
+
+		AtomicReference<List<Waypoint>> waypoints = new AtomicReference<>();
+		waypoints.set(waypointss);
+
+		if (sortMode.get() == WaypointsModuleModes.SortMode.Distance) {
+			waypoints.get().sort(new WaypointsModuleModes.DistanceComparator());
+		}
+		else if (sortMode.get() == WaypointsModuleModes.SortMode.Name) {
+			waypoints.get().sort(new WaypointsModuleModes.NameComparator());
+		}
+
+		List<Waypoint> filtered = new ArrayList<>();
+
+		if (!search.get().isEmpty()) {
+			for (Waypoint waypoint : waypoints.get()) {
+				if (waypoint.name.get().toLowerCase().contains(search.get().toLowerCase())) {
+					filtered.add(waypoint);
+				}
+			}
+			waypoints.set(filtered);
+		}
+		for (Waypoint waypoint : waypoints.get()) {
 			boolean validDim = Waypoints.checkDimension(waypoint);
 
 			table.add(new WIcon(waypoint));
 
-			WLabel name = table.add(theme.label(waypoint.name.get())).expandCellX().widget();
+			String name_str = waypoint.name.get();
+			if (showDistance.get()) {
+				double distance = mc.player.getPos().distanceTo(waypoint.getPos().toCenterPos());
+				if (!showCompactDistance.get()) {
+					name_str += " (" + distance + "m)";
+				}
+				else {
+					name_str += " (" + NumeralUtils.FormatNumber((long)distance) + ")";
+				}
+			}
+			WLabel name = table.add(theme.label(name_str)).expandCellX().widget();
 			if (!validDim) name.color = GRAY;
 
 			WCheckbox visible = table.add(theme.checkbox(waypoint.visible.get())).widget();
@@ -172,12 +198,6 @@ public class WaypointsModuleMixin extends Module {
 		table.row();
 
 		WButton create = table.add(theme.button("Create")).expandX().widget();
-		create.action = () -> {
-			if (Utils.canUpdate()) {
-				mc.setScreen(new EditWaypointScreen(theme, null, () -> {
-					initTable(theme, table);
-				}));
-			}
-		};
+		create.action = () -> mc.setScreen(new EditWaypointScreen(theme, null, () -> initTable(theme, table)));
 	}
 }
