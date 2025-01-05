@@ -12,10 +12,10 @@ jobs:
           distribution: adopt
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-	
+
       - name: Build
         run: ./gradlew build
-	
+
       - name: Archive Artifacts
         uses: actions/upload-artifact@v4
         with:
