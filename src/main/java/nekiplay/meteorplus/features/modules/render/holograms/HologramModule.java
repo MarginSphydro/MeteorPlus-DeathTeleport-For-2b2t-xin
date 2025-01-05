@@ -72,7 +72,7 @@ public class HologramModule extends Module {
 			if (pos.distance(camera_pos.x, camera_pos.y, camera_pos.z) <= hologramData.max_render_distance) {
 				if (NametagUtils.to2D(pos, hologramData.scale, hologramData.distanceScaling)) {
 					TextRenderer text = TextRenderer.get();
-					NametagUtils.begin(pos, event.drawContext);
+					NametagUtils.begin(pos);
 					text.beginBig();
 
 					String hologram_text = hologramData.text;
