@@ -59,10 +59,6 @@ dependencies {
 	modImplementation files("libs\\baritone-unoptimized-fabric-1.10.1-11-g3ed49fd4.jar")
 	modImplementation files("libs\\meteor-client-0.5.8-2200.jar")
 
-	// Journey Map
-	modCompileOnlyApi  group: 'info.journeymap', name: 'journeymap-api', version: project.journeymap_api_fabric_version, changing: true
-	modCompileOnly "maven.modrinth:journeymap:${project.jm_fabric_version}"
-
 	// Xaero's Mods
 	modCompileOnly "maven.modrinth:xaeros-world-map:${project.xwm_fabric_version}" // Xaero's World Map
 	modCompileOnly "maven.modrinth:xaeros-minimap:${project.xmm_fabric_version}" // Xaero's Minimap

@@ -26,7 +26,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
 	public static boolean isFutureClient = false;
 
 	public static boolean isBaritonePresent = false;
-	public static boolean isJourneyMapPresent = false;
 	public static boolean isXaeroWorldMapresent = false;
 	public static boolean isXaeroMiniMapresent = false;
 	public static boolean isXaeroPlusMapresent = false;
@@ -47,7 +46,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
 		isZewo2 = loader.isModLoaded("zewo2");
 
 		isBaritonePresent = loader.isModLoaded("baritone");
-		isJourneyMapPresent = loader.isModLoaded("journeymap");
 		isXaeroWorldMapresent = loader.isModLoaded("xaeroworldmap");
 		isXaeroMiniMapresent = loader.isModLoaded("xaerominimap");
 		isXaeroPlusMapresent = loader.isModLoaded("xaeroplus");
@@ -71,9 +69,6 @@ public class MixinPlugin implements IMixinConfigPlugin {
 				return isBaritonePresent && isMeteorClient;
 			}
             return isMeteorClient;
-		}
-		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".journeymap")) {
-			return isBaritonePresent && isJourneyMapPresent && isMeteorClient;
 		}
 		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".xaero.worldmap")) {
 			return isBaritonePresent && isXaeroWorldMapresent && isMeteorClient;
