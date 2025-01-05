@@ -27,7 +27,7 @@ import java.util.Iterator;
 
 public class EyeFinder extends Module {
 	public EyeFinder() {
-		super(Categories.Render, "Eye Finder", "Find block player look.");
+		super(Categories.Render, "eye-finder", "Find block player look.");
 	}
 	private final HashMap<Entity, HitResult> resultMap = new HashMap<Entity, HitResult>();
 
