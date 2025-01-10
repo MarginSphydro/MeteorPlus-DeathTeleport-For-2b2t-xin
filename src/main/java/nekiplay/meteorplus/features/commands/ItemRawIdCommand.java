@@ -25,7 +25,5 @@ public class ItemRawIdCommand extends Command {
 			}
 			return SINGLE_SUCCESS;
 		});
-
-
 	}
 }
