@@ -96,12 +96,12 @@ public class HologramModule extends Module {
 							}
 						}
 
-						text.end();
 						if (hologramData.item_id != 0) {
 							Item item = Item.byRawId(hologramData.item_id);
 							RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) hX, (int) 0, hologramData.item_scale, true);
 						}
 					}
+					text.end();
 					NametagUtils.end(event.drawContext);
 				}
 			}
