@@ -18,7 +18,7 @@ public class HologramData {
 	public HologramData() {
 
 	}
-	public HologramData(double x, double y, double z, String text, String world, String dimension, Color color, double max_render_distance) {
+	public HologramData(double x, double y, double z, String text, String dimension, Color color, double max_render_distance) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -27,7 +27,7 @@ public class HologramData {
 		this.text = text;
 	}
 
-	public HologramData(BlockPos pos, String text, String world, Dimension dimension, Color color, double max_render_distance) {
+	public HologramData(BlockPos pos, String text, Dimension dimension, Color color, double max_render_distance) {
 		this.x = pos.getX();
 		this.y = pos.getY();
 		this.z = pos.getZ();
