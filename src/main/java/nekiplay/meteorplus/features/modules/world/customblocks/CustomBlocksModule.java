@@ -100,11 +100,9 @@ public class CustomBlocksModule extends Module {
 	}
 
 	private void setBlock(BlockPos pos, CustomBlockData data) {
-		Item item = Item.byRawId(data.block_id);
-		Block block = Block.getBlockFromItem(item);
-		BlockState state = block.getDefaultState();
+		BlockState block = Block.getStateFromRawId(data.block_id);
 
-		mc.world.setBlockState(pos, state);
+		mc.world.setBlockState(pos, block);
 	}
 
 	@EventHandler
