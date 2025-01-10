@@ -4,6 +4,7 @@ package nekiplay.meteorplus.features.modules.render.holograms;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import meteordevelopment.meteorclient.MeteorClient;
+import meteordevelopment.meteorclient.events.game.GameJoinedEvent;
 import meteordevelopment.meteorclient.events.render.Render2DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.text.TextRenderer;
@@ -58,7 +59,7 @@ public class HologramModule extends Module {
 		inWorldHolograms.clear();
 		Dimension dim = PlayerUtils.getDimension();
 		for (HologramDataListed hologramData : allHolograms) {
-			if (hologramData.world.equals(Utils.getWorldName()) && hologramData.dimension.equals(dim.name())) {
+			if ( hologramData.dimension.equals(dim.name())) {
 				inWorldHolograms.add(hologramData);
 			}
 		}
@@ -84,20 +85,22 @@ public class HologramModule extends Module {
 
 					double hX = -widthHalf;
 					double hY = -heightDown;
-
-					text.render(MeteorStarscript.run(scripts.get(hologram_text)), hX, hY, hologramData.color, true);
-					for (HologramData hologramData1 : hologramData.other_holograms) {
-						text.render(MeteorStarscript.run(scripts.get(hologramData1.text)), hX - hologramData1.x, hY - hologramData1.y, hologramData1.color, true);
-						if (hologramData1.item_id != 0) {
-							Item item = Item.byRawId(hologramData1.item_id);
-							RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) ((int) hX - hologramData1.x), (int) ((int) 0 - hologramData1.y), hologramData1.item_scale, true);
+					var script = scripts.get(hologram_text);
+					if (script != null) {
+						text.render(MeteorStarscript.run(script), hX, hY, hologramData.color, true);
+						for (HologramData hologramData1 : hologramData.other_holograms) {
+							text.render(MeteorStarscript.run(scripts.get(hologramData1.text)), hX - hologramData1.x, hY - hologramData1.y, hologramData1.color, true);
+							if (hologramData1.item_id != 0) {
+								Item item = Item.byRawId(hologramData1.item_id);
+								RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) ((int) hX - hologramData1.x), (int) ((int) 0 - hologramData1.y), hologramData1.item_scale, true);
+							}
 						}
-					}
 
-					text.end();
-					if (hologramData.item_id != 0) {
-						Item item = Item.byRawId(hologramData.item_id);
-						RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) hX, (int) 0, hologramData.item_scale, true);
+						text.end();
+						if (hologramData.item_id != 0) {
+							Item item = Item.byRawId(hologramData.item_id);
+							RenderUtils.drawItem(event.drawContext, item.getDefaultStack(), (int) hX, (int) 0, hologramData.item_scale, true);
+						}
 					}
 					NametagUtils.end(event.drawContext);
 				}
@@ -163,8 +166,8 @@ public class HologramModule extends Module {
 		if (!dir2.exists()) {
 			dir2.mkdir();
 
-			HologramDataListed hologramData = new HologramDataListed(new BlockPos(0, 64, 0), "Spawn", world_name, PlayerUtils.getDimension(), Color.RED, 16);
-			HologramData hologramData2 = new HologramData(new BlockPos(0, 15, 0), PlayerUtils.getDimension().name(), world_name, PlayerUtils.getDimension(), Color.RED, 16);
+			HologramDataListed hologramData = new HologramDataListed(new BlockPos(0, 64, 0), "Spawn", PlayerUtils.getDimension(), Color.RED, 16);
+			HologramData hologramData2 = new HologramData(new BlockPos(0, 15, 0), PlayerUtils.getDimension().name(), PlayerUtils.getDimension(), Color.RED, 16);
 			hologramData.other_holograms.add(hologramData2);
 			String json = gson.toJson(hologramData);
 
@@ -185,5 +188,10 @@ public class HologramModule extends Module {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@EventHandler
+	public void onJoinGame(GameJoinedEvent event) {
+		load();
 	}
 }

@@ -13,7 +13,6 @@ public class HologramDataListed {
 	public double y;
 	public double z;
 	public String text;
-	public String world;
 	public String dimension;
 	public Color color;
 	public double max_render_distance = 16;
@@ -27,26 +26,24 @@ public class HologramDataListed {
 	public HologramDataListed() {
 
 	}
-	public HologramDataListed(double x, double y, double z, String text, String world, String dimension, Color color, double max_render_distance) {
+	public HologramDataListed(double x, double y, double z, String text, String dimension, Color color, double max_render_distance) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.color = color;
 
 		this.text = text;
-		this.world = world;
 		this.dimension = dimension;
 		this.max_render_distance = max_render_distance;
 	}
 
-	public HologramDataListed(BlockPos pos, String text, String world, Dimension dimension, Color color, double max_render_distance) {
+	public HologramDataListed(BlockPos pos, String text, Dimension dimension, Color color, double max_render_distance) {
 		this.x = pos.getX();
 		this.y = pos.getY();
 		this.z = pos.getZ();
 		this.color = color;
 
 		this.text = text;
-		this.world = world;
 		this.dimension = dimension.name();
 		this.max_render_distance = max_render_distance;
 	}
