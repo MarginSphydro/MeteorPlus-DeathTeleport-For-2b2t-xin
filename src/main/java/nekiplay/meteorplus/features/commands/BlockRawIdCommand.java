@@ -22,7 +22,7 @@ public class BlockRawIdCommand extends Command {
 				BlockPos pos = new BlockPos((int) mc.crosshairTarget.getPos().x, (int) mc.crosshairTarget.getPos().y, (int) mc.crosshairTarget.getPos().z);
 				BlockState state = mc.world.getBlockState(pos);
 				int raw_id = Block.getRawIdFromState(state);
-				info(raw_id);
+				info(String.valueOf(raw_id));
 			}
 			return SINGLE_SUCCESS;
 		});
