@@ -6,7 +6,7 @@
 		An addon for <a href="https://github.com/MeteorDevelopment/meteor-client">Meteor client</a> that adds many blatant features.
 	<br>
 	<a href="https://anticope.pages.dev/addons/?addon=MeteorClientPlus%2FMeteorPlus"><img src="https://img.shields.io/badge/verified%20addon-yes-brightgreen" alt="Verified Addon"></a>
-	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.18.2 -- 1.21.3-brightgreen" alt="Minecraft version"/></a>
+	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.20.4 -- 1.21.4-brightgreen" alt="Minecraft version"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/releases"><img src="https://img.shields.io/github/downloads/MeteorClientPlus/MeteorPlus/total" alt="Downloads"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/stargazers"><img src="https://badgen.net/github/stars/MeteorClientPlus/MeteorPlus" alt="GitHub stars"/></a>
 	<br>
@@ -20,7 +20,7 @@
 </div>
 
 ## PvE Modules
-| Module                 | Description                                   | Bypasses                      |
+| Module                 | Description                                   | Bypasses anti cheats          |
 |------------------------|-----------------------------------------------|-------------------------------|
 | **Flight+**            | **Flight for Anti-Cheats**                    | **Matrix, Spartan, Vulcan**   |
 | **Speed+**             | **Speed for Anti-Cheats**                     | **Matrix, ACC, Vulcan, NCP**  |
@@ -36,11 +36,11 @@
 | **Auto Obsidian Farm** | **Automatically farm obsidian in AFK**        |                               |
 
 ## PvP Modules
-| Module        | Description                                            | Bypasses |
-|---------------|--------------------------------------------------------|----------|
-| **Velocity+** | **Velocity for Anti-Cheats**                           | **Grim** |
-| **Anti Bot**  | **Ignores bots for KillAura, ESP, Tracers**            |          |
-| **Teams**     | **Does not beat teammates on BedWars and other modes** |          |
+| Module        | Description                                            | Bypasses anti cheats |
+|---------------|--------------------------------------------------------|----------------------|
+| **Velocity+** | **Velocity for Anti-Cheats**                           | **Grim**             |
+| **Anti Bot**  | **Ignores bots for KillAura, ESP, Tracers**            |                      |
+| **Teams**     | **Does not beat teammates on BedWars and other modes** |                      |
 
 ## Integrations
 | Module              | Description                                       |
@@ -49,22 +49,25 @@
 | **Xaero's MiniMap** | **Support baritone control on context**           |
 
 ## Commands
-| Command   | Description            | Bypasses                                |
-|-----------|------------------------|-----------------------------------------|
-| **eclip** | **Vertical clip**      | **Matrix, Wraith, Spartan, Negativity** |
-| **gpt**   | **Use ChatGPT module** |                                         |
+| Command        | Description                                       | Bypasses anti cheats                    |
+|----------------|---------------------------------------------------|-----------------------------------------|
+| **eclip**      | **Vertical clip**                                 | **Matrix, Wraith, Spartan, Negativity** |
+| **gpt**        | **Use ChatGPT module**                            |                                         |
+| **clearinv**   | **Clear inventory exploit not work after 1.20.3** | **NCP**                                 |
+| **rawitemid**  | **Get raw item id for holograms module**          |                                         |
+| **rawblockid** | **Get raw block id for custom blocks module**     |                                         |
 
 
 ## Meteor Client improvements
 | Module               | Enhancements                                                        |
 |----------------------|---------------------------------------------------------------------|
-| **Freecam**          | **Added good baritone control via Freecam**                         |       
+| **Freecam**          | **Added baritone control via Freecam**                              |       
 | **Waypoints**        | **Added display of distances in label names, sorting, name search** |
 | **BetterTooltips**   | **Translations for BetterTooltips**                                 |
 | **Break Indicators** | **Added percentage render**                                         |
 
 ## Meteor Client fixes
-| Module        | Fix                                         |
+| Module        | Fixed problem                               |
 |---------------|---------------------------------------------|
 | **Auto Tool** | **No work in creative mode**                |
 | **KeyBinds**  | **Allow binding function to LMB, RMB, ESC** |
