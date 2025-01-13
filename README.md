@@ -67,9 +67,9 @@
 | **Break Indicators** | **Added percentage render**                                         |
 
 ## Meteor Client fixes
-| Module        | Fixed                                       |
-|---------------|---------------------------------------------|
-| **Auto Tool** | **Now no work in creative mode**                   |
+| Module        | Fixed                                           |
+|---------------|-------------------------------------------------|
+| **Auto Tool** | **Now no work in creative mode**                |
 | **KeyBinds**  | **Now allow binding function to LMB, RMB, ESC** |
 
 # Installation Guide
