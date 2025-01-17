@@ -45,12 +45,14 @@ public class CriticalsMixin extends Module {
 			if (skipCrit()) { ci.cancel(); return; }
 
 			Entity entity = packet.meteor$getEntity();
-			if (entity.getType() == EntityType.SHULKER_BULLET || entity.getType() == EntityType.FIREBALL) {
-				ci.cancel();
-			}
-			else if (entity instanceof LivingEntity livingEntity) {
-				if (!needCrit(livingEntity) && noWorkIfItsNotNeed.get()) {
+			if (entity != null) {
+				if (entity.getType() == EntityType.SHULKER_BULLET || entity.getType() == EntityType.FIREBALL) {
 					ci.cancel();
+				}
+				else if (entity instanceof LivingEntity livingEntity) {
+					if (!needCrit(livingEntity) && noWorkIfItsNotNeed.get()) {
+						ci.cancel();
+					}
 				}
 			}
 		}
