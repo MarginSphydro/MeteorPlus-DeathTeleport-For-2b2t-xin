@@ -1,6 +1,5 @@
 package nekiplay.meteorplus.features.modules.movement.fly;
 
-import meteordevelopment.meteorclient.events.entity.DamageEvent;
 import meteordevelopment.meteorclient.events.entity.player.CanWalkOnFluidEvent;
 import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
 import meteordevelopment.meteorclient.events.entity.player.SendMovementPacketsEvent;
@@ -52,58 +51,6 @@ public class FlyPlus extends Module {
 		.visible(() -> flyMode.get() == FlyModes.Matrix_Exploit_2)
 		.build()
 	);
-
-	public final Setting<Double> speedDamage = sgGeneral.add(new DoubleSetting.Builder()
-		.name("damage-fly-speed")
-		.description("Fly speed.")
-		.defaultValue(1.25)
-		.max(2500)
-		.sliderRange(0, 2500)
-		.onChanged((e) -> {
-			Damage.speed = e;
-		})
-		.visible(() -> flyMode.get() == FlyModes.Damage)
-		.build()
-	);
-
-	public final Setting<Double> speedDamageY = sgGeneral.add(new DoubleSetting.Builder()
-		.name("speed-y")
-		.description("Fly speed Y.")
-		.defaultValue(1.25)
-		.max(2500)
-		.sliderRange(0, 2500)
-		.onChanged((e) -> {
-			Damage.speedUp = e;
-		})
-		.visible(() -> flyMode.get() == FlyModes.Damage)
-		.build()
-	);
-
-	public final Setting<Integer> speedDamageTicks = sgGeneral.add(new IntSetting.Builder()
-		.name("max-ticks")
-		.description("Max fly ticks.")
-		.defaultValue(15)
-		.max(2500)
-		.sliderRange(0, 2500)
-		.onChanged((e) -> {
-			Damage.workingTicks = e;
-		})
-		.visible(() -> flyMode.get() == FlyModes.Damage)
-		.build()
-	);
-	public final Setting<Integer> speedUpDamageTicks = sgGeneral.add(new IntSetting.Builder()
-		.name("max-up-ticks")
-		.description("Max fly ticks.")
-		.defaultValue(5)
-		.max(2500)
-		.sliderRange(0, 2500)
-		.onChanged((e) -> {
-			Damage.workingUpTicks = e;
-		})
-		.visible(() -> flyMode.get() == FlyModes.Damage)
-		.build()
-	);
-
 
 	public final Setting<Boolean> canClip = sgGeneral.add(new BoolSetting.Builder()
 		.name("can-clip")
@@ -181,12 +128,6 @@ public class FlyPlus extends Module {
 		currentMode.onPlayerMoveSendPre(event);
 	}
 
-
-	@EventHandler
-	private void onDamage(DamageEvent event) {
-		currentMode.onDamage(event);
-	}
-
 	private void onFlyModeChanged(FlyModes mode) {
 		switch (mode) {
 			case Matrix_Exploit_2 -> currentMode = new MatrixExploit2();
@@ -196,14 +137,6 @@ public class FlyPlus extends Module {
 					info("Vulcan fly work on 1.8.9 servers");
 				}
 				currentMode = new VulcanClip();
-			}
-			case Damage -> currentMode = new Damage();
-			case Damage_OldFag -> {
-				currentMode = new Damage();
-				Damage.workingUpTicks = 0;
-				Damage.workingTicks = 15;
-				Damage.speed = 0.396;
-				Damage.speedUp = 0;
 			}
 		}
 	}
