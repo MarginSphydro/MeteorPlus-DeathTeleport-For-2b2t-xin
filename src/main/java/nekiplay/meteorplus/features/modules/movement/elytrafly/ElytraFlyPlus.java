@@ -37,7 +37,7 @@ public class ElytraFlyPlus extends Module {
 	public final Setting<Double> fallSpeed_wasp = sgGeneral.add(new DoubleSetting.Builder()
 		.name("Fall-Speed")
 		.description("How many blocks to fall down each tick.")
-		.defaultValue(0.01)
+		.defaultValue(0)
 		.min(0)
 		.sliderRange(0, 1)
 		.visible(() -> flightMode.get() == ElytraFlyModes.Wasp)
