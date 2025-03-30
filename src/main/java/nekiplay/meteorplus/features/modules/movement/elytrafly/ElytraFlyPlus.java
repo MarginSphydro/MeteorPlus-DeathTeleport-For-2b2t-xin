@@ -25,7 +25,7 @@ public class ElytraFlyPlus extends Module {
 	);
 	//<editor-fold desc="Wasp">
 	public final Setting<Double> horizontal_wasp = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Horizontal-Speed")
+		.name("horizontal-speed")
 		.description("How many blocks to move each tick horizontally.")
 		.defaultValue(1)
 		.min(0)
@@ -35,7 +35,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> fallSpeed_wasp = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Fall-Speed")
+		.name("fall-speed")
 		.description("How many blocks to fall down each tick.")
 		.defaultValue(0)
 		.min(0)
@@ -45,7 +45,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Boolean> smartFall_wasp = sgGeneral.add(new BoolSetting.Builder()
-		.name("Smart-Fall")
+		.name("smart-fall")
 		.description("Only falls down when looking down.")
 		.defaultValue(true)
 		.visible(() -> flightMode.get() == ElytraFlyModes.Wasp)
@@ -53,7 +53,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> up_wasp = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Up-Speed")
+		.name("up-speed")
 		.description("How many blocks to move up each tick.")
 		.defaultValue(1)
 		.min(0)
@@ -63,7 +63,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> down_wasp = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Down-Speed")
+		.name("down-speed")
 		.description("How many blocks to move down each tick.")
 		.defaultValue(1)
 		.min(0)
@@ -86,7 +86,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> upMultiplier_control = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Up-Multiplier")
+		.name("up-multiplier")
 		.description("How many times faster should we fly up.")
 		.defaultValue(1)
 		.min(0)
@@ -96,7 +96,7 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> downSpeed_control = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Down-Speed")
+		.name("down-speed")
 		.description("How many blocks to move down each tick.")
 		.defaultValue(1)
 		.min(0)
@@ -106,9 +106,9 @@ public class ElytraFlyPlus extends Module {
 	);
 
 	public final Setting<Double> fallSpeed_control = sgGeneral.add(new DoubleSetting.Builder()
-		.name("Fall-Speed")
+		.name("fall-speed")
 		.description("How many blocks to fall down each tick.")
-		.defaultValue(0.01)
+		.defaultValue(0)
 		.min(0)
 		.sliderRange(0, 1)
 		.visible(() -> flightMode.get() == ElytraFlyModes.Control)
