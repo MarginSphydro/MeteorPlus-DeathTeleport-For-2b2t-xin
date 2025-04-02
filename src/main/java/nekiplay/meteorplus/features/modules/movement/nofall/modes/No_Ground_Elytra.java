@@ -9,6 +9,7 @@ import meteordevelopment.meteorclient.utils.player.InvUtils;
 import nekiplay.meteorplus.features.modules.movement.nofall.NoFallMode;
 import nekiplay.meteorplus.features.modules.movement.nofall.NoFallModes;
 import nekiplay.meteorplus.mixin.minecraft.entity.PlayerMoveC2SPacketAccessor;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 
@@ -36,7 +37,7 @@ public class No_Ground_Elytra extends NoFallMode {
 			FindItemResult elytra = InvUtils.find(Items.ELYTRA);
 			if (elytra.found()) {
 				int slot = elytra.slot();
-				if (mc.player.getInventory().getArmorStack(2).getItem() != Items.ELYTRA) {
+				if (mc.player.getEquippedStack(EquipmentSlot.CHEST).getItem() != Items.ELYTRA) {
 					InvUtils.move().from(slot).toArmor(2);
 				}
 			}

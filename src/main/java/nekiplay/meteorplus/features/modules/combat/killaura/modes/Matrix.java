@@ -113,8 +113,8 @@ public class Matrix extends KillAuraPlusMode {
 		if (!PlayerUtils.canSeeEntity(entity) && !PlayerUtils.isWithin(entity, settings.wallsRange.get())) return false;
 		if (settings.ignoreTamed.get()) {
 			if (entity instanceof Tameable tameable
-				&& tameable.getOwnerUuid() != null
-				&& tameable.getOwnerUuid().equals(mc.player.getUuid())
+				&& tameable.getOwner().getUuid() != null
+				&& tameable.getOwner().getUuid().equals(mc.player.getUuid())
 			) return false;
 		}
 		if (settings.ignorePassive.get()) {
@@ -125,7 +125,7 @@ public class Matrix extends KillAuraPlusMode {
 		if (entity instanceof PlayerEntity player) {
 			if (player.isCreative()) return false;
 			if (!Friends.get().shouldAttack(player)) return false;
-			if (settings.shieldMode.get() == KillAura.ShieldMode.Ignore && player.blockedByShield(mc.world.getDamageSources().playerAttack(mc.player))) return false;
+			if (settings.shieldMode.get() == KillAura.ShieldMode.Ignore && player.isBlocking()) return false;
 		}
 		return true;
 	}

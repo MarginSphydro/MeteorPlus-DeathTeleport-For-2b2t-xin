@@ -12,7 +12,7 @@ jobs:
           distribution: adopt
       - name: Make gradlew executable
         run: chmod +x ./gradlew
-        
+
       - name: Build
         run: ./gradlew build
 
@@ -21,13 +21,13 @@ jobs:
         with:
           name: Artifacts
           path: ./build/libs/
-        
+
       - name: Release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: "1.21.4_1.0.9.5"
+          automatic_release_tag: "1.21.5_1.0.9.4"
           prerelease: true
-          title: "1.21.4 | 1.0.9.5"
+          title: "1.21.5 | 1.0.9.4"
           files: |
             ./build/libs/*.jar

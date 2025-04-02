@@ -67,8 +67,8 @@ public class HiglightItemData implements ICopyable<HiglightItemData>, ISerializa
 
 	@Override
 	public HiglightItemData fromTag(NbtCompound tag) {
-		Color.fromTag(tag.getCompound("color"));
-		changed = tag.getBoolean("changed");
+		Color.fromTag(tag.getCompound("color").get());
+		changed = tag.getBoolean("changed").get();
 
 		return this;
 	}

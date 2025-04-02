@@ -35,8 +35,8 @@ public class GrimNew extends NoSlowMode {
             network.sendPacket(new PlayerInteractItemC2SPacket(Hand.OFF_HAND, 0, 0, 0));
 		}
 		else if (hand == Hand.OFF_HAND) {
-			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().selectedSlot % 8 + 1));
-			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().selectedSlot));
+			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().getSelectedSlot() % 8 + 1));
+			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().getSelectedSlot()));
 		}
 	}
 }

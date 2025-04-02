@@ -17,11 +17,11 @@ public class MovementUtils {
 	}
 	public static double direction() {
 		float yaw = mc.player.getYaw();
-		if (mc.player.input.movementForward < 0) yaw += 180;
+		if (mc.player.input.getMovementInput().x < 0) yaw += 180;
 		float forward = 1;
-		if (mc.player.input.movementForward < 0) forward -= 0.5; else if (mc.player.input.movementForward > 0) forward += 0.5;
-		if (mc.player.input.movementSideways > 0) yaw -= 90 * forward;
-		if (mc.player.input.movementSideways < 0) yaw += 90 * forward;
+		if (mc.player.input.getMovementInput().x < 0) forward -= 0.5; else if (mc.player.input.getMovementInput().x > 0) forward += 0.5;
+		if (mc.player.input.getMovementInput().y > 0) yaw -= 90 * forward;
+		if (mc.player.input.getMovementInput().y < 0) yaw += 90 * forward;
 		return Math.toRadians(yaw);
 	}
 }

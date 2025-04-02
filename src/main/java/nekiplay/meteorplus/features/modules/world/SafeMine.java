@@ -92,7 +92,7 @@ public class SafeMine extends Module {
 						{
 							if (mc.player != null) {
 								BlockPos block = iterator.next();
-								BlockUtils.place(block, Hand.OFF_HAND, mc.player.getInventory().selectedSlot, false, 0, false, false, false);
+								BlockUtils.place(block, Hand.OFF_HAND, mc.player.getInventory().getSelectedSlot(), false, 0, false, false, false);
 								iterator.remove();
 								tick = delay.get();
 							}

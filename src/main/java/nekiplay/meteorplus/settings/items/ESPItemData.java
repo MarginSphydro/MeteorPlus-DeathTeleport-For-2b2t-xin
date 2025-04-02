@@ -92,14 +92,14 @@ public class ESPItemData implements ICopyable<ESPItemData>, ISerializable<ESPIte
 
 	@Override
 	public ESPItemData fromTag(NbtCompound tag) {
-		shapeMode = ShapeMode.valueOf(tag.getString("shapeMode"));
-		lineColor.fromTag(tag.getCompound("lineColor"));
-		sideColor.fromTag(tag.getCompound("sideColor"));
+		shapeMode = ShapeMode.valueOf(tag.getString("shapeMode").get());
+		lineColor.fromTag(tag.getCompound("lineColor").get());
+		sideColor.fromTag(tag.getCompound("sideColor").get());
 
-		tracer = tag.getBoolean("tracer");
-		tracerColor.fromTag(tag.getCompound("tracerColor"));
+		tracer = tag.getBoolean("tracer").get();
+		tracerColor.fromTag(tag.getCompound("tracerColor").get());
 
-		changed = tag.getBoolean("changed");
+		changed = tag.getBoolean("changed").get();
 
 		return this;
 	}

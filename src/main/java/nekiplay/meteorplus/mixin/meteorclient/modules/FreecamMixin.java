@@ -181,9 +181,9 @@ public class FreecamMixin {
 	@Unique @Nullable
 	private BlockPos rayCastClicked() {
 		BlockPos blockPos = null;
-		Vec3d rotationVector = RaycastUtils.getRotationVector((float) freecam.getPitch(mc.getRenderTickCounter().getTickDelta(true)), (float) freecam.getYaw(mc.getRenderTickCounter().getTickDelta(true)));
+		Vec3d rotationVector = RaycastUtils.getRotationVector((float) freecam.getPitch(mc.getRenderTickCounter().getTickProgress(true)), (float) freecam.getYaw(mc.getRenderTickCounter().getTickProgress(true)));
 		Vec3d pos = new Vec3d(freecam.pos.x, freecam.pos.y, freecam.pos.z);
-		HitResult result = RaycastUtils.raycast(pos, rotationVector, 64 * 4, mc.getRenderTickCounter().getTickDelta(true), true);
+		HitResult result = RaycastUtils.raycast(pos, rotationVector, 64 * 4, mc.getRenderTickCounter().getTickProgress(true), true);
 		if (result.getType() == HitResult.Type.BLOCK) {
 			BlockHitResult blockHitResult = (BlockHitResult) result;
 			blockPos = blockHitResult.getBlockPos();

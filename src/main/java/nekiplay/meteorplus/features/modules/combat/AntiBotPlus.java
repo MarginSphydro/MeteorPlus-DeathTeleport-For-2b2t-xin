@@ -256,7 +256,7 @@ public class AntiBotPlus extends Module {
 						airs.add(entity.getId());
 
 					if (entity.isOnGround()) {
-						if (entity.prevY != entity.getY())
+						if (entity.lastY != entity.getY())
 							invalidGrounds.put(entity.getId(), invalidGrounds.getOrDefault(entity.getId(), 0) + 1);
 					} else {
 						int currentVL = invalidGrounds.getOrDefault(entity.getId(), 0) / 2;

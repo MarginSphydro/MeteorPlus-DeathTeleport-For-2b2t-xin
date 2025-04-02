@@ -28,8 +28,8 @@ public class Grim extends NoSlowMode {
 		if (mc.player.isUsingItem()) {
 			ClientPlayNetworkHandler network = mc.getNetworkHandler();
             assert network != null;
-            network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().selectedSlot % 8 + 1));
-			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().selectedSlot));
+            network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().getSelectedSlot() % 8 + 1));
+			network.sendPacket(new UpdateSelectedSlotC2SPacket(mc.player.getInventory().getSelectedSlot()));
 		}
 	}
 }

@@ -73,7 +73,7 @@ public class Cauldrons extends AutoObsidianFarmMode {
 			}
 		}
 	}
-	
+
 	@Override
 	public String getInfoString() {
 		return Integer.toString(placed);
@@ -169,7 +169,7 @@ public class Cauldrons extends AutoObsidianFarmMode {
 						BlockState state2 = mc.world.getBlockState(block);
 						if (state2.getBlock() == Blocks.LAVA_CAULDRON && mc.player.getPos().distanceTo(block.toCenterPos()) <= settings.range.get() + 1) {
 							if (collectTimer >= settings.collectDelay.get()) {
-								mc.player.getInventory().selectedSlot = bucket.slot();
+								mc.player.getInventory().setSelectedSlot(bucket.slot());
 								mc.player.networkHandler.sendPacket(new UpdateSelectedSlotC2SPacket(bucket.slot()));
 								rotate(block, () -> {
 									Vec3d hitPos = Vec3d.ofCenter(block);

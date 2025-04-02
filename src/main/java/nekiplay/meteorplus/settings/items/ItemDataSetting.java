@@ -54,9 +54,9 @@ public class ItemDataSetting<T extends ICopyable<T> & ISerializable<T> & IChange
 	protected Map<Item, T> load(NbtCompound tag) {
 		get().clear();
 
-		NbtCompound valueTag = tag.getCompound("value");
+		NbtCompound valueTag = tag.getCompound("value").get();
 		for (String key : valueTag.getKeys()) {
-			get().put(Registries.ITEM.get(Identifier.of(key)), defaultData.get().copy().fromTag(valueTag.getCompound(key)));
+			get().put(Registries.ITEM.get(Identifier.of(key)), defaultData.get().copy().fromTag(valueTag.getCompound(key).get()));
 		}
 
 		return get();

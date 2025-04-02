@@ -16,8 +16,8 @@
     "meteorclient.modules.NoRenderMixin",
     "meteorclient.modules.TracersMixin",
     "meteorclient.modules.WaypointsModuleMixin",
-	"meteorclient.modules.BreakIndicatorsMixin",
-	"meteorclient.modules.BetterTooltipsMixin",
+	  "meteorclient.modules.BreakIndicatorsMixin",
+	  "meteorclient.modules.BetterTooltipsMixin",
     "minecraft.ClientConnectionAccessor",
     "minecraft.ShapelessRecipeAccessor",
     "minecraft.entity.ShulkerEntityAccessor",
@@ -31,7 +31,6 @@
     "meteorclient.gui.DefaultSettingsWidgetFactoryMixin",
     "meteorclient.utils.misc.KeybindMixin",
     "minecraft.StringReaderMixin",
-    "minecraft.entity.ClientPlayerEntityMixin",
     "minecraft.entity.LivingEntityMixin",
     "minecraft.entity.PlayerMoveC2SPacketAccessor"
   ]

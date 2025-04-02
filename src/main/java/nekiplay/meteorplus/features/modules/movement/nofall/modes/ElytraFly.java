@@ -5,6 +5,7 @@ import meteordevelopment.meteorclient.utils.player.FindItemResult;
 import meteordevelopment.meteorclient.utils.player.InvUtils;
 import nekiplay.meteorplus.features.modules.movement.nofall.NoFallModes;
 import nekiplay.meteorplus.features.modules.movement.nofall.NoFallMode;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Items;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
@@ -26,7 +27,7 @@ public class ElytraFly extends NoFallMode {
 			FindItemResult elytra = InvUtils.find(Items.ELYTRA);
 			if (elytra.found()) {
 				int slot = elytra.slot();
-				if (mc.player.getInventory().getArmorStack(2).getItem() != Items.ELYTRA) {
+				if (mc.player.getEquippedStack(EquipmentSlot.CHEST).getItem() != Items.ELYTRA) {
 					InvUtils.move().from(slot).toArmor(2);
 				}
 			}
