@@ -49,8 +49,8 @@ public class Wasp extends ElytraFlyMode {
 	private void updateWaspMovement() {
 		float yaw = mc.player.getYaw();
 
-		float forward = mc.player.input.getMovementInput().x;
-		float sideways = mc.player.input.getMovementInput().y;
+		float forward = mc.player.input.getMovementInput().y;
+		float sideways = mc.player.input.getMovementInput().x;
 
 		if (forward > 0) {
 			moving = true;
