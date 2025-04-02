@@ -60,19 +60,20 @@ public class Control extends ElytraFlyMode {
 	private void updateControlMovement() {
 		float yaw = mc.player.getYaw();
 
-		float f = mc.player.input.getMovementInput().x;
-		float s = mc.player.input.getMovementInput().y;
+		float forward = mc.player.input.getMovementInput().x;
+		float sideways = mc.player.input.getMovementInput().y;
 
-		if (f > 0) {
+		if (forward > 0) {
 			moving = true;
-			yaw += s > 0 ? -45 : s < 0 ? 45 : 0;
-		} else if (f < 0) {
+			yaw += sideways > 0 ? -45 : sideways < 0 ? 45 : 0;
+		} else if (forward < 0) {
 			moving = true;
-			yaw += s > 0 ? -135 : s < 0 ? 135 : 180;
+			yaw += sideways > 0 ? -135 : sideways < 0 ? 135 : 180;
 		} else {
-			moving = s != 0;
-			yaw += s > 0 ? -90 : s < 0 ? 90 : 0;
+			moving = sideways != 0;
+			yaw += sideways > 0 ? -90 : sideways < 0 ? 90 : 0;
 		}
+
 		this.yaw = yaw;
 	}
 }
