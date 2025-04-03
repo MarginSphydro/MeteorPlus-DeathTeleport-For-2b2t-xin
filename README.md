@@ -9,12 +9,11 @@
 	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/github/license/MeteorClientPlus/MeteorPlus?logo=mdBook&color=FF8C00" alt="Minecraft version"/></a>
 	<br>
 	<a href="https://anticope.pages.dev/addons/?addon=MeteorClientPlus%2FMeteorPlus"><img src="https://img.shields.io/badge/verified%20addon-yes-brightgreen" alt="Verified Addon"></a>
-	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.20.4 -- 1.21.4-brightgreen" alt="Minecraft version"/></a>
+	<a href="https://www.minecraft.net/"><img src="https://img.shields.io/badge/minecraft%20version-1.20.4 -- 1.21.5-brightgreen" alt="Minecraft version"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/releases"><img src="https://img.shields.io/github/downloads/MeteorClientPlus/MeteorPlus/total" alt="Downloads"/></a>
 	<a href="https://github.com/Nekiplay/MeteorClientPlus/stargazers"><img src="https://badgen.net/github/stars/MeteorClientPlus/MeteorPlus" alt="GitHub stars"/></a>
 	<br>
 	<a href="https://discord.gg/N3gqYc7GRS"><img src="https://img.shields.io/badge/support/help/issues-discord-brightgreen" alt="Discord"/></a>
-	<a href="https://t.me/+E3PuLb8cZOlmZWIy"><img src="https://img.shields.io/badge/support/help/issues-telegram-brightgreen" alt="Telegram"/></a>
 	<br>
 	<p>Thanks some russian paid clients and <a href="https://github.com/CCBlueX/LiquidBounce">LiquidBounce</a> 🤫</p>
 	<br>
