@@ -3,7 +3,7 @@
   "id": "meteorplus",
   "version": "${version}",
   "name": "Meteor+",
-  "description": "An addon for Meteor client and Boze Client that adds many blatant features.",
+  "description": "An addon for Meteor client that adds many blatant features.",
   "authors": [
     "Neki_play"
   ],
@@ -33,15 +33,12 @@
 		"modmenu": {
 			"links": {
 				"modmenu.website": "https://meteorclientplus.github.io",
-				"modmenu.discord": "https://discord.gg/Y3ardRfJXr",
-				"Guilded": "https://www.guilded.gg/i/27dAlJKk",
-				"Telegram": "https://t.me/+oST4M1L4pGdiYzgy"
-			},
-			"badges": [ "clientsideOnly" ]
+				"modmenu.discord": "https://discord.gg/Y3ardRfJXr"
+			}
 		}
   },
   "depends": {
-    "java": ">=17",
+    "java": ">=21",
     "minecraft": ">=${mc_version}"
   }
 }

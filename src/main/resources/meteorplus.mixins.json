@@ -1,38 +1,39 @@
 {
-  "required": true,
-  "package": "nekiplay.meteorplus.mixin",
-  "compatibilityLevel": "JAVA_17",
-  "plugin": "nekiplay.MixinPlugin",
-  "client": [
-    "meteorclient.gui.WBlockPosEditMixin",
-    "meteorclient.modules.BlockESPMixin",
-    "meteorclient.modules.CriticalsMixin",
-    "meteorclient.modules.ESPMixin",
-    "meteorclient.modules.FreecamMixin",
-    "meteorclient.modules.ItemHighlightMixin",
-    "meteorclient.modules.KillAuraMixin",
-    "meteorclient.modules.MiddleClickExtraMixin",
-    "meteorclient.modules.NameTagsMixin",
-    "meteorclient.modules.NoRenderMixin",
-    "meteorclient.modules.TracersMixin",
-    "meteorclient.modules.WaypointsModuleMixin",
-	  "meteorclient.modules.BreakIndicatorsMixin",
-	  "meteorclient.modules.BetterTooltipsMixin",
-    "minecraft.ClientConnectionAccessor",
-    "minecraft.ShapelessRecipeAccessor",
-    "minecraft.entity.ShulkerEntityAccessor",
-    "minecraft.hud.DebugHudMixin",
+	"required": true,
+	"package": "nekiplay.meteorplus.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"plugin": "nekiplay.MixinPlugin",
+	"client": [
+		"meteorclient.gui.WBlockPosEditMixin",
+		"meteorclient.modules.BetterTooltipsMixin",
+		"meteorclient.modules.BlockESPMixin",
+		"meteorclient.modules.BreakIndicatorsMixin",
+		"meteorclient.modules.CriticalsMixin",
+		"meteorclient.modules.ESPMixin",
+		"meteorclient.modules.FreecamMixin",
+		"meteorclient.modules.ItemHighlightMixin",
+		"meteorclient.modules.KillAuraMixin",
+		"meteorclient.modules.MiddleClickExtraMixin",
+		"meteorclient.modules.NameTagsMixin",
+		"meteorclient.modules.NoRenderMixin",
+		"meteorclient.modules.TracersMixin",
+		"meteorclient.modules.WaypointsModuleMixin",
+		"minecraft.ClientConnectionAccessor",
+		"minecraft.ShapelessRecipeAccessor",
+		"minecraft.entity.ShulkerEntityAccessor",
+		"minecraft.hud.DebugHudMixin",
 		"minecraft.hud.InGameHudMixin"
-  ],
-  "injectors": {
-    "defaultRequire": 1
-  },
-  "mixins": [
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixins": [
+		"meteorclient.gui.DefaultSettingsWidgetFactoryMixin",
+		"meteorclient.gui.TitleScreenCreditsMixin",
+		"meteorclient.utils.misc.KeybindMixin",
+		"minecraft.StringReaderMixin",
 		"minecraft.entity.ClientPlayerEntityMixin",
-    "meteorclient.gui.DefaultSettingsWidgetFactoryMixin",
-    "meteorclient.utils.misc.KeybindMixin",
-    "minecraft.StringReaderMixin",
-    "minecraft.entity.LivingEntityMixin",
-    "minecraft.entity.PlayerMoveC2SPacketAccessor"
-  ]
+		"minecraft.entity.LivingEntityMixin",
+		"minecraft.entity.PlayerMoveC2SPacketAccessor"
+	]
 }
