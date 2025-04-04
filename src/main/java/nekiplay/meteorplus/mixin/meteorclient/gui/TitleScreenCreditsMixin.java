@@ -21,7 +21,7 @@ public class TitleScreenCreditsMixin {
 			int day = calendar.get(Calendar.DAY_OF_MONTH);
 			int month = calendar.get(Calendar.MONTH) + 1;
 
-			if (day <= 7 && month == 4) {
+			if (day <= 5 && month == 4) {
 				MutableText newText = Text.literal(text.getString().replaceAll("Meteor", "Motor"))
 					.setStyle(text.getStyle());
 				if (text instanceof MutableText mutableText) {
