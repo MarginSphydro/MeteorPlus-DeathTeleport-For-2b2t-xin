@@ -153,8 +153,8 @@ public class FreecamMixin {
 				if (state.isAir()) return;
 				isBlinkMoving = true;
 				GoalBlock goal = new GoalBlock(tryGetValidPos(clicked));
-				BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(null);
-				BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(goal);
+				BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("stop");
+				BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goto " + goal.x + " " + goal.y + " " + goal.z);
 
 				event.cancel();
 			}
@@ -174,8 +174,8 @@ public class FreecamMixin {
 
 
 			GoalBlock goal = new GoalBlock(tryGetValidPos(clicked));
-			BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(null);
-			BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(goal);
+			BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("stop");
+			BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goto " + goal.x + " " + goal.y + " " + goal.z);
 
 			event.cancel();
 		}

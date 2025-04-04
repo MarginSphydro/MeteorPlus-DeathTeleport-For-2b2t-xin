@@ -62,11 +62,7 @@ dependencies {
 	// Xaero's Mods
 	modCompileOnly "maven.modrinth:xaeros-world-map:${project.xwm_fabric_version}" // Xaero's World Map
 	modCompileOnly "maven.modrinth:xaeros-minimap:${project.xmm_fabric_version}" // Xaero's Minimap
-
-	// Litematica
-	modImplementation "curse.maven:litematica-${project.litematica_projectid}:${project.litematica_fileid}"
-	modImplementation "curse.maven:litematica-${project.malilib_projectid}:${project.malilib_fileid}"
-
+	
 	// Chest Tracker
 	modImplementation("red.jackf:whereisit:${project.where_is_it_version}")
 	modImplementation("maven.modrinth:chest-tracker:${project.chest_tracker}")

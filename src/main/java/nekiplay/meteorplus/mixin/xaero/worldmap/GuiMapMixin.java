@@ -99,14 +99,14 @@ public abstract class GuiMapMixin {
 								@Override
 								public void onAction(Screen screen) {
 									GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
-									BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(goal);
+									BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goal " + goal.x + " " + goal.y + " " + goal.z);
 								}
 							},
 							new RightClickOption(I18n.translate("gui.world_map.baritone_path_here"), options.size(), guiMap) {
 								@Override
 								public void onAction(Screen screen) {
 									GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
-									BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoalAndPath(goal);
+									BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goto " + goal.x + " " + goal.y + " " + goal.z);
 								}
 							}
 						));
@@ -117,13 +117,8 @@ public abstract class GuiMapMixin {
 										@Override
 										public void onAction(Screen screen) {
 											GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
-											BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(goal);
-											for (IBaritone baritone : BaritoneAPI.getProvider().getAllBaritones()) {
-												if (!baritone.getCommandManager().getRegistry().stream().filter((a) -> a.getNames().get(0).equalsIgnoreCase("elytra")).findAny().isEmpty()) {
-													baritone.getCommandManager().execute("elytra");
-													break;
-												}
-											}
+											BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goal " + goal.x + " " + goal.y + " " + goal.z);
+											BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("elytra");
 										}
 									}
 								));
@@ -138,13 +133,8 @@ public abstract class GuiMapMixin {
 									@Override
 									public void onAction(Screen screen) {
 										GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
-										BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(goal);
-										for (IBaritone baritone : BaritoneAPI.getProvider().getAllBaritones()) {
-											if (!baritone.getCommandManager().getRegistry().stream().filter((a) -> a.getNames().get(0).equalsIgnoreCase("elytra")).findAny().isEmpty()) {
-												baritone.getCommandManager().execute("elytra");
-												break;
-											}
-										}
+										BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("goal " + goal.x + " " + goal.y + " " + goal.z);
+										BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("elytra");
 									}
 								}
 							));
