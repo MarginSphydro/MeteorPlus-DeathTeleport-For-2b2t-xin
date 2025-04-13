@@ -14,23 +14,23 @@ public class MixinPlugin implements IMixinConfigPlugin {
 	public static final String METEOR_LOGPREFIX_MIXIN = "[Meteor+ Mixins]";
 
 	private static final String mixinPackageMeteorPlus = "nekiplay.meteorplus.mixin";
-	private static final String mixinPackageBozePlus = "nekiplay.bozeplus.mixin";
+
 
 	public static boolean isMeteorClient = false;
 	public static boolean isMeteorRejects = false; // Meteor Client Addon
 	public static boolean isNumbyHack = false; // Meteor Client Addon
 	public static boolean isZewo2 = false; // Meteor Client Addon
 
-	public static boolean isBozeAPI = false;
-	public static boolean isFutureClient = false;
+	public static boolean isBozeAPI = false; // Client API
+	public static boolean isFutureClient = false; // Other cheat client
 
-	public static boolean isBaritonePresent = false;
-	public static boolean isJourneyMapPresent = false;
-	public static boolean isXaeroWorldMapresent = false;
-	public static boolean isXaeroMiniMapresent = false;
-	public static boolean isXaeroPlusMapresent = false;
-	public static boolean isLitematicaMapresent = false;
-	public static boolean isWhereIsIt = false;
+	public static boolean isBaritonePresent = false; // Baritone for auto walking
+	public static boolean isJourneyMapPresent = false; // Currently not used
+	public static boolean isXaeroWorldMapresent = false; // Extension for map and baritone
+	public static boolean isXaeroMiniMapresent = false; // Extension for map and baritone
+	public static boolean isXaeroPlusMapresent = false; // other extension for map and baritone
+	public static boolean isLitematicaMapresent = false; // Detect litematica mod
+	public static boolean isWhereIsIt = false; // Utility for ChestTracker for render 3d text
 
 	@Override
 	public void onLoad(String mixinPackage) {
@@ -60,7 +60,7 @@ public class MixinPlugin implements IMixinConfigPlugin {
 
 	@Override
 	public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-		if (!mixinClassName.startsWith(mixinPackageMeteorPlus) && !mixinClassName.startsWith(mixinPackageBozePlus)) {
+		if (!mixinClassName.startsWith(mixinPackageMeteorPlus)) {
 			throw new RuntimeException(METEOR_LOGPREFIX_MIXIN + " " + mixinClassName + " is not in the mixin package");
 		}
 		else if (mixinClassName.startsWith(mixinPackageMeteorPlus + ".meteorclient")) {
