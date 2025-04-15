@@ -3,6 +3,7 @@ package nekiplay.meteorplus.features.modules.movement.elytrafly;
 import meteordevelopment.meteorclient.events.entity.player.PlayerMoveEvent;
 import meteordevelopment.meteorclient.events.packets.PacketEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
+import meteordevelopment.meteorclient.mixininterface.IVec3d;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
@@ -10,6 +11,11 @@ import meteordevelopment.orbit.EventHandler;
 import meteordevelopment.starscript.compiler.Expr;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.modes.Control;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.modes.Wasp;
+import net.minecraft.entity.EntityPose;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 
 public class ElytraFlyPlus extends Module {
 	private final SettingGroup sgGeneral = settings.getDefaultGroup();
@@ -123,6 +129,23 @@ public class ElytraFlyPlus extends Module {
 		.build()
 	);
 
+	public final Setting<Boolean> noCrash = sgGeneral.add(new BoolSetting.Builder()
+		.name("no-crash")
+		.description("Stops you from going into walls.")
+		.defaultValue(false)
+		.build()
+	);
+
+	public final Setting<Integer> crashLookAhead = sgGeneral.add(new IntSetting.Builder()
+		.name("crash-look-ahead")
+		.description("Distance to look ahead when flying.")
+		.defaultValue(5)
+		.range(1, 15)
+		.sliderMin(1)
+		.visible(noCrash::get)
+		.build()
+	);
+
 	private ElytraFlyMode currentMode = new Control();
 
 	public ElytraFlyPlus() {
@@ -142,6 +165,15 @@ public class ElytraFlyPlus extends Module {
 	@EventHandler
 	private void onPlayerMove(PlayerMoveEvent event) {
 		currentMode.onPlayerMove(event);
+
+		if (noCrash.get() && mc.player.getPose() == EntityPose.FALL_FLYING) {
+			Vec3d lookAheadPos = mc.player.getPos().add(mc.player.getVelocity().normalize().multiply(crashLookAhead.get()));
+			RaycastContext raycastContext = new RaycastContext(mc.player.getPos(), new Vec3d(lookAheadPos.getX(), mc.player.getY(), lookAheadPos.getZ()), RaycastContext.ShapeType.COLLIDER, RaycastContext.FluidHandling.NONE, mc.player);
+			BlockHitResult hitResult = mc.world.raycast(raycastContext);
+			if (hitResult != null && hitResult.getType() == HitResult.Type.BLOCK) {
+				((IVec3d) event.movement).set(0, currentMode.velY, 0);
+			}
+		}
 	}
 
 	@EventHandler

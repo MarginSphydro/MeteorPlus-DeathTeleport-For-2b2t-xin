@@ -55,17 +55,19 @@ dependencies {
 	// Mixin extras
 	include(implementation(annotationProcessor("io.github.llamalad7:mixinextras-fabric:0.4.1")))
 
-	// Meteor Client
-	modImplementation files("libs\\baritone-unoptimized-fabric-1.10.1-11-g3ed49fd4.jar")
-	modImplementation files("libs\\meteor-client-0.5.8-2200.jar")
+	// Meteor Client and Baritone
+	modImplementation files("libs\\baritone-unoptimized-fabric-1.10.1-11-g3ed49fd4.jar") // Baritone
+	modImplementation files("libs\\meteor-client-0.5.8-2200.jar") // Meteor Client
 
 	// Xaero's Mods
 	modCompileOnly "maven.modrinth:xaeros-world-map:${project.xwm_fabric_version}" // Xaero's World Map
 	modCompileOnly "maven.modrinth:xaeros-minimap:${project.xmm_fabric_version}" // Xaero's Minimap
-	
+
+	modCompileOnly "maven.modrinth:litematica:${project.litematica_version}" // Litematica
+
 	// Chest Tracker
-	modImplementation("red.jackf:whereisit:${project.where_is_it_version}")
-	modImplementation("maven.modrinth:chest-tracker:${project.chest_tracker}")
+	modImplementation("red.jackf:whereisit:${project.where_is_it_version}") // Library for Chect Tracker
+	modImplementation("maven.modrinth:chest-tracker:${project.chest_tracker}") // Chest Tracker
 }
 
 loom {
