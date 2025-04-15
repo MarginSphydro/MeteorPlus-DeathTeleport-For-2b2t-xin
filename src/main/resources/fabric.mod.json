@@ -17,6 +17,9 @@
   "icon": "assets/meteorplus/icon.png",
   "environment": "*",
   "entrypoints": {
+		"main": [
+			"nekiplay.Main"
+		],
     "meteor": [
       "nekiplay.meteorplus.MeteorPlusAddon"
     ]
