@@ -2,6 +2,7 @@
 	"gui.world_map.baritone_goal_here": "Baritone 目標標記",
 	"gui.world_map.baritone_path_here": "Baritone 路徑標記",
 	"gui.world_map.baritone_elytra_here": "Baritone 鞘翅飛行標記",
+	"gui.world_map.look_at_waypoint": "查看標籤",
 
 	"item.meteorplus.logo": "Meteor+ 主標誌",
 	"item.meteorplus.logo_mods": "Meteor+ 整合包標誌",

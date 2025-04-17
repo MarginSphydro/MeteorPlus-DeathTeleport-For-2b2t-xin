@@ -118,12 +118,7 @@ public abstract class GuiMapMixin {
 										public void onAction(Screen screen) {
 											GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
 											BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(goal);
-											for (IBaritone baritone : BaritoneAPI.getProvider().getAllBaritones()) {
-												if (!baritone.getCommandManager().getRegistry().stream().filter((a) -> a.getNames().get(0).equalsIgnoreCase("elytra")).findAny().isEmpty()) {
-													baritone.getCommandManager().execute("elytra");
-													break;
-												}
-											}
+											BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("elytra");
 										}
 									}
 								));
@@ -139,12 +134,7 @@ public abstract class GuiMapMixin {
 									public void onAction(Screen screen) {
 										GoalBlock goal = new GoalBlock(new BlockPos(rightClickX, rightClickY, rightClickZ).up());
 										BaritoneAPI.getProvider().getPrimaryBaritone().getCustomGoalProcess().setGoal(goal);
-										for (IBaritone baritone : BaritoneAPI.getProvider().getAllBaritones()) {
-											if (!baritone.getCommandManager().getRegistry().stream().filter((a) -> a.getNames().get(0).equalsIgnoreCase("elytra")).findAny().isEmpty()) {
-												baritone.getCommandManager().execute("elytra");
-												break;
-											}
-										}
+										BaritoneAPI.getProvider().getPrimaryBaritone().getCommandManager().execute("elytra");
 									}
 								}
 							));
