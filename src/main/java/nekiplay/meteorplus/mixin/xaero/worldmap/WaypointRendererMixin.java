@@ -116,7 +116,7 @@ public class WaypointRendererMixin {
 						public boolean isActive() {
 							return true;
 						}
-					}).setNameFormatArgs(new Object[]{"P"}));
+					}).setNameFormatArgs(new Object[]{"L"}));
 				}
 
 				rightClickOptions.add((new RightClickOption("gui.xaero_right_click_waypoint_teleport", rightClickOptions.size(), target) {
