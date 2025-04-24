@@ -57,7 +57,7 @@ dependencies {
 
 	// Meteor Client
 	modImplementation files("libs\\baritone-unoptimized-fabric-1.10.2.jar")
-	modImplementation files("libs\\meteor-client-1.21.5-2.jar")
+	modImplementation files("libs\\meteor-client-1.21.5-12.jar")
 
 	// Xaero's Mods
 	modCompileOnly "maven.modrinth:xaeros-world-map:${project.xwm_fabric_version}" // Xaero's World Map
