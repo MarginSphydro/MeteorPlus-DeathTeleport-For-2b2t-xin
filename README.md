@@ -29,7 +29,7 @@
 | **Spider+**            | **Spider for Anti-Cheats**                    | **Matrix, Vulcan**            |
 | **Jesus+**             | **Jesus for Anti-Cheats**                     | **Matrix, Vulcan**            |
 | **No Slow+**           | **No Slow for Anti-Cheats**                   | **Matrix, Vulcan, Grim, NCP** |
-| **Fast Climb+** 	     | **Fast Climb for Anti-Cheats**                | **Spartan**                   |
+| **Fast Climb+** 	      | **Fast Climb for Anti-Cheats**                | **Spartan**                   |
 | **Gui Move+**          | **Gui Move for Anti-Cheats**                  | **Matrix, NCP**               |
 | **Timer+**             | **Timer for Anti-Cheats**                     | **NCP, Intave, Vulcan**       |
 | **Safe mine**          | **Prevents player from lava**                 | **Matrix**                    |

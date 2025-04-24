@@ -36,9 +36,9 @@ public class WBlockPosEditMixin extends WHorizontalList  {
 	private boolean clicking;
 	@Inject(method = "addTextBox", at = @At("HEAD"), cancellable = true)
 	private void addTextBox(CallbackInfo ci) {
-		this.textBoxX = (WTextBox)this.add(this.theme.textBox(Integer.toString(this.value.getX()), this::filter)).minWidth(75.0).widget();
-		this.textBoxY = (WTextBox)this.add(this.theme.textBox(Integer.toString(this.value.getY()), this::filter)).minWidth(75.0).widget();
-		this.textBoxZ = (WTextBox)this.add(this.theme.textBox(Integer.toString(this.value.getZ()), this::filter)).minWidth(75.0).widget();
+		this.textBoxX = this.add(this.theme.textBox(Integer.toString(this.value.getX()), this::filter)).minWidth(75.0).widget();
+		this.textBoxY = this.add(this.theme.textBox(Integer.toString(this.value.getY()), this::filter)).minWidth(75.0).widget();
+		this.textBoxZ = this.add(this.theme.textBox(Integer.toString(this.value.getZ()), this::filter)).minWidth(75.0).widget();
 		this.textBoxX.actionOnUnfocused = () -> {
 			try {
 				this.lastValue = this.value;
@@ -97,7 +97,7 @@ public class WBlockPosEditMixin extends WHorizontalList  {
 	private boolean filter(String text, char c) {
 		boolean validate = true;
 		boolean good;
-		if (c == '-' && text.isEmpty()) {
+		if (c == '-' && text.isEmpty() || text.equals("***")) {
 			good = true;
 			validate = false;
 		} else {
