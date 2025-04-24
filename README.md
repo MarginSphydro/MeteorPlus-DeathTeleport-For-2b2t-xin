@@ -67,6 +67,8 @@
 | **Waypoints**        | **Added display of distances in label names, sorting, name search** |
 | **BetterTooltips**   | **Translations for BetterTooltips**                                 |
 | **Break Indicators** | **Added percentage render**                                         |
+| **No Render**        | **Improved HUD disablers**                                          |
+
 
 ## Meteor Client fixes
 | Module        | Fixed                                           |
