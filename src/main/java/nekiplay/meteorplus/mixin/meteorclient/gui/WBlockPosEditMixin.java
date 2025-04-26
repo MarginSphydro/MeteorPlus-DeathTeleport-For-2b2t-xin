@@ -9,10 +9,11 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.util.math.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = WBlockPosEdit.class, remap = false, priority = 1001)
 public class WBlockPosEditMixin extends WHorizontalList  {
@@ -36,9 +37,9 @@ public class WBlockPosEditMixin extends WHorizontalList  {
 	private boolean clicking;
 	@Inject(method = "addTextBox", at = @At("HEAD"), cancellable = true)
 	private void addTextBox(CallbackInfo ci) {
-		this.textBoxX = this.add(this.theme.textBox(Integer.toString(this.value.getX()), this::filter)).minWidth(75.0).widget();
-		this.textBoxY = this.add(this.theme.textBox(Integer.toString(this.value.getY()), this::filter)).minWidth(75.0).widget();
-		this.textBoxZ = this.add(this.theme.textBox(Integer.toString(this.value.getZ()), this::filter)).minWidth(75.0).widget();
+		this.textBoxX = this.add(this.theme.textBox(Integer.toString(this.value.getX()), this::filterFixed)).minWidth(75.0).widget();
+		this.textBoxY = this.add(this.theme.textBox(Integer.toString(this.value.getY()), this::filterFixed)).minWidth(75.0).widget();
+		this.textBoxZ = this.add(this.theme.textBox(Integer.toString(this.value.getZ()), this::filterFixed)).minWidth(75.0).widget();
 		this.textBoxX.actionOnUnfocused = () -> {
 			try {
 				this.lastValue = this.value;
@@ -84,20 +85,25 @@ public class WBlockPosEditMixin extends WHorizontalList  {
 			catch (NumberFormatException ignore) { }
 		};
 
-
-
 		if (ConfigModifier.get().positionProtection.get()) {
 			textBoxX.set("***");
-			textBoxZ.set("***");
+			updateRender(textBoxX);
 			textBoxY.set("***");
+			updateRender(textBoxY);
+			textBoxZ.set("***");
+			updateRender(textBoxZ);
 		}
 		ci.cancel();
 	}
-	@Shadow
-	private boolean filter(String text, char c) {
+	private void updateRender(WTextBox textBox) {
+		textBoxX.setFocused(true);
+		textBoxX.setFocused(false);
+	}
+	@Unique
+	private boolean filterFixed(String text, char c) {
 		boolean validate = true;
 		boolean good;
-		if (c == '-' && text.isEmpty() || text.equals("***")) {
+		if ((c == '-' && text.isEmpty()) || text.equals("***")) {
 			good = true;
 			validate = false;
 		} else {
@@ -111,7 +117,6 @@ public class WBlockPosEditMixin extends WHorizontalList  {
 				good = false;
 			}
 		}
-
 		return good;
 	}
 	@Shadow
