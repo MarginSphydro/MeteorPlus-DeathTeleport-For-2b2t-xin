@@ -69,10 +69,9 @@ public class HologramModule extends Module {
 		for (HologramDataListed hologramData : inWorldHolograms) {
 			Vector3d pos = new Vector3d(hologramData.x, hologramData.y, hologramData.z);
 			if (pos.distance(camera_pos.x, camera_pos.y, camera_pos.z) <= hologramData.max_render_distance) {
-				if (NametagUtils.to2D(pos, hologramData.scale, hologramData.distanceScaling)) {
+				if (NametagUtils.to2D(pos, hologramData.scale)) {
 					TextRenderer text = TextRenderer.get();
 					NametagUtils.begin(pos);
-					text.beginBig();
 
 					String hologram_text = hologramData.text;
 					double hologramWidth = text.getWidth(hologram_text, true);
@@ -85,6 +84,7 @@ public class HologramModule extends Module {
 					double hY = -heightDown;
 
 					var script = scripts.get(hologram_text);
+					text.beginBig();
 					if (script != null) {
 						text.render(MeteorStarscript.run(script), hX, hY, hologramData.color, true);
 						for (HologramData hologramData1 : hologramData.other_holograms) {
@@ -100,7 +100,7 @@ public class HologramModule extends Module {
 						}
 					}
 					text.end();
-					NametagUtils.end(event.drawContext);
+					NametagUtils.end();
 				}
 			}
 		}
