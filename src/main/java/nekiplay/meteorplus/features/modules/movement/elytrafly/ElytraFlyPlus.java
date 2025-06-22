@@ -8,7 +8,6 @@ import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Categories;
 import meteordevelopment.meteorclient.systems.modules.Module;
 import meteordevelopment.orbit.EventHandler;
-import meteordevelopment.starscript.compiler.Expr;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.modes.Control;
 import nekiplay.meteorplus.features.modules.movement.elytrafly.modes.Wasp;
 import net.minecraft.util.hit.BlockHitResult;

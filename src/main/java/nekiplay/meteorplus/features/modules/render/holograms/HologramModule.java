@@ -17,7 +17,7 @@ import meteordevelopment.meteorclient.utils.render.RenderUtils;
 import meteordevelopment.meteorclient.utils.render.color.Color;
 import meteordevelopment.meteorclient.utils.world.Dimension;
 import meteordevelopment.orbit.EventHandler;
-import meteordevelopment.starscript.Script;
+import org.meteordev.starscript.Script;
 import nekiplay.meteorplus.MeteorPlusAddon;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;

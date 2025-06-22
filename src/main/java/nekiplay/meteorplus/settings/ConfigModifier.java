@@ -26,19 +26,15 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.apache.commons.lang3.StringUtils;
+import org.meteordev.starscript.Starscript;
 import org.meteordev.starscript.Script;
 import org.meteordev.starscript.value.Value;
 import org.meteordev.starscript.value.ValueMap;
-
-
-
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
-import static meteordevelopment.meteorclient.utils.misc.MeteorStarscript.popIdentifier;
-import static meteordevelopment.meteorclient.utils.misc.MeteorStarscript.wrap;
 
 public class ConfigModifier {
 	private static ConfigModifier INSTANCE;
