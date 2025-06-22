@@ -35,6 +35,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static meteordevelopment.meteorclient.MeteorClient.mc;
+import static meteordevelopment.meteorclient.utils.misc.MeteorStarscript.popIdentifier;
+import static meteordevelopment.meteorclient.utils.misc.MeteorStarscript.wrap;
 
 public class ConfigModifier {
 	private static ConfigModifier INSTANCE;

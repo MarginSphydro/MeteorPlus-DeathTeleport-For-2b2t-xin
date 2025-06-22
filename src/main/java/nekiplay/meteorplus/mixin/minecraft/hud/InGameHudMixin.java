@@ -20,22 +20,7 @@ public class InGameHudMixin {
 			ci.cancel();
 		}
 	}
-	@Inject(method = "renderExperienceBar", at = @At("HEAD"), cancellable = true)
-	private void onRenderExperienceBar(DrawContext context, int x, CallbackInfo ci) {
-		RenderExperienceBarEvent renderExperienceBarEvent = RenderExperienceBarEvent.get(context, x);
-		MeteorClient.EVENT_BUS.post(renderExperienceBarEvent);
-		if (renderExperienceBarEvent.isCancelled()) {
-			ci.cancel();
-		}
-	}
-	@Inject(method = "renderExperienceLevel", at = @At("HEAD"), cancellable = true)
-	private void onRenderExperienceBar(DrawContext context, RenderTickCounter tickCounter, CallbackInfo ci) {
-		RenderExperienceLevelEvent renderExperienceLevelEvent = RenderExperienceLevelEvent.get(context, tickCounter);
-		MeteorClient.EVENT_BUS.post(renderExperienceLevelEvent);
-		if (renderExperienceLevelEvent.isCancelled()) {
-			ci.cancel();
-		}
-	}
+
 	@Inject(method = "renderFood", at = @At("HEAD"), cancellable = true)
 	private void onRenderFoodBar(DrawContext context, PlayerEntity player, int top, int right, CallbackInfo ci) {
 		RenderFoodBarEvent renderFoodBarEvent = RenderFoodBarEvent.get(context, player, top, right);

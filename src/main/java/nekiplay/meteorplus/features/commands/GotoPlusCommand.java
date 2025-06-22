@@ -40,7 +40,7 @@ public class GotoPlusCommand extends Command {
 
 
 				BlockIterator.register(64, mc.world.getHeight() / 2, (blockPos, blockState) -> {
-					switch (BlockUtils.isValidMobSpawn(blockPos, true)) {
+					switch (BlockUtils.isValidMobSpawn(blockPos, mc.world.getBlockState(blockPos), 0)) {
 						case Never:
 							break;
 						case Potential, Always:
