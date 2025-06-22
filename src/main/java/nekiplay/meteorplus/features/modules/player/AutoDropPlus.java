@@ -24,48 +24,70 @@ public class AutoDropPlus extends Module  {
 
 	private final SettingGroup defaultGroup = settings.getDefaultGroup();
 
-	private final Setting<List<Item>> items = defaultGroup.add(new ItemListSetting.Builder()
-		.name("drop-items")
-		.description("Items to dropping.")
-		.build()
-	);
+	private final Setting<List<Item>> items;
+	private final Setting<Integer> delay;
+	private final Setting<Boolean> workInstant;
+	private final Setting<Boolean> removeContainersItems;
+	private final Setting<Boolean> autoDropExcludeHotbar;
+	private final Setting<Boolean> removeItems;
 
-	private final Setting<Integer> delay = defaultGroup.add(new IntSetting.Builder()
-		.name("delay")
-		.description("drop delay.")
-		.defaultValue(5)
-		.min(0)
-		.build()
-	);
+	{
+		// Initialize settings in proper order
+		items = defaultGroup.add(new ItemListSetting.Builder()
+			.name("drop-items")
+			.description("Items to dropping.")
+			.build()
+		);
 
-	private final Setting<Boolean> workInstant = defaultGroup.add(new BoolSetting.Builder()
-		.name("instant-work")
-		.description("Drop or remove items instant.")
-		.defaultValue(true)
-		.visible(() -> delay.get() == 0)
-		.build()
-	);
+		// First declare workInstant without initialization
+		final Setting<Boolean>[] workInstantRef = new Setting[1];
 
-	private final Setting<Boolean> removeContainersItems = defaultGroup.add(new BoolSetting.Builder()
-		.name("work-in-containers")
-		.description("Remove items in chests?.")
-		.defaultValue(true)
-		.build()
-	);
+		// Initialize delay with onChanged callback
+		delay = defaultGroup.add(new IntSetting.Builder()
+			.name("delay")
+			.description("drop delay.")
+			.defaultValue(5)
+			.min(0)
+			.onChanged(value -> {
+				if (value != 0 && workInstantRef[0] != null && workInstantRef[0].get()) {
+					workInstantRef[0].set(false);
+				}
+			})
+			.build()
+		);
 
-	private final Setting<Boolean> autoDropExcludeHotbar = defaultGroup.add(new BoolSetting.Builder()
-		.name("work-in-hotbar")
-		.description("Allow hotbar?.")
-		.defaultValue(true)
-		.build()
-	);
+		// Then initialize workInstant
+		workInstantRef[0] = defaultGroup.add(new BoolSetting.Builder()
+			.name("instant-work")
+			.description("Drop or remove items instant.")
+			.defaultValue(false)
+			.visible(() -> delay.get() == 0)
+			.build()
+		);
+		workInstant = workInstantRef[0];
 
-	private final Setting<Boolean> removeItems = defaultGroup.add(new BoolSetting.Builder()
-		.name("remover")
-		.description("Remove items?.")
-		.defaultValue(true)
-		.build()
-	);
+		// Initialize other settings
+		removeContainersItems = defaultGroup.add(new BoolSetting.Builder()
+			.name("work-in-containers")
+			.description("Work in chests?.")
+			.defaultValue(true)
+			.build()
+		);
+
+		autoDropExcludeHotbar = defaultGroup.add(new BoolSetting.Builder()
+			.name("work-in-hotbar")
+			.description("Work in hotbar?.")
+			.defaultValue(true)
+			.build()
+		);
+
+		removeItems = defaultGroup.add(new BoolSetting.Builder()
+			.name("remover")
+			.description("Remove items?.")
+			.defaultValue(false)
+			.build()
+		);
+	}
 
 	private int tick = 0;
 
