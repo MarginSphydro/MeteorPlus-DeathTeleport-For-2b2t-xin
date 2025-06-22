@@ -8,9 +8,6 @@ import meteordevelopment.meteorclient.utils.misc.HorizontalDirection;
 import meteordevelopment.meteorclient.utils.misc.MeteorStarscript;
 import meteordevelopment.meteorclient.utils.player.PlayerUtils;
 import meteordevelopment.meteorclient.utils.world.Dimension;
-import meteordevelopment.starscript.Starscript;
-import meteordevelopment.starscript.value.Value;
-import meteordevelopment.starscript.value.ValueMap;
 import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
 import nekiplay.meteorplus.mixinclasses.SpoofMode;
 import net.minecraft.client.network.PlayerListEntry;
@@ -29,6 +26,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.apache.commons.lang3.StringUtils;
+import org.meteordev.starscript.Script;
+import org.meteordev.starscript.value.Value;
+import org.meteordev.starscript.value.ValueMap;
+
+
 
 import java.util.Arrays;
 import java.util.Optional;
