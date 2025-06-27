@@ -1,23 +1,69 @@
-name: Development Build
-on: push
+name: Build & Release
+
+on:
+  push:
+    # 监控符合 SemVer 格式的 tag
+    tags:
+      - 'v*.*.*'
 
 jobs:
   build:
+    name: Build mod JAR
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
         with:
-          java-version: 18
-          distribution: adopt
-      - name: Build
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
         run: ./gradlew build
-      - name: Release
-        uses: marvinpinto/action-automatic-releases@latest
+
+      - name: Archive build outputs
+        uses: actions/upload-artifact@v3
         with:
-          repo_token: '${{ secrets.GITHUB_TOKEN }}'
-          automatic_release_tag: "1.20.4_1.0.9.1"
-          prerelease: true
-          title: "1.20.4 | 1.0.9.1"
-          files: |
-            ./build/libs/*.jar
+          name: mod-jar
+          path: build/libs/*.jar
+
+  release:
+    name: Create GitHub Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download built JAR
+        uses: actions/download-artifact@v3
+        with:
+          name: mod-jar
+          path: ./dist
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          body: |
+            **自动编译发布**  
+            发布版本：${{ github.ref_name }}  
+            发布日期：${{ github.event.head_commit.timestamp }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload mod JAR to release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: DeathTeleport-${{ github.ref_name }}.jar
+          asset_path: ./dist/*.jar
+          asset_content_type: application/java-archive
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
