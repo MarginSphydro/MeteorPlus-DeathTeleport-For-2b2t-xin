@@ -2,6 +2,8 @@
 
 A Meteor Plus addon for Minecraft (2b2t.xin) that provides instant teleportation to your death location and automated easy kills (Auto Ez), plus spam protection.
 
+在Meteor Plus的基础上主要添加的功能：Infinite Death Respawn(无床设置重生点) Auto Ez(解决沙壁Prism端不能自定义ez内容) Anti Spam(优雅的绕过chat)
+
 &#x20;&#x20;
 
 ---
