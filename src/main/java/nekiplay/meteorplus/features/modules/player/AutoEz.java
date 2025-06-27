@@ -32,18 +32,14 @@ public class AutoEz extends Module {
 		.name("enemy-messages")
 		.description("Message Use {player} to express killed name by mark_7601")
 		.defaultValue(Arrays.asList(
-			"EZ {player}",
-			"GG {player}",
-			"Get good, {player}",
-			"Trolled by Meteor+, {player}",
-			"{player} got clapped"
+			"GoodFight {player}! TrollHack owns me and all."
 		))
 		.build()
 	);
 
 	// 自己死亡时的托词（多句）
 	private final Setting<List<String>> selfMessages = sgGeneral.add(new StringListSetting.Builder()
-		.name("self-messages")
+		.name("Auto-Excuse")
 		.description("Nerver Lose (Mental) by mark_7601")
 		.defaultValue(Arrays.asList(
 			"My dog ate my PC",

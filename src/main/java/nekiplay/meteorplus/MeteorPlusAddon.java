@@ -206,6 +206,7 @@ public class MeteorPlusAddon extends MeteorAddon {
 		//modules.add(new KillAuraPlus());
 		modules.add(new AutoEz());
 		modules.add(new InfiniteDeathRespawn());
+		modules.add(new AntiSpam());
 		modules.add(new VelocityPlus());
 		if (!MixinPlugin.isMeteorRejects) {
 			modules.add(new NoJumpDelay());

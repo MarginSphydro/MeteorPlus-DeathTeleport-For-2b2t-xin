@@ -1,45 +1,104 @@
-I add 2 modules base on Meteor plus for minecraft server 2b2t.xin.
+# DeathTeleport
 
-Infinite Death Respawn
+A Meteor Plus addon for Minecraft (2b2t.xin) that provides instant teleportation to your death location and automated easy kills (Auto Ez), plus spam protection.
 
-Auto Ez
+&#x20;&#x20;
 
-我在Meteor plus基础上添加了两个功能——Infinite Death Respawn和Auto Ez
+---
 
-这个功能可以上你在2b2t.xin死亡时重生在死亡点
+## 📦 Project Overview
 
-作用在2b2t.xin服务器上
+**DeathTeleport** extends the Meteor Plus client with three powerful modules for the iconic 2b2t.xin server:
 
-沙壁狗头端Prism不能自定义Ez所以我写了个Auto Ez
+- **Infinite Death Respawn**: Automatically respawn and teleport back to your death point, bypassing anti-cheat interference.
+- **Auto Ez**: Customizable automated kill messages for easy PvP victories.
+- **Anti Spam**: Bypass chat.
 
+This addon is built to work seamlessly on 2b2t.xin, providing reliable performance even under strict server checks.
 
+---
 
-📦 DeathTeleport
-A Meteor Plus addon that allows instant teleportation to the death location, bypassing interference like 2b2t anti-cheat.
+## ✨ Features
 
-✨ Features
-⚡ Instantly teleport to your death point after dying
+- ⚡ **Infinite Death Respawn**
 
-🛡️ Works on servers like 2b2t with interference
+  - Records death location and teleports you back instantly upon respawn.
+  - Uses packet manipulation to avoid server-side checks.
 
-🔧 Configurable through Meteor GUI
+- ⚔️ **Auto Ez**
 
-🚀 Built on Meteor Plus
+  - Automatically sends configurable kill messages when you defeat a player.
+  - Fully customizable messages via Meteor GUI.
 
-📁 Installation
-Download the .jar file from Releases
+- 🚫 **Anti Spam**
 
-Place it in your .minecraft/.meteor-client/addons/ folder
+  - Bypass chat.
 
-Launch Minecraft with Meteor+
+---
 
-Enable the module in the Meteor GUI
+## 🛠 Installation
 
-🧠 How It Works
-When the player dies, the module records the death location and instantly teleports the player back to it upon respawn. It uses packet manipulation to avoid server-side movement checks, making it effective even on heavily protected servers like 2b2t.
+1. **Download the latest JAR** from the [Releases](#) page.
+2. Copy the JAR into your `mods/.meteor-client/addons/` directory:
+   ```bash
+   ~/.minecraft/.meteor-client/addons/DeathTeleport.jar
+   ```
+3. Launch Minecraft with **Meteor Plus**.
+4. Open the Meteor GUI and **enable** the `Infinite Death Respawn`, `Auto Ez`, and `Anti Spam` modules.
 
-📚 Requirements
-Meteor Plus (Tested on version 1.20.4)
+---
 
-Minecraft 1.20.4 (or your target version)
+## ⚙️ Configuration
+
+- Press `Right Shift` (default) to open the Meteor Plus GUI.
+- Navigate to the **Addons** tab and select **DeathTeleport**.
+- Expand each module to customize settings:
+  - **Infinite Death Respawn**: Toggle packet bypass.
+  - **Auto Ez**: Edit message templates.
+  - **Anti Spam**: Define spam keywords and thresholds.
+
+---
+
+## 🎮 Usage
+
+1. Join **2b2t.xin**.
+2. Enable the modules in the Meteor GUI.
+3. Enjoy instant teleportation back to your death point and automated PvP messages.
+
+---
+
+## 📜 Changelog
+
+### 2025/06/28
+
+- Updated default **Auto Ez** messages.
+- Added **Anti Spam** module.
+- Minor bug fixes and performance improvements.
+
+---
+
+## 📚 Requirements
+
+- **Meteor Plus** client (tested on v1.20.4)
+- Minecraft 1.20.4
+
+---
+
+## 🤝 Contributing
+
+Feel free to open issues or submit pull requests on the [GitHub repository](#).
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 📬 Contact
+
+- Author: @yourname (GitHub)
+- Server: 2b2t.xin
+- Email: [yourname@example.com](mailto\:yourname@example.com)
 
