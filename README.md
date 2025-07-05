@@ -10,9 +10,14 @@ A Meteor Plus addon for Minecraft (2b2t.xin) that provides instant teleportation
 
 **DeathTeleport** extends the Meteor Plus client with three powerful modules for the iconic 2b2t.xin server:
 
-- **Infinite Death Respawn**: Automatically respawn and teleport back to your death point, bypassing anti-cheat interference.
-- **Auto Ez**: Customizable automated kill messages for easy PvP victories.
-- **Anti Spam**: Bypass chat.
+- **Infinite Death Respawn**: 死亡原地重生，用于组织合影干扰or刷头
+- **Auto Ez**: 击杀播报，解决超级傻逼无敌Prism客户端无法自定义Auto Ez内容
+- **Anti Spam**: 优雅绕过聊天限制
+- **Nearby Player List**: 更优雅的附近玩家显示，死亡时，Nametag标红并停留并显示图腾爆炸数量，在Meteor ClickGUI上方点击GUI，点击Edit，右键，你可以在下方看到并使用
+- **Infinite Death Respawn HUD**: 为死亡原地重生而写的HUD，主要功能是显示数据包发送的具体坐标
+- **Explosion Phase**: 测试
+- **Explosion Spoof**: 测试
+- **Anti Explosion**: 测试
 
 This addon is built to work seamlessly on 2b2t.xin, providing reliable performance even under strict server checks.
 

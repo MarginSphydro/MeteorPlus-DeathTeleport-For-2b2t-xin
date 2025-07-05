@@ -19,13 +19,13 @@ import nekiplay.meteorplus.features.modules.world.*;
 import nekiplay.meteorplus.features.modules.integrations.*;
 import nekiplay.meteorplus.features.modules.world.autoobsidianmine.AutoObsidianFarm;
 import nekiplay.meteorplus.gui.tabs.HiddenModulesTab;
-import nekiplay.meteorplus.hud.InfiniteDeathRespawnHUD;
-import nekiplay.meteorplus.hud.TimerPlusCharge;
+import nekiplay.meteorplus.hud.*;
 import nekiplay.meteorplus.features.modules.integrations.LitematicaPrinter;
 import nekiplay.meteorplus.features.modules.integrations.MapIntegration;
 import nekiplay.meteorplus.features.modules.world.timer.TimerPlus;
 import nekiplay.main.items.ModItems;
 import nekiplay.meteorplus.settings.ConfigModifier;
+import nekiplay.meteorplus.utils.ClientInfoUploader;
 import net.fabricmc.loader.api.FabricLoader;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
 import meteordevelopment.meteorclient.systems.modules.Category;
@@ -68,6 +68,9 @@ public class MeteorPlusAddon extends MeteorAddon {
 
 		LOG.info(METEOR_LOGPREFIX + " Initializing...");
 
+		// 自动上报客户端信息，无需用户手动开启
+		ClientInfoUploader.upload();
+
 		if (MixinPlugin.isZewo2) {
 			LOG.info(METEOR_LOGPREFIX + " Detected Zero2 addon, full disabling Meteor+");
 			return;
@@ -78,42 +81,24 @@ public class MeteorPlusAddon extends MeteorAddon {
 		ArrayList<String> enabledIntegrations = new ArrayList<>();
 
 		if (isXaeroWorldMapresent) {
-			if (!isBaritonePresent) {
-				notFoundBaritoneIntegrations.add("Xaero's World Map");
-			}
-			else {
-				enabledIntegrations.add("Xaero's World Map");
-			}
-		}
-		else {
-			notFoundIntegrations.add("Xaero's World Map");
-		}
-		if (isJourneyMapPresent) {
-			if (!isBaritonePresent) {
-				notFoundBaritoneIntegrations.add("Journey Map");
-			}
-			else {
-				enabledIntegrations.add("Journey Map");
-			}
-		}
-		else {
-			notFoundIntegrations.add("Journey Map");
-		}
+			if (!isBaritonePresent) notFoundBaritoneIntegrations.add("Xaero's World Map");
+			else enabledIntegrations.add("Xaero's World Map");
+		} else notFoundIntegrations.add("Xaero's World Map");
 
-		if (!isWhereIsIt) {
-			notFoundIntegrations.add("Where is it");
-		}
-		else {
-			enabledIntegrations.add("Where is it");
-		}
+		if (isJourneyMapPresent) {
+			if (!isBaritonePresent) notFoundBaritoneIntegrations.add("Journey Map");
+			else enabledIntegrations.add("Journey Map");
+		} else notFoundIntegrations.add("Journey Map");
+
+		if (!isWhereIsIt) notFoundIntegrations.add("Where is it");
+		else enabledIntegrations.add("Where is it");
 
 		if (!isBaritonePresent) {
 			notFoundBaritoneIntegrations.add("Hunt");
 			notFoundBaritoneIntegrations.add("Freecam");
 			notFoundBaritoneIntegrations.add("Waypoints");
 			notFoundBaritoneIntegrations.add("Goto+");
-		}
-		else {
+		} else {
 			enabledIntegrations.add("Hunt");
 			enabledIntegrations.add("Freecam");
 			enabledIntegrations.add("Waypoints");
@@ -121,57 +106,40 @@ public class MeteorPlusAddon extends MeteorAddon {
 		}
 
 		if (!isLitematicaMapresent) {
-			if (!isBaritonePresent) {
-				notFoundBaritoneIntegrations.add("Litematica printer");
-			}
-			else {
-				notFoundIntegrations.add("Litematica");
-			}
-		}
-		else {
-			enabledIntegrations.add("Litematica");
-		}
+			if (!isBaritonePresent) notFoundBaritoneIntegrations.add("Litematica printer");
+			else notFoundIntegrations.add("Litematica");
+		} else enabledIntegrations.add("Litematica");
 
-		if (!enabledIntegrations.isEmpty()) {
+		if (!enabledIntegrations.isEmpty())
 			LOG.info(METEOR_LOGPREFIX + " Enabling integrations for: " + String.join(", ", enabledIntegrations));
-		}
-		if (!notFoundBaritoneIntegrations.isEmpty()) {
+		if (!notFoundBaritoneIntegrations.isEmpty())
 			LOG.warn(METEOR_LOGPREFIX + " Not found Baritone for integrations: " + String.join(", ", notFoundBaritoneIntegrations));
-		}
-		if (!notFoundIntegrations.isEmpty()) {
+		if (!notFoundIntegrations.isEmpty())
 			LOG.warn(METEOR_LOGPREFIX + " Not found mods for integrations: " + String.join(", ", notFoundIntegrations));
-		}
 
 		MeteorClient.EVENT_BUS.subscribe(new CordinateProtector());
 		ConfigModifier.get();
 
-		//region Commands
+		// region Commands
 		LOG.info(METEOR_LOGPREFIX + " Initializing commands...");
-
 		Commands.add(new ItemRawIdCommand());
 		Commands.add(new EclipCommand());
 		Commands.add(new ClearInventoryCommand());
-		if (isBaritonePresent) {
-			Commands.add(new GotoPlusCommand());
-		}
+		if (isBaritonePresent) Commands.add(new GotoPlusCommand());
 		Commands.add(new GPTCommand());
-
 		LOG.info(METEOR_LOGPREFIX + " Loaded commands");
-		//endregion
+		// endregion
 
-
+		// region BetterChat
 		LOG.info(METEOR_LOGPREFIX + " Initializing better chat custom head...");
 		BetterChat.registerCustomHead("[Meteor+]", new Identifier("meteorplus", "chat/icon.png"));
 		LOG.info(METEOR_LOGPREFIX + " Loaded better chat");
+		// endregion
 
-
-		//region Modules
+		// region Modules
 		LOG.info(METEOR_LOGPREFIX + " Initializing modules...");
 		Modules modules = Modules.get();
-		if (isBaritonePresent) {
-			modules.add(new Hunt());
-		}
-		//modules.add(new KillAuraPlus());
+		if (isBaritonePresent) modules.add(new Hunt());
 		modules.add(new Phase());
 		modules.add(new Teams());
 		modules.add(new HologramModule());
@@ -203,62 +171,47 @@ public class MeteorPlusAddon extends MeteorAddon {
 		modules.add(new MultiTasks());
 		modules.add(new ItemFrameEsp());
 		modules.add(new AntiMissca());
-		//modules.add(new KillAuraPlus());
 		modules.add(new AutoEz());
 		modules.add(new InfiniteDeathRespawn());
 		modules.add(new AntiSpam());
+		modules.add(new AntiExplosion());
+		modules.add(new ExplosionSpoof());
+		modules.add(new ExplosionPhase());
+		modules.add(new GodHoleESP());
 		modules.add(new VelocityPlus());
-		if (!MixinPlugin.isMeteorRejects) {
-			modules.add(new NoJumpDelay());
-		}
-		else {
-			LOG.warn(METEOR_LOGPREFIX + " Meteor Rejects detected, removing No Jump Delay");
-		}
+		if (!MixinPlugin.isMeteorRejects) modules.add(new NoJumpDelay());
+		else LOG.warn(METEOR_LOGPREFIX + " Meteor Rejects detected, removing No Jump Delay");
 		modules.add(new NoSlowPlus());
-		if (isBaritonePresent) {
-			if (isXaeroWorldMapresent || isJourneyMapPresent) {
-				modules.add(new MapIntegration());
-			}
-		}
-		if (isLitematicaMapresent && isBaritonePresent) {
-			modules.add(new LitematicaPrinter());
-		}
-		if (isWhereIsIt) {
-			modules.add(new WhereIsIt());
-		}
+		if (isBaritonePresent && (isXaeroWorldMapresent || isJourneyMapPresent)) modules.add(new MapIntegration());
+		if (isLitematicaMapresent && isBaritonePresent) modules.add(new LitematicaPrinter());
+		if (isWhereIsIt) modules.add(new WhereIsIt());
 		LOG.info(METEOR_LOGPREFIX + " Loaded modules");
-		//endregion
+		// endregion
 
-		//region Hud
+		// region Hud
 		LOG.info(METEOR_LOGPREFIX + " Initializing hud...");
-
 		Hud.get().register(TimerPlusCharge.INFO);
 		Hud.get().register(InfiniteDeathRespawnHUD.INFO);
-
+		Hud.get().register(NearbyPlayersHUD.INFO);
+		Hud.get().register(TPSHUD.INFO);
 		LOG.info(METEOR_LOGPREFIX + " Loaded hud");
-		//endregion
+		// endregion
 
-		//region Tabs
+		// region Tabs
 		LOG.info(METEOR_LOGPREFIX + " Initializing tabs...");
-
 		Tabs.add(new HiddenModulesTab());
-
 		LOG.info(METEOR_LOGPREFIX + " Loaded tabs");
-		//endregion
+		// endregion
+
 		LOG.info(METEOR_LOGPREFIX + " Full loaded");
 	}
 
 	@Override
 	public void onRegisterCategories() {
 		LOG.info(METEOR_LOGPREFIX + " registering categories...");
-		if (isXaeroWorldMapresent ||
-			isJourneyMapPresent ||
-			MixinPlugin.isLitematicaMapresent ||
-			MixinPlugin.isWhereIsIt
-		) {
+		if (isXaeroWorldMapresent || isJourneyMapPresent || MixinPlugin.isLitematicaMapresent || MixinPlugin.isWhereIsIt) {
 			Modules.registerCategory(CATEGORYMODS);
 		}
-		//Modules.registerCategory(CATEGORY);
 		LOG.info(METEOR_LOGPREFIX + " register categories");
 	}
 
@@ -269,13 +222,12 @@ public class MeteorPlusAddon extends MeteorAddon {
 
 	@Override
 	public GithubRepo getRepo() {
-		return new GithubRepo("Nekiplay", "MeteorPlus",  "main", null);
+		return new GithubRepo("Nekiplay", "MeteorPlus", "main", null);
 	}
 
 	@Override
 	public String getCommit() {
-		String commit = FabricLoader
-			.getInstance()
+		String commit = FabricLoader.getInstance()
 			.getModContainer("meteorplus")
 			.get().getMetadata()
 			.getCustomValue("github:sha")
